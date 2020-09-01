@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div mat-dialog-content>
+    <h1 class="title">Iniciar sesión</h1>
+    <p class="separator"></p>
+
+    <div class="container">
+        <form class="register-form">
+            <mat-form-field class="register-full-width">
+                <mat-label>Correo</mat-label>
+                <input matInput placeholder="name@gmail.com">
+                <mat-icon matSuffix>alternate_email</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="register-full-width">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password">
+                <mat-icon matSuffix>security</mat-icon>
+            </mat-form-field>
+
+            <p></p>
+            <button mat-raised-button class="register-full-width button">Iniciar sesión</button>
+            <p></p>
+            <button (click)="irA('/register')" type="submit" mat-raised-button class="register-full-width button">¿No
+                tienes
+                cuenta?,
+                Registrate
+                Aqui!</button>
+        </form>
+    </div>

@@ -2,7 +2,6 @@
 <p class="separator"></p>
 
 <h1 class="title">Registro</h1>
-<hr>
 
 <div class="container">
     <form class="register-form">
@@ -10,7 +9,6 @@
             <mat-label>Correo</mat-label>
             <input matInput placeholder="name@gmail.com">
             <mat-icon matSuffix>alternate_email</mat-icon>
-
         </mat-form-field>
         <mat-form-field class="register-full-width">
             <mat-label>Nombre</mat-label>
@@ -37,8 +35,10 @@
         <p></p>
         <button mat-raised-button class="register-full-width button">Registrarse</button>
         <p></p>
-        <button mat-raised-button class="register-full-width button">¿Yá tienes cuenta?, Login
+        <button (click)="irA('/menu-principal')" type="submit" mat-raised-button class="register-full-width button">¿Yá
+            tienes
+            cuenta?,
+            Login
             Aqui!</button>
-
     </form>
 </div>
