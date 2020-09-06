@@ -3,13 +3,18 @@ const { response } = require('../../config/server');
     
 module.exports = (app) => {
 
-    app.get('/getUsuarios/:id', (req, res, next) => {
+    app.post('/LoginUsuarios/', (req, res, next) => {
 
-        let querry = `Select * from usuarios where  u_id = ${req.params.id}`;
+        let querry = `Select * from usuarios where  correo = ${req.body.correo} and contraseña = ${req.body.contraseña}`;
         conn.query( querry, (error, formularios, cols) => {
 
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
+            else if (formularios.length > 0) {
+                res.json({status: 1, message: "Correo y contraseña correctos", formularios});
+            } 
+            else {
+                res.json({status: 0, message: "No coincidió el correo y contraseña "})
+            }
 
         });
 
