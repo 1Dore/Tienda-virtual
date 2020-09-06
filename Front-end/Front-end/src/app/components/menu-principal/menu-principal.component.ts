@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-menu-principal',
@@ -11,11 +12,19 @@ import { LoginComponent } from '../login/login.component';
 export class MenuPrincipalComponent implements OnInit {
   email: string;
   password: string;
+  formulario: FormGroup;
+ 
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private fb:FormBuilder) { }
+
 
   ngOnInit(): void {
+    this.formulario = this.fb.group({
+      buscador: ['']
+    })
   }
+      
+
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
   }
@@ -29,5 +38,9 @@ export class MenuPrincipalComponent implements OnInit {
       console.log('The dialog was closed');
       this.email = result;
     });
+  }
+
+  onSubmit(){
+    
   }
 }
