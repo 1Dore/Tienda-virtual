@@ -18,7 +18,7 @@ module.exports = (app) => {
 
         });
 
-    })
+    });
 
     app.post('/newUsuario', (req, res, next) => {
 
@@ -32,4 +32,39 @@ module.exports = (app) => {
 
         });
     });
+
+    //------------------------ADMIN------------------------------------------
+
+    app.post('/LoginAdmin/', (req, res, next) => {
+
+        let querry = `Select * from administradores where  correo = ${req.body.correo} and contraseña = ${req.body.contraseña}`;
+        conn.query( querry, (error, formularios, cols) => {
+
+            if (error) res.json({status: 0, message: `${error}`});
+            else if (formularios.length > 0) {
+                res.json({status: 1, message: "Correo y contraseña correctos", formularios});
+            } 
+            else {
+                res.json({status: 0, message: "No coincidió el correo y contraseña "})
+            }
+
+        });
+
+    });
+
+
+    app.post('/newAdmin', (req, res, next) => {
+
+        let query = `Insert into Administradores (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
+        
+        conn.query(query, (error, form, cols) => {
+
+            if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
+
+            else res.json({status: 1, menssage: "Insercion realizada"});
+
+        });
+    });
+
+
 };
