@@ -4,36 +4,45 @@
 <h1 class="title">Registro</h1>
 
 <div class="container">
-    <form class="register-form">
+    <form class="register-form" [formGroup] = "register">
+
+        <!---------- Correo------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Correo</mat-label>
-            <input matInput placeholder="name@gmail.com">
+            <input matInput placeholder="name@gmail.com" formControlName="Correo">
             <mat-icon matSuffix>alternate_email</mat-icon>
         </mat-form-field>
+
+        <!---------- Nombre------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Nombre</mat-label>
-            <input matInput placeholder="John">
+            <input matInput placeholder="John" formControlName="Nombre">
             <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
 
+        <!---------- Apellido ------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Apellido</mat-label>
-            <input matInput placeholder="Smith">
+            <input matInput placeholder="Smith" formControlName="Apellido">
             <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
 
+        <!---------- Contraseña ------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password">
+            <input matInput type="password" formControlName="Contraseña">
             <mat-icon matSuffix>security</mat-icon>
         </mat-form-field>
+
+        <!---------- Validacion contraseña------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Repetir Contraseña</mat-label>
             <input matInput type="password">
             <mat-icon matSuffix>verified_user</mat-icon>
         </mat-form-field>
+
         <p></p>
-        <button mat-raised-button class="register-full-width button">Registrarse</button>
+        <button mat-raised-button class="register-full-width button" (click) = "onSubmit('/menu-principal')">Registrarse</button>
         <p></p>
         <button (click)="irA('/menu-principal')" type="submit" mat-raised-button class="register-full-width button">¿Yá
             tienes
