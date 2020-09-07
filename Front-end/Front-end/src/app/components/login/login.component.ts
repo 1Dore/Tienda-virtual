@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MenuPrincipalComponent } from '../menu-principal/menu-principal.component';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  login:FormGroup
+
   constructor(public dialogRef: MatDialogRef<MenuPrincipalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private fb: FormBuilder, ) { }
 
   ngOnInit(): void {
+    this.login = this.fb.group({
+      correo: ['', Validators.required],
+      contraseña: ['', Validators.required]
+    })
   }
 
   irA(ruta: string) {
