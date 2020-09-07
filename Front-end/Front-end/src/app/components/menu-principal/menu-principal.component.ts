@@ -13,12 +13,12 @@ export class MenuPrincipalComponent implements OnInit {
   email: string;
   password: string;
   formulario: FormGroup;
- 
 
   constructor(private router: Router, public dialog: MatDialog, private fb:FormBuilder) { }
 
 
   ngOnInit(): void {
+    
     this.formulario = this.fb.group({
       buscador: ['']
     })
