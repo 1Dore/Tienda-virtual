@@ -12,14 +12,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatCardModule} from '@angular/material/card';
+import { ListadoProductosComponent } from './components/listado-productos/listado-productos.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuPrincipalComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ListadoProductosComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,8 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatDialogModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
