@@ -18,15 +18,25 @@
         <mat-card *ngFor="let card of cards">
             <mat-card-title>{{card.title}}</mat-card-title>
             <mat-card-content>
-                <p>
-                    {{card.description}}
-                </p>
+                {{card.img}}
+                <br>
+                {{card.description}}
+                <br>
+                {{card.category}}
+                <br>
+                {{card.author}}
+                <br>
+                {{card.available}}
+                <br>
+                {{card.price}}
             </mat-card-content>
             <mat-card-actions>
                 <button mat-button>
-                    <mat-icon>favorite</mat-icon>
+                    <mat-icon>plus_one</mat-icon>
                 </button>
-                <button mat-button>SHARE</button>
+                <button mat-button>
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
             </mat-card-actions>
         </mat-card>
     </div>
