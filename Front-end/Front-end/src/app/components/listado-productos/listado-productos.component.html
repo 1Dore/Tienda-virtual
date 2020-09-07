@@ -1,0 +1,17 @@
+<div class="upperbar">
+    <button mat-button [matMenuTriggerFor]="usuario">{{user}}</button>
+    <mat-menu #usuario="matMenu">
+        <button mat-menu-item>Mi Cuenta</button>
+        <button (click)="irA('/menu-principal')" mat-menu-item>Cerrar Sesión</button>
+    </mat-menu>
+
+    <button (click)="irA('/checkout')" mat-mini-fab color="accent" class="checkout">
+        <mat-icon class="icon">shopping_cart</mat-icon>
+    </button>
+
+</div>
+
+
+<p class="separator"></p>
+
+<h1 class="title">Productos</h1>
