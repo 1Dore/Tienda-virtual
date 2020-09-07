@@ -4,7 +4,7 @@ import { MenuPrincipalComponent } from '../menu-principal/menu-principal.compone
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth/auth.service';
-//import CryptoJS from 'crypto-js';
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login',
