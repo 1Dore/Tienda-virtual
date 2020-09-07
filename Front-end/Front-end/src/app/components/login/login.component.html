@@ -3,20 +3,24 @@
     <p class="separator"></p>
 
     <div class="container">
-        <form class="register-form">
+        <form class="register" [formGroup] = "login">
+
+            <!-------------  email --------------------->
             <mat-form-field class="register-full-width">
                 <mat-label>Correo</mat-label>
-                <input matInput placeholder="name@gmail.com">
+                <input matInput placeholder="name@gmail.com" type="input" formControlName = "correo">
                 <mat-icon matSuffix>alternate_email</mat-icon>
             </mat-form-field>
+
+            <!-------------  contraseña --------------------->
             <mat-form-field class="register-full-width">
                 <mat-label>Contraseña</mat-label>
-                <input matInput type="password">
+                <input matInput type="password" formControlName = "contraseña">
                 <mat-icon matSuffix>security</mat-icon>
             </mat-form-field>
 
             <p></p>
-            <button (click)="irA('/listado-productos')" mat-raised-button class="register-full-width button">Iniciar
+            <button (click)="onSubmit()" mat-raised-button class="register-full-width button">Iniciar
                 sesión</button>
             <p></p>
             <button (click)="irA('/register')" type="submit" mat-raised-button class="register-full-width button">¿No

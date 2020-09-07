@@ -16,6 +16,8 @@ import { ListadoProductosComponent } from './components/listado-productos/listad
 import { MatMenuModule } from '@angular/material/menu';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatCardModule } from '@angular/material/card';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { MatCardModule } from '@angular/material/card';
     MatDialogModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
