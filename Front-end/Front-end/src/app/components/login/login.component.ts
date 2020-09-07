@@ -11,10 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  login:FormGroup
+  login: FormGroup
 
   constructor(public dialogRef: MatDialogRef<MenuPrincipalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private fb: FormBuilder, ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private fb: FormBuilder,) { }
 
   ngOnInit(): void {
     this.login = this.fb.group({
