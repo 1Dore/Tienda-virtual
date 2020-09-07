@@ -5,15 +5,14 @@ module.exports = (app) => {
 
     app.post('/LoginUsuarios/', (req, res, next) => {
 
-        let querry = `Select * from usuarios where  correo = ${req.body.correo} and contraseña = ${req.body.contraseña}`;
-        conn.query( querry, (error, formularios, cols) => {
-
+        let querry = `Select * from usuarios where  correo = '${req.body.correo}' and contraseña = '${req.body.contraseña}'`;
+        conn.query( querry, (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});
-            else if (formularios.length > 0) {
-                res.json({status: 1, message: "Correo y contraseña correctos", formularios});
+            else if (formularios.rows.length > 0) {
+                res.json({status: 1, message: "Correo y contraseña correctos"});
             } 
             else {
-                res.json({status: 0, message: "No coincidió el correo y contraseña "})
+                res.json({status: 0, message: "No coincidió el correo y contraseña"})
             }
 
         });
