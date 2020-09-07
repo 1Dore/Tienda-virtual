@@ -38,7 +38,7 @@ import { MatCardModule } from '@angular/material/card';
     MatDialogModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
