@@ -6,7 +6,7 @@
     </mat-menu>
 
     <button (click)="irA('/checkout')" mat-mini-fab color="accent" class="checkout">
-        <mat-icon class="icon">shopping_cart</mat-icon>
+        <mat-icon class="icon">add_shopping_cart</mat-icon>
     </button>
 
 </div>
@@ -20,24 +20,47 @@
             <mat-card-content>
                 {{card.img}}
                 <br>
-                {{card.description}}
+                Descripcion: {{card.description}}
                 <br>
-                {{card.category}}
+                Categoría: {{card.category}}
                 <br>
-                {{card.author}}
+                Autor: {{card.author}}
                 <br>
-                {{card.available}}
+                Cantidad Disponible: {{card.available}}
                 <br>
-                {{card.price}}
+                Precio: Q{{card.price}}
             </mat-card-content>
+            <mat-divider></mat-divider>
             <mat-card-actions>
-                <button mat-button>
-                    <mat-icon>plus_one</mat-icon>
-                </button>
-                <button mat-button>
-                    <mat-icon>delete_outline</mat-icon>
-                </button>
+                <div class="menu">
+                    <button mat-icon-button class="delete">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                    <button (click)="minus_one()" mat-icon-button class="quantity">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    {{quantity}}
+                    <button (click)="plus_one()" mat-icon-button>
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
             </mat-card-actions>
         </mat-card>
+        <div>
+            <h3>
+                Total: Q{{total}}
+            </h3>
+        </div>
+        <mat-divider></mat-divider>
+        <br>
+        <div class="botones">
+            <button mat-raised-button class="register-full-width button" (click)="irA('/checkout')">Ir a Caja</button>
+            <br>
+            <br>
+            <button mat-raised-button class="register-full-width button" (click)="irA('/menu-principal')">Seguir
+                Comprando</button>
+        </div>
+
+
     </div>
 </div>

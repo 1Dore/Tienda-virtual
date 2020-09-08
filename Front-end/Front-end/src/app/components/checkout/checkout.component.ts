@@ -9,15 +9,17 @@ import { Router } from '@angular/router';
 export class CheckoutComponent implements OnInit {
 
   user = 'PlaceHolder';
+  quantity = 1;
+  total = 0;
   cards = [
     {
       img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       title: 'Montañas',
       description: 'Paisaje de montañas',
-      category: 'Categoría: Fotografía',
+      category: 'Fotografía',
       author: 'Jhon Smith',
-      available: 'Cantidad Disponible: 10',
-      price: 'Precio: Q 100.00'
+      available: 10,
+      price: 5
     }
   ];
   constructor(private router: Router) { }
@@ -26,5 +28,27 @@ export class CheckoutComponent implements OnInit {
   }
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
+  }
+  minus_one() {
+    let price = (this.cards.map(i => i.price));
+    this.quantity--;
+    if (this.quantity < 0) {
+      this.quantity = 1;
+    }
+    this.total = Number(price) * this.quantity;
+
+  }
+  plus_one() {
+    let available = (this.cards.map(i => i.available));
+    let price = (this.cards.map(i => i.price));
+
+    this.quantity++;
+
+    if (this.quantity > Number(available)) {
+      this.quantity = Number(available);
+
+    }
+    this.total = Number(price) * Number(this.quantity);
+    this.total = Number(this.total);
   }
 }
