@@ -52,10 +52,11 @@ create table productos(
 	pr_id serial,
 	pr_nombre varchar(100),
 	pr_existencia int,
+	pr_precio decimal(15,2),
 	pr_categoria varchar(100),
 	pr_autor varchar(100),
 	pr_descipcion varchar(240),
-	pr_fot varchar(120),
+	pr_foto varchar(120),
 	primary key (pr_id)
 );
 

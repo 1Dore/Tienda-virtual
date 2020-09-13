@@ -15,13 +15,13 @@ export class AuthService {
 
   login(loginData): Observable<any>{
 
-    let url = "localhost:3000/LoginUsuarios";
+    let url = "http://localhost:3000/LoginUsuarios";
     return this.http.post(url, loginData, httpHeader);
   }
 
   register(regData): Observable<any>{
 
-    let url = "localhost:3000/newUsuario";
+    let url = "http://localhost:3000/newUsuario";
     return this.http.post(url, regData, httpHeader);
 
   }
