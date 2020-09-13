@@ -29,7 +29,7 @@ export class CheckoutComponent implements OnInit {
       author: 'Jhon Smith',
       available: 10,
       price: 5
-    },
+    }/*,
     {
       img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       title: 'Montañas',
@@ -39,7 +39,7 @@ export class CheckoutComponent implements OnInit {
       author: 'Jhon Smith',
       available: 12,
       price: 6
-    }
+    }*/
   ];
 
   constructor(private router: Router) { }
@@ -65,13 +65,13 @@ export class CheckoutComponent implements OnInit {
     let available = (this.cards.map(i => i.available));
     let price = (this.cards.map(i => i.price));
 
-    this.quantity++;
-
-    if (this.quantity > Number(available)) {
-      this.quantity = Number(available);
-
+    for (var i = 0; i < this.cards.length; i++) {
+      this.quantity[i]++;
+      if (this.quantity[i] > Number(available[i])) {
+        this.quantity[i] = Number(available[i]);
+      }
+      this.total = Number(price) * Number(this.quantity[i]);
+      this.total = Number(this.total);
     }
-    this.total = Number(price) * Number(this.quantity);
-    this.total = Number(this.total);
   }
 }
