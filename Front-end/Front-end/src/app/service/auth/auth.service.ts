@@ -40,7 +40,12 @@ export class AuthService {
 
   enviarCategoria(tipo: String){
     this.tipo = tipo;
+    localStorage.setItem('Categoria', "" + tipo);
     this.tipoDeLaLsita_productos.next(tipo);
+  }
+
+  getCategoria(){
+    return localStorage.getItem('Categoria');
   }
   
 

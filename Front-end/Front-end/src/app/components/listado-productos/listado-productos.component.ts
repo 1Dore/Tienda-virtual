@@ -27,7 +27,8 @@ export class ListadoProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicio.enviarTipo.subscribe(tipo => {
-      this.tipo = tipo;
+      this.tipo = tipo + "";
+      this.tipo = this.servicio.getCategoria() + "";
     })
   }
 
