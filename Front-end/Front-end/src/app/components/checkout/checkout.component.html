@@ -35,7 +35,7 @@
             <mat-divider></mat-divider>
             <mat-card-actions>
                 <div class="menu">
-                    <button mat-icon-button class="delete">
+                    <button (click)="delete_card" mat-icon-button class="delete">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
                     <button (click)="minus_one()" mat-icon-button class="quantity">

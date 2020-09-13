@@ -29,7 +29,7 @@ export class CheckoutComponent implements OnInit {
       author: 'Jhon Smith',
       available: 10,
       price: 5
-    }/*,
+    },
     {
       img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       title: 'Montañas',
@@ -39,7 +39,7 @@ export class CheckoutComponent implements OnInit {
       author: 'Jhon Smith',
       available: 12,
       price: 6
-    }*/
+    }
   ];
 
   constructor(private router: Router) { }
@@ -53,25 +53,29 @@ export class CheckoutComponent implements OnInit {
   minus_one() {
     let price = (this.cards.map(i => i.price));
 
-    for (var i = 0; i < this.cards.length; i++) {
-      this.quantity[i]--;
-      if (this.quantity[i] < 0) {
-        this.quantity[i] = 1;
-      }
-      this.total = Number(price) * this.quantity[i];
+    this.quantity--;
+    if (this.quantity < 0) {
+      this.quantity = 1;
+      this.total = Number(price) * this.quantity;
     }
   }
   plus_one() {
     let available = (this.cards.map(i => i.available));
     let price = (this.cards.map(i => i.price));
 
-    for (var i = 0; i < this.cards.length; i++) {
-      this.quantity[i]++;
-      if (this.quantity[i] > Number(available[i])) {
-        this.quantity[i] = Number(available[i]);
-      }
-      this.total = Number(price) * Number(this.quantity[i]);
+    this.quantity++;
+    if (this.quantity > Number(available)) {
+      this.quantity = Number(available);
+      this.total = Number(price) * Number(this.quantity);
       this.total = Number(this.total);
     }
+
+
+  }
+  delete_card() {
+    //let numero = (this.cards.map(i => i.numero))
+    let numero = 0;
+
+    delete this.cards[Number(numero)];
   }
 }
