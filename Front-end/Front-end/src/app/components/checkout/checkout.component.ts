@@ -11,10 +11,20 @@ export class CheckoutComponent implements OnInit {
   user = 'PlaceHolder';
   quantity = 1;
   total = 0;
+
+  pr_id = 0;
+  pr_nombre = "";
+  pr_existencia = 0;
+  pr_categoria = "";
+  pr_autor = "";
+  pr_descipcion = "";
+  pr_fot = "";
+
   cards = [
     {
       img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       title: 'Montañas',
+      numero: this.pr_id,
       description: 'Paisaje de montañas',
       category: 'Fotografía',
       author: 'Jhon Smith',
