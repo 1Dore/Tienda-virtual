@@ -4,7 +4,7 @@
 <h1 class="title">Registro</h1>
 
 <div class="container">
-    <form class="register-form" [formGroup] = "register">
+    <form class="register-form" [formGroup]="register">
 
         <!---------- Correo------------------------------------------------------->
         <mat-form-field class="register-full-width">
@@ -37,12 +37,13 @@
         <!---------- Validacion contraseña------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Repetir Contraseña</mat-label>
-            <input matInput type="password">
+            <input matInput type="password" formControlName="RContrasenia">
             <mat-icon matSuffix>verified_user</mat-icon>
         </mat-form-field>
 
         <p></p>
-        <button mat-raised-button class="register-full-width button" (click) = "onSubmit('/menu-principal')">Registrarse</button>
+        <button mat-raised-button class="register-full-width button"
+            (click)="onSubmit('/menu-principal')">Registrarse</button>
         <p></p>
         <button (click)="irA('/menu-principal')" type="submit" mat-raised-button class="register-full-width button">¿Yá
             tienes

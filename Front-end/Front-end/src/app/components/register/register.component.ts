@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import CryptoJS from 'crypto-js';
 import { AuthService } from 'src/app/service/auth/auth.service';
+//import { group } from 'console';
 
 @Component({
   selector: 'app-register',
@@ -11,10 +12,10 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  
-  register:FormGroup;
 
-  constructor(private router: Router, private fb:FormBuilder, private auth:AuthService ) { }
+  register: FormGroup;
+
+  constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.register = this.fb.group({
@@ -29,7 +30,7 @@ export class RegisterComponent implements OnInit {
     this.router.navigateByUrl(ruta);
   }
 
-  onSubmit(ruta:string){
+  onSubmit(ruta: string) {
     let formulario = this.register.value;
 
     //---------------------------------------encriptacion-------------------------------
@@ -43,7 +44,8 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(formulario).subscribe(data => {
 
-      if( data.status == 1) this.router.navigateByUrl(ruta);
+
+      if (data.status == 1) this.router.navigateByUrl(ruta);
       else alert("Error al ejecutarse");
 
     });
