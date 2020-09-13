@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-menu-principal',
@@ -14,7 +15,7 @@ export class MenuPrincipalComponent implements OnInit {
   password: string;
   formulario: FormGroup;
 
-  constructor(private router: Router, public dialog: MatDialog, private fb:FormBuilder) { }
+  constructor(private router: Router, public dialog: MatDialog, private fb:FormBuilder, private servicio: AuthService) { }
 
 
   ngOnInit(): void {
@@ -24,6 +25,20 @@ export class MenuPrincipalComponent implements OnInit {
     })
   }
       
+
+  enviarTipoF(){
+    this.servicio.enviarCategoria("F");
+    this.irA('/lista_de_productos');
+  }
+  enviarTipoP(){
+    this.servicio.enviarCategoria("P");
+    this.irA('/lista_de_productos');
+  }
+  enviarTipoE(){
+    this.servicio.enviarCategoria("E");
+    this.irA('/lista_de_productos');
+  }
+  
 
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
@@ -43,4 +58,5 @@ export class MenuPrincipalComponent implements OnInit {
   onSubmit(){
     
   }
+  
 }

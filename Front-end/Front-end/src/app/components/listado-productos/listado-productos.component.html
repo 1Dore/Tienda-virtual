@@ -1,3 +1,5 @@
+
+
 <div class="upperbar">
     <button mat-button [matMenuTriggerFor]="usuario">{{user}}</button>
     <mat-menu #usuario="matMenu">
@@ -8,10 +10,30 @@
     <button (click)="irA('/checkout')" mat-mini-fab color="accent" class="checkout">
         <mat-icon class="icon">shopping_cart</mat-icon>
     </button>
-
-</div>
+</div>  
 
 
 <p class="separator"></p>
 
-<h1 class="title">Productos</h1>
+<h1 class="title">Productos {{tipo}}</h1>
+
+<mat-list role="list">
+    <mat-list-item *ngFor="let producto of lista_de_productos">
+        <mat-card class="element">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title> Autor: {{producto.autor}}</mat-card-title>
+                <mat-card-subtitle>{{producto.tipo}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <h2>{{producto.nombre}}</h2>
+                <p>{{producto.descripcion}}</p>
+                <h3>Precio: {{producto.precio}}</h3>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>Agregar al Carro</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-list-item>
+
+</mat-list>

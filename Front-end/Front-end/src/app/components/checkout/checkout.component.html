@@ -1,4 +1,7 @@
 <div class="upperbar">
+    <a (click)="irA('/menu-principal')"> 
+        <button mat-button><mat-icon class="center">home</mat-icon></button>
+    </a>
     <button mat-button [matMenuTriggerFor]="usuario">{{user}}</button>
     <mat-menu #usuario="matMenu">
         <button mat-menu-item>Mi Cuenta</button>

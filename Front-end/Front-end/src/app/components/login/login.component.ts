@@ -32,9 +32,28 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSubmit() {
-    let params = this.login.value;
-    console.log("Hola :v");
+  onSubmit(ruta:string){
+    let login = this.login.value;
+
+    //---------------------------------------encriptacion-------------------------------
+    var passwordBytes = CryptoJS.enc.Utf16LE.parse(login.contraseña);
+    var sha1Hash = CryptoJS.SHA1(passwordBytes);
+    var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
+    login.contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
+    login.contraseña = CryptoJS.SHA1(login.contraseña).toString();
+    //---------------------------------------encriptacion---------------------------------
+
+    this.auth.login(login).subscribe((formulario) => {
+
+      if(formulario.message == "Correo y contraseña correctos"){
+        this.router.navigateByUrl(ruta);
+      }
+      else{
+        alert("Correo o contraseña incorrectos");
+      }
+    });
+
+    this.login.reset();
   }
 
 }

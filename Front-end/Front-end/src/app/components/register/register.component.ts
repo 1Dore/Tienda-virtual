@@ -19,11 +19,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.register = this.fb.group({
-      Nombre: ['', Validators.required],
-      Apellido: ['', Validators.required],
-      Correo: ['', Validators.required],
-      Contrasenia: ['', Validators.required],
-      RContrasenia: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      correo: ['', Validators.required],
+      contraseña: ['', Validators.required],
     })
   }
 
@@ -33,14 +32,17 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(ruta: string) {
     let formulario = this.register.value;
-    let contrasenia = this.register.get('Contrasenia').value;
-    let rcontrasenia = this.register.get('RContrasenia').value;
 
-    if (contrasenia != rcontrasenia) {
-      alert("Porfavor valide correctamente la contraseña");
-    }
-    formulario.password = CryptoJS.SHA1(formulario.password);
-    this.auth.login(formulario).subscribe(data => {
+    //---------------------------------------encriptacion-------------------------------
+    var passwordBytes = CryptoJS.enc.Utf16LE.parse(formulario.contraseña);
+    var sha1Hash = CryptoJS.SHA1(passwordBytes);
+    var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
+    formulario.contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
+    formulario.contraseña = CryptoJS.SHA1(formulario.contraseña).toString();
+    //---------------------------------------encriptacion---------------------------------
+
+
+    this.auth.register(formulario).subscribe(data => {
 
 
       if (data.status == 1) this.router.navigateByUrl(ruta);
