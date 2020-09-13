@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatMenuModule,
     HttpClientModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
