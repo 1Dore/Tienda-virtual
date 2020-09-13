@@ -17,7 +17,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {MatListModule} from '@angular/material/list';
     MatMenuModule,
     HttpClientModule,
     MatListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

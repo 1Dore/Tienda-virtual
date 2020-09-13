@@ -13,11 +13,11 @@ import CryptoJS from 'crypto-js';
 })
 export class LoginComponent implements OnInit {
 
-  login:FormGroup
+  login: FormGroup
 
   constructor(public dialogRef: MatDialogRef<MenuPrincipalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private fb: FormBuilder, 
-    private auth:AuthService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private fb: FormBuilder,
+    private auth: AuthService) { }
 
   ngOnInit(): void {
     this.login = this.fb.group({
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSubmit(){
+  onSubmit() {
     let params = this.login.value;
     console.log("Hola :v");
   }
