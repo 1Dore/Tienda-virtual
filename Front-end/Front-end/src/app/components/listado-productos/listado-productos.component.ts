@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 interface producto{
   tipo: String;
@@ -19,13 +20,18 @@ interface producto{
 export class ListadoProductosComponent implements OnInit {
 
   lista_de_productos: Array<producto>;
-
+  tipo: String;
   user = 'PlaceHolder';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private servicio:AuthService) { }
 
   ngOnInit(): void {
+    this.servicio.enviarTipo.subscribe(tipo => {
+      this.tipo = tipo;
+    })
   }
+
+
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
   }

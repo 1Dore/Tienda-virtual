@@ -12,16 +12,17 @@
     </button>
 </div>  
 
+
 <p class="separator"></p>
 
-<h1 class="title">Productos</h1>
+<h1 class="title">Productos {{tipo}}</h1>
 
 <mat-list role="list">
     <mat-list-item *ngFor="let producto of lista_de_productos">
         <mat-card class="element">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>Autor: {{producto.autor}}</mat-card-title>
+                <mat-card-title> Autor: {{producto.autor}}</mat-card-title>
                 <mat-card-subtitle>{{producto.tipo}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
