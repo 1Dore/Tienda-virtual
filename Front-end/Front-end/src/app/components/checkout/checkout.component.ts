@@ -75,7 +75,6 @@ export class CheckoutComponent implements OnInit {
   delete_card() {
     //let numero = (this.cards.map(i => i.numero))
     let numero = 0;
-
-    delete this.cards[Number(numero)];
+    this.cards.pop[numero];
   }
 }
