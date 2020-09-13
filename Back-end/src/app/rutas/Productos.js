@@ -7,9 +7,12 @@ module.exports = (app) => {
     app.get('/getAllProducts', (req, res, next) => {    
 
         let querry = `Select * from productos`;
+
         conn.query( querry, (error, formularios) => {
+
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status:1, formularios})
+            else res.json({status:1, formularios});
+
         });
 
     });
@@ -17,10 +20,13 @@ module.exports = (app) => {
     //get de los productos por categoria
     app.post('/getProductsBy', (req, res, next) => {    
 
-        let querry = `Select * from productos where pr_categoria = '${req.params.categoria}'`;
+        let querry = `Select * from productos where pr_categoria = '${req.body.categoria}'`;
+
         conn.query( querry, (error, formularios) => {
+
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status:1, formularios})
+            else res.json({status:1, formularios});
+
         });
 
     });
@@ -28,10 +34,13 @@ module.exports = (app) => {
     //post de nuevo producto
     app.post('/newProduct', (req, res, next) => {    
 
-        let querry = `Insert into productos (pr_nombre, pr_existencia, pr_autor, pr_descripcion, pr_foto, pr_precio) values ('${req.body.pr_nombre}', '${req.body.pr_existencia}', '${req.body.pr_autor}', '${req.body.pr_descripcion}', '${req.body.pr_foto}', '${req.body.pr_precio}')`;
+        let querry = `Insert into productos (pr_nombre, pr_existencia, pr_autor, pr_descripcion, pr_foto, pr_precio, pr_categoria) values ('${req.body.nombre}', ${req.body.existencia}, '${req.body.autor}', '${req.body.descripcion}', '${req.body.foto}', ${req.body.precio}, '${req.body.categoria}')`;
+        
         conn.query( querry, (error, formularios) => {
+
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status:1, formularios})
+            else res.json({status:1, message:"Insertado existosamente" ,formularios});
+
         });
 
     });
@@ -40,10 +49,13 @@ module.exports = (app) => {
     //alter producto (precio, nombre, autor, cantidad)
     app.post('/editCantidad', (req, res, next) => {    
 
-        let querry = `Update productos set pr_existencia = ${req.body.existencia}`;
+        let querry = `Update productos set pr_existencia = ${req.body.existencia} where pr_nombre = '${req.body.nombre}'`;
+
         conn.query( querry, (error, formularios) => {
+
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status:1, formularios})
+            else res.json({status:1, formularios});
+
         });
         
     });
