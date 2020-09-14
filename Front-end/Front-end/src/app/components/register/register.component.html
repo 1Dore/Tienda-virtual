@@ -42,8 +42,10 @@
         </mat-form-field>
 
         <p></p>
-        <button mat-raised-button class="register-full-width button"
-            (click)="onSubmit('/menu-principal')">Registrarse</button>
+        <button [disabled] = "register.invalid" mat-raised-button class="register-full-width button"
+                (click)="onSubmit('/menu-principal')">
+            Registrarse
+        </button>
         <p></p>
         <button (click)="irA('/menu-principal')" type="submit" mat-raised-button class="register-full-width button">¿Yá
             tienes
