@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { runInThisContext } from 'vm';
 
 class ContenidoCarrito {
   pr_id: Number;
@@ -77,42 +78,82 @@ export class AuthService {
 
   agregarCarrito(item: Number) {
     let temp: ContenidoCarrito = new ContenidoCarrito();
+    this.traerListaCarrito();
     let existente = this.items.find((producto) => item == producto.pr_id);
 
     if (!existente) {
+      temp.pr_id = item;
+      temp.pr_cantidad = 1;
       this.items.push(temp);
 
     }
     else {
       this.items.forEach(element => {
-        temp = this.items.splice(this.items.indexOf(element))[0];
-        temp.pr_cantidad = Number(temp.pr_cantidad) + 1;
-        this.items.push(temp);
+        if(element.pr_id == item){
+          let index = this.items.indexOf(element);
+          this.items[index].pr_cantidad = Number(this.items[index].pr_cantidad) + 1;
+        }
       });
     }
+    this.guardarListaCarrito();
   }
+
   sacardeCarrito(item: Number) {
     let temp: ContenidoCarrito = new ContenidoCarrito();
+    this.traerListaCarrito();
     let existente = this.items.find((producto) => item == producto.pr_id);
 
     if (existente) {
       this.items.forEach(element => {
-        temp = this.items.splice(this.items.indexOf(element))[0];
-        temp.pr_cantidad = Number(temp.pr_cantidad) - 1;
-
-        if (temp.pr_cantidad != 0) {
-          this.items.push(temp);
+        if(element.pr_id == item){
+          let index = this.items.indexOf(element);
+          this.items[index].pr_cantidad = Number(this.items[index].pr_cantidad) - 1;
+          if(this.items[index].pr_cantidad == 0){
+            this.items.splice(index, 1);
+          }
         }
       });
     }
   }
+
   eliminardeCarrito(item: Number) {
-    let temp: ContenidoCarrito = new ContenidoCarrito();
-
     this.items.forEach(element => {
-      temp = this.items.splice(this.items.indexOf(element))[0];
-      temp.pr_cantidad = Number(temp.pr_cantidad) - 1;
-
+      if(element.pr_id == item){
+        this.items.splice(this.items.indexOf(element), 1);
+      }
     });
+  }
+
+
+  getCarrito(){
+    return this.items;
+  }
+
+
+  eliminarListaCarrito(){
+    for(let i = 0; i < Number(localStorage.getItem('carritoLength')); i++){
+      localStorage.removeItem('item' + i);
+    }
+    localStorage.removeItem('carritoLength');
+  }
+
+  guardarListaCarrito(){
+    let i = 0;
+    this.items.forEach(element => {
+      
+      localStorage.setItem('item' + i, JSON.stringify(element));
+      i++;
+    });
+    localStorage.setItem('carritoLength', this.items.length + "");
+  }
+
+  traerListaCarrito(){
+    let listaTemp = new Array<ContenidoCarrito>();
+    for(let i = 0; i < Number(localStorage.getItem('carritoLength')); i++){
+      let temp: ContenidoCarrito = new ContenidoCarrito();
+      temp = JSON.parse(localStorage.getItem('item' + i));
+      listaTemp.push(temp);
+    }
+    this.items = listaTemp;
   }
 }
