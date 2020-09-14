@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { runInThisContext } from 'vm';
+//import { runInThisContext } from 'vm';
 
 class ContenidoCarrito {
   pr_id: Number;
@@ -32,13 +32,13 @@ export class AuthService {
 
   login(loginData): Observable<any> {
 
-    let url = dominio +"LoginUsuarios";
+    let url = dominio + "LoginUsuarios";
     return this.http.post(url, loginData, httpHeader);
   }
 
   register(regData): Observable<any> {
 
-    let url = dominio +"newUsuario";
+    let url = dominio + "newUsuario";
     return this.http.post(url, regData, httpHeader);
 
   }
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   categoriaService(dato): Observable<any> {
-    let url = dominio+"getProductsBy";
+    let url = dominio + "getProductsBy";
     return this.http.post(url, dato, httpHeader);
   }
 
@@ -89,7 +89,7 @@ export class AuthService {
     }
     else {
       this.items.forEach(element => {
-        if(element.pr_id == item){
+        if (element.pr_id == item) {
           let index = this.items.indexOf(element);
           this.items[index].pr_cantidad = Number(this.items[index].pr_cantidad) + 1;
         }
@@ -105,10 +105,10 @@ export class AuthService {
 
     if (existente) {
       this.items.forEach(element => {
-        if(element.pr_id == item){
+        if (element.pr_id == item) {
           let index = this.items.indexOf(element);
           this.items[index].pr_cantidad = Number(this.items[index].pr_cantidad) - 1;
-          if(this.items[index].pr_cantidad == 0){
+          if (this.items[index].pr_cantidad == 0) {
             this.items.splice(index, 1);
           }
         }
@@ -118,38 +118,38 @@ export class AuthService {
 
   eliminardeCarrito(item: Number) {
     this.items.forEach(element => {
-      if(element.pr_id == item){
+      if (element.pr_id == item) {
         this.items.splice(this.items.indexOf(element), 1);
       }
     });
   }
 
 
-  getCarrito(){
+  getCarrito() {
     return this.items;
   }
 
 
-  eliminarListaCarrito(){
-    for(let i = 0; i < Number(localStorage.getItem('carritoLength')); i++){
+  eliminarListaCarrito() {
+    for (let i = 0; i < Number(localStorage.getItem('carritoLength')); i++) {
       localStorage.removeItem('item' + i);
     }
     localStorage.removeItem('carritoLength');
   }
 
-  guardarListaCarrito(){
+  guardarListaCarrito() {
     let i = 0;
     this.items.forEach(element => {
-      
+
       localStorage.setItem('item' + i, JSON.stringify(element));
       i++;
     });
     localStorage.setItem('carritoLength', this.items.length + "");
   }
 
-  traerListaCarrito(){
+  traerListaCarrito() {
     let listaTemp = new Array<ContenidoCarrito>();
-    for(let i = 0; i < Number(localStorage.getItem('carritoLength')); i++){
+    for (let i = 0; i < Number(localStorage.getItem('carritoLength')); i++) {
       let temp: ContenidoCarrito = new ContenidoCarrito();
       temp = JSON.parse(localStorage.getItem('item' + i));
       listaTemp.push(temp);
