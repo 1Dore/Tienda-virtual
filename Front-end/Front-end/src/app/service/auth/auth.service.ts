@@ -8,6 +8,7 @@ const httpHeader = {
   headers: new HttpHeaders({ 'Content-type': 'application/json' })
 }
 
+const dominio = environment.dominio;
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +26,13 @@ export class AuthService {
 
   login(loginData): Observable<any> {
 
-    let url = environment.dominio+"LoginUsuarios";
+    let url = dominio +"LoginUsuarios";
     return this.http.post(url, loginData, httpHeader);
   }
 
   register(regData): Observable<any> {
 
-    let url = environment.dominio+"newUsuario";
+    let url = dominio +"newUsuario";
     return this.http.post(url, regData, httpHeader);
 
   }
@@ -47,7 +48,7 @@ export class AuthService {
   }
 
   categoriaService(dato): Observable<any> {
-    let url = environment.dominio+"getProductsBy";
+    let url = dominio+"getProductsBy";
     return this.http.post(url, dato, httpHeader);
   }
 
