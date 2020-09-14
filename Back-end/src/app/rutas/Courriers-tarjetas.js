@@ -3,11 +3,58 @@ const conn = require('../../config/serverDB');
 module.exports = (app) => {
 
     //agregar courier
+    app.post('/newCourrier', (req, res, next) => {
+
+        let query = `Insert into courrier (c_ip, c_nombre) values ('${req.body.ip}', '${req.body.nombre}')`;
+        
+        conn.query(query, (error, form, cols) => {
+
+            if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
+
+            else res.json({status: 1, menssage: "Insercion realizada"});
+
+        });
+    });
 
     //editar courier
+    app.post('/editCantidad', (req, res, next) => {    
+
+        let querry = `Update emisores set c_ip = ${req.body.ip} where c_nombre = '${req.body.nombre}'`;
+
+        conn.query( querry, (error, formularios) => {
+
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status:1, message:`Courrier editado, la nueva ip es: ${req.boy.ip}` });
+
+        });
+        
+    });
 
     //agregar emisor
+    app.post('/newEmisor', (req, res, next) => {
+
+        let query = `Insert into emisores (e_ip, compañia) values ('${req.body.ip}', '${req.body.nombre}')`;
+        
+        conn.query(query, (error, form, cols) => {
+
+            if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
+
+            else res.json({status: 1, menssage: "Insercion realizada"});
+
+        });
+    });
 
     //editar emisor
+    app.post('/editCantidad', (req, res, next) => {    
 
+        let querry = `Update emisores set e_ip = ${req.body.ip} where compañia = '${req.body.nombre}'`;
+
+        conn.query( querry, (error, formularios) => {
+
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status:1, message:`Courrier editado, la nueva ip es: ${req.boy.ip}` });
+
+        });
+        
+    });
 }
