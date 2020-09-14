@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 class ContenidoCarrito {
   pr_id: Number;
@@ -10,6 +11,8 @@ class ContenidoCarrito {
 const httpHeader = {
   headers: new HttpHeaders({ 'Content-type': 'application/json' })
 }
+
+const dominio = environment.dominio;
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +31,13 @@ export class AuthService {
 
   login(loginData): Observable<any> {
 
-    let url = "http://localhost:3000/LoginUsuarios";
+    let url = dominio +"LoginUsuarios";
     return this.http.post(url, loginData, httpHeader);
   }
 
   register(regData): Observable<any> {
 
-    let url = "http://localhost:3000/newUsuario";
+    let url = dominio +"newUsuario";
     return this.http.post(url, regData, httpHeader);
 
   }
@@ -50,7 +53,7 @@ export class AuthService {
   }
 
   categoriaService(dato): Observable<any> {
-    let url = "http://localhost:3000/getProductsBy";
+    let url = dominio+"getProductsBy";
     return this.http.post(url, dato, httpHeader);
   }
 
