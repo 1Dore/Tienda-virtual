@@ -19,6 +19,8 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -45,7 +47,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatMenuModule,
     HttpClientModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatToolbarModule,
+    MatButtonToggleModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
