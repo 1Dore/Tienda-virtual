@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 const httpHeader = {
   headers: new HttpHeaders({ 'Content-type': 'application/json' })
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +25,13 @@ export class AuthService {
 
   login(loginData): Observable<any> {
 
-    let url = "http://localhost:3000/LoginUsuarios";
+    let url = environment.dominio+"LoginUsuarios";
     return this.http.post(url, loginData, httpHeader);
   }
 
   register(regData): Observable<any> {
 
-    let url = "http://localhost:3000/newUsuario";
+    let url = environment.dominio+"newUsuario";
     return this.http.post(url, regData, httpHeader);
 
   }
@@ -45,7 +47,7 @@ export class AuthService {
   }
 
   categoriaService(dato): Observable<any> {
-    let url = "http://localhost:3000/getProductsBy";
+    let url = environment.dominio+"getProductsBy";
     return this.http.post(url, dato, httpHeader);
   }
 
