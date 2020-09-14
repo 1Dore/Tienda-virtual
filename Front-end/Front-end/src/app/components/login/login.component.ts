@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
         alert("Correo o contraseña incorrectos");
       }
     });*/
-      if (login.status === 1) {
+      if (formulario.message == "Correo y contraseña correctos") {
         alert("Exitoso");
         this.auth.guardarSenal();
         this.auth.isLogin()
-        localStorage.setItem('loggedUser', login.email);
+        localStorage.setItem('loggedUser', login.correo);
         window.location.href = '/menu-principal';
         this.router.navigateByUrl('/menu-principal');
       }

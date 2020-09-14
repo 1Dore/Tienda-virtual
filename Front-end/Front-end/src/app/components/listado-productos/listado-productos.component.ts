@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
+import { Categoria } from './categoria';
 
-interface producto {
+class Producto {
   categoria: String;
   nombre: String;
   descripcion: String;
@@ -24,39 +25,42 @@ interface categoria{
 export class ListadoProductosComponent implements OnInit {
 
 
-  lista_de_productos: Array<producto>;
+  lista_de_productos: Array<Producto>;
 
 
-  categoria: String;
+  categoria:String;
   user = 'PlaceHolder';
 
   constructor(private router: Router, private servicio: AuthService) { }
 
   ngOnInit(): void {
-    this.categoria = this.servicio.getCategoria();
 
-    this.servicio.categoriaService(this.categoria).subscribe((rows) => {
+    //igualo a la interfaz y mando json {"categoria": "cosa"}
+    this.categoria = this.servicio.getCategoria();
+    let data:Categoria = new Categoria();
+    data.categoria = this.categoria;
+
+    this.servicio.categoriaService(data).subscribe((rows) => {
 
       //variables que inicializo para el foreach
-      let temp: producto;    //uso la interfaz producto
-      this.lista_de_productos = new Array<producto>();  //array de productoss
 
-      console.log("entre");
-      if (rows.formularios.length > 0) {
-        console.log("entre al if");
-        rows.formularios.forEach((element) => {
+      this.lista_de_productos = new Array<Producto>();  //array de productoss
+
+
+      if (rows.formularios.rows.length > 0) {
+        rows.formularios.rows.forEach((element) => {
           //meto las cosas al temp
-          temp.autor = element.autor;
-          temp.categoria = element.categoria;
-          temp.descripcion = element.descripcion;
-          temp.foto = element.foto;
-          temp.nombre = element.nombre;
-          temp.precio = element.precio;
+          let temp:Producto = new Producto();    //uso la interfaz producto
+          temp.autor = element.pr_autor;
+          temp.categoria = element.pr_categoria;
+          temp.descripcion = element.pr_descripcion;
+          temp.foto = element.pr_foto;
+          temp.nombre = element.pr_nombre;
+          temp.precio = element.pr_precio;
           //meto el temp a la lista
           this.lista_de_productos.push(temp);
 
         });
-
         console.log(this.lista_de_productos);
       }
       else {
