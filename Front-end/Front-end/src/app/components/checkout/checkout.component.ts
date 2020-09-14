@@ -78,8 +78,6 @@ export class CheckoutComponent implements OnInit {
       this.total = Number(this.total);
     }
     this.total = Number(price) * Number(this.quantity);
-
-
   }
   delete_card() {
     //let numero = (this.cards.map(i => i.numero))
