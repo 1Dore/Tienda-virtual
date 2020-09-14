@@ -31,8 +31,6 @@ export class ListadoProductosComponent implements OnInit {
   ngOnInit(): void {
       this.categoria = this.servicio.getCategoria();
 
-
-
     this.servicio.categoriaService(this.categoria).subscribe((rows) => {
       
       //variables que inicializo para el foreach

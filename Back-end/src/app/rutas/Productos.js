@@ -19,9 +19,8 @@ module.exports = (app) => {
 
     //get de los productos por categoria
     app.post('/getProductsBy', (req, res, next) => {    
-
-        let querry = `Select * from productos where pr_categoria = ${req.body.categoria}`;
-        console.log(querry);
+        
+        let querry = `Select * from productos where pr_categoria = '${req.body.categoria}'`;
         conn.query( querry, (error, formularios) => {
 
             if (error) res.json({status: 0, message: `${error}`});

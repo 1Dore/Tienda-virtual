@@ -27,12 +27,12 @@ export class LoginComponent implements OnInit {
   }
 
 
-  irA(ruta: string) {
+  irA(ruta:string) {
     this.router.navigateByUrl(ruta);
     this.dialogRef.close();
   }
 
-  onSubmit(ruta:string){
+  onSubmit(){
     let login = this.login.value;
 
     //---------------------------------------encriptacion-------------------------------
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(login).subscribe((formulario) => {
 
       if(formulario.message == "Correo y contraseña correctos"){
-        this.router.navigateByUrl(ruta);
+        this.router.navigateByUrl("/");
       }
       else{
         alert("Correo o contraseña incorrectos");
