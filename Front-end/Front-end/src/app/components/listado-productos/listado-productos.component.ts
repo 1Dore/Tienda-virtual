@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
-interface producto{
+interface producto {
   categoria: String;
   nombre: String;
   descripcion: String;
@@ -23,22 +23,22 @@ export class ListadoProductosComponent implements OnInit {
   lista_de_productos: Array<producto>;
 
 
-  categoria:String;
+  categoria: String;
   user = 'PlaceHolder';
 
-  constructor(private router: Router, private servicio:AuthService) { }
+  constructor(private router: Router, private servicio: AuthService) { }
 
   ngOnInit(): void {
-      this.categoria = this.servicio.getCategoria();
+    this.categoria = this.servicio.getCategoria();
 
     this.servicio.categoriaService(this.categoria).subscribe((rows) => {
-      
+
       //variables que inicializo para el foreach
-      let temp:producto;    //uso la interfaz producto
+      let temp: producto;    //uso la interfaz producto
       this.lista_de_productos = new Array<producto>();  //array de productoss
 
       console.log("entre");
-      if(rows.formularios.length > 0){
+      if (rows.formularios.length > 0) {
         console.log("entre al if");
         rows.formularios.forEach((element) => {
           //meto las cosas al temp
@@ -55,7 +55,7 @@ export class ListadoProductosComponent implements OnInit {
 
         console.log(this.lista_de_productos);
       }
-      else{
+      else {
         alert("Producto no encontrado");
         console.log(rows.message);
       }
@@ -67,6 +67,7 @@ export class ListadoProductosComponent implements OnInit {
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
   }
+
 }
 
 

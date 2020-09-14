@@ -1,4 +1,4 @@
-<div class="upperbar">
+<!--<div class="upperbar">
     <a (click)="irA('/menu-principal')"> 
         <button mat-button><mat-icon class="center">home</mat-icon></button>
     </a>
@@ -12,7 +12,7 @@
         <mat-icon class="icon">add_shopping_cart</mat-icon>
     </button>
 
-</div>
+</div>-->
 <p class="separator"></p>
 <h1 class="title">Mi Carreta</h1>
 
@@ -38,7 +38,7 @@
             <mat-divider></mat-divider>
             <mat-card-actions>
                 <div class="menu">
-                    <button mat-icon-button class="delete">
+                    <button (click)="delete_card" mat-icon-button class="delete">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
                     <button (click)="minus_one()" mat-icon-button class="quantity">

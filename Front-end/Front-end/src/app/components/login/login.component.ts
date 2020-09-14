@@ -27,12 +27,12 @@ export class LoginComponent implements OnInit {
   }
 
 
-  irA(ruta:string) {
+  irA(ruta: string) {
     this.router.navigateByUrl(ruta);
     this.dialogRef.close();
   }
 
-  onSubmit(){
+  onSubmit() {
     let login = this.login.value;
 
     //---------------------------------------encriptacion-------------------------------
@@ -45,16 +45,31 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(login).subscribe((formulario) => {
 
-      if(formulario.message == "Correo y contraseña correctos"){
-        this.router.navigateByUrl("/");
+      /*if(formulario.message == "Correo y contraseña correctos"){
+        this.router.navigateByUrl(ruta);
       }
       else{
         alert("Correo o contraseña incorrectos");
       }
-    });
+    });*/
+      if (login.status === 1) {
+        alert("Exitoso");
+        this.auth.guardarSenal();
+        this.auth.isLogin()
+        localStorage.setItem('loggedUser', login.email);
+        window.location.href = '/menu-principal';
+        this.router.navigateByUrl('/menu-principal');
+      }
+      else {
+        alert("Fallido");
+        localStorage.setItem('loggedUser', "LOGIN");
 
-    this.login.reset();
-  }
+      }
 
+      this.login.reset();
+    }
+
+    )
+  };
 }
 

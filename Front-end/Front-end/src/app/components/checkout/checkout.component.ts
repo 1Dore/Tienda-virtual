@@ -53,12 +53,10 @@ export class CheckoutComponent implements OnInit {
   minus_one() {
     let price = (this.cards.map(i => i.price));
 
-    for (var i = 0; i < this.cards.length; i++) {
-      this.quantity[i]--;
-      if (this.quantity[i] < 0) {
-        this.quantity[i] = 1;
-      }
-      this.total = Number(price) * this.quantity[i];
+    this.quantity--;
+    if (this.quantity < 0) {
+      this.quantity = 1;
+      this.total = Number(price) * this.quantity;
     }
   }
   plus_one() {
@@ -66,12 +64,17 @@ export class CheckoutComponent implements OnInit {
     let price = (this.cards.map(i => i.price));
 
     this.quantity++;
-
     if (this.quantity > Number(available)) {
       this.quantity = Number(available);
-
+      this.total = Number(price) * Number(this.quantity);
+      this.total = Number(this.total);
     }
-    this.total = Number(price) * Number(this.quantity);
-    this.total = Number(this.total);
+
+
+  }
+  delete_card() {
+    //let numero = (this.cards.map(i => i.numero))
+    let numero = 0;
+    this.cards.pop[numero];
   }
 }

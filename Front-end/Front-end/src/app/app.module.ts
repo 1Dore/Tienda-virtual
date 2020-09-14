@@ -20,6 +20,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { AdminComponent } from './components/admin/admin.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -47,7 +49,10 @@ import { AdminComponent } from './components/admin/admin.component';
     MatMenuModule,
     HttpClientModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatToolbarModule,
+    MatButtonToggleModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
