@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  dominio: "http://7e8cf383dca3.ngrok.io"
+  dominio: "http://ae9b24bd8a16.ngrok.io/"
 };
 
 /*
