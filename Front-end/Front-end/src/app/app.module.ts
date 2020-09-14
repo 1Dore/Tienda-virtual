@@ -22,6 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { AdminComponent } from './components/admin/admin.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatListModule,
     MatDividerModule,
     MatToolbarModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatCheckboxModule
 
   ],
   providers: [],
