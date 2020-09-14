@@ -43,11 +43,14 @@ export class MenuPrincipalComponent implements OnInit {
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
   }
+
+
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
       width: '500px',
-      data: { name: this.email, animal: this.password }
+      data: { name:this.email, animal:this.password }
     });
+
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

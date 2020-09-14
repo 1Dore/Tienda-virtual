@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 interface producto{
-  tipo: String;
+  categoria: String;
   nombre: String;
   descripcion: String;
   autor: String;
@@ -19,16 +19,50 @@ interface producto{
 })
 export class ListadoProductosComponent implements OnInit {
 
+
   lista_de_productos: Array<producto>;
-  tipo: String;
+
+
+  categoria:String;
   user = 'PlaceHolder';
 
   constructor(private router: Router, private servicio:AuthService) { }
 
   ngOnInit(): void {
-    this.servicio.enviarTipo.subscribe(tipo => {
-      this.tipo = tipo;
-    })
+    this.servicio.enviarcategoria.subscribe(categoria => {
+      this.categoria = categoria;
+    });
+
+    this.servicio.enviarCategoria(this.categoria).subscribe((rows) => {
+      
+      //variables que inicializo para el foreach
+      let temp:producto;    //uso la interfaz producto
+      this.lista_de_productos = new Array<producto>();  //array de productoss
+
+      console.log("entre");
+      if(rows.formularios.length > 0){
+        console.log("entre al if");
+        rows.formularios.forEach((element) => {
+          //meto las cosas al temp
+          temp.autor = element.autor;
+          temp.categoria = element.categoria;
+          temp.descripcion = element.descripcion;
+          temp.foto = element.foto;
+          temp.nombre = element.nombre;
+          temp.precio = element.precio;
+          //meto el temp a la lista
+          this.lista_de_productos.push(temp);
+
+        });
+
+        console.log(this.lista_de_productos);
+      }
+      else{
+        alert("Producto no encontrado");
+        console.log(rows.message);
+      }
+
+    });
   }
 
 
@@ -36,3 +70,7 @@ export class ListadoProductosComponent implements OnInit {
     this.router.navigateByUrl(ruta);
   }
 }
+
+
+
+

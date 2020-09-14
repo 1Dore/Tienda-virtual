@@ -12,9 +12,11 @@ const httpHeader = {
 })
 export class AuthService {
 
-  tipo: String;
-  private tipoDeLaLsita_productos = new Subject<String>();
-  enviarTipo = this.tipoDeLaLsita_productos.asObservable();
+
+  categoria: String;
+  private categoriaDeLaLsita_productos = new Subject<String>();
+  enviarcategoria = this.categoriaDeLaLsita_productos.asObservable();
+
 
   constructor(private http:HttpClient) { }
 
@@ -31,17 +33,19 @@ export class AuthService {
 
   }
 
-
-
-
-  // Codigo para enviar el tipo de producto de Menu Principal a Lista de Producto
-
-  
-
-  enviarCategoria(tipo: String){
-    this.tipo = tipo;
-    this.tipoDeLaLsita_productos.next(tipo);
+  isLogin(){
+    return false;
   }
-  
+
+  // Codigo para enviar el categoria de producto de Menu Principal a Lista de Producto
+  enviarCategoria(categoria: String): Observable<any>{
+
+    this.categoria = categoria;
+    this.categoriaDeLaLsita_productos.next(categoria);
+    let url = "http://localhost:3000/getProductsBy";
+    return this.http.post(url, categoria, httpHeader); 
+
+  }
+
 
 }
