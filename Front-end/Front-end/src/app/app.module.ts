@@ -19,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatDividerModule } from '@angular/material/divider';
     RegisterComponent,
     LoginComponent,
     ListadoProductosComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

@@ -20,16 +20,13 @@ interface producto{
 export class ListadoProductosComponent implements OnInit {
 
   lista_de_productos: Array<producto>;
-  tipo: String;
+  private tipo: String;
   user = 'PlaceHolder';
 
   constructor(private router: Router, private servicio:AuthService) { }
 
-  ngOnInit(): void {
-    this.servicio.enviarTipo.subscribe(tipo => {
-      this.tipo = tipo + "";
-      this.tipo = this.servicio.getCategoria() + "";
-    })
+  ngOnInit(): void {  
+    this.tipo = this.servicio.getCategoria()
   }
 
 
