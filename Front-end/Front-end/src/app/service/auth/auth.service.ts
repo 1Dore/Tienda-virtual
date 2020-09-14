@@ -35,7 +35,12 @@ export class AuthService {
     let url = dominio + "LoginUsuarios";
     return this.http.post(url, loginData, httpHeader);
   }
+  //ADMIN LOGIN
+  loginAdmin(loginAdminData): Observable<any> {
 
+    let url = dominio + "LoginAdmin";
+    return this.http.post(url, loginAdminData, httpHeader);
+  }
   register(regData): Observable<any> {
 
     let url = dominio + "newUsuario";
