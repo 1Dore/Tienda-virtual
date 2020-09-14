@@ -12,6 +12,10 @@ interface producto{
   foto: String;
 }
 
+interface categoria{
+  categoria:String;
+}
+
 @Component({
   selector: 'app-listado-productos',
   templateUrl: './listado-productos.component.html',
@@ -29,9 +33,11 @@ export class ListadoProductosComponent implements OnInit {
   constructor(private router: Router, private servicio:AuthService) { }
 
   ngOnInit(): void {
-      this.categoria = this.servicio.getCategoria();
-
-    this.servicio.categoriaService(this.categoria).subscribe((rows) => {
+    this.categoria = this.servicio.getCategoria();
+    let categoria:categoria;
+    console.log(this.categoria);
+    categoria.categoria = this.categoria;
+    this.servicio.categoriaService(categoria).subscribe((rows) => {
       
       //variables que inicializo para el foreach
       let temp:producto;    //uso la interfaz producto
