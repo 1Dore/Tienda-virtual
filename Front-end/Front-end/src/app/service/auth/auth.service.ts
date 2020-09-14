@@ -38,14 +38,22 @@ export class AuthService {
   }
 
   // Codigo para enviar el categoria de producto de Menu Principal a Lista de Producto
-  enviarCategoria(categoria: String): Observable<any>{
+  enviarCategoria(categoria:String){
 
     this.categoria = categoria;
+    localStorage.setItem('Categoria', "" + categoria);
     this.categoriaDeLaLsita_productos.next(categoria);
-    let url = "http://localhost:3000/getProductsBy";
-    return this.http.post(url, categoria, httpHeader); 
 
   }
 
+  categoriaService(dato):Observable<any>{
+    let url = "http://localhost:3000/getProductsBy";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  getCategoria(){
+    return localStorage.getItem('Categoria');
+  }
+  
 
 }

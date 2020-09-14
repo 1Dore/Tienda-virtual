@@ -29,11 +29,11 @@ export class ListadoProductosComponent implements OnInit {
   constructor(private router: Router, private servicio:AuthService) { }
 
   ngOnInit(): void {
-    this.servicio.enviarcategoria.subscribe(categoria => {
-      this.categoria = categoria;
-    });
+      this.categoria = this.servicio.getCategoria();
 
-    this.servicio.enviarCategoria(this.categoria).subscribe((rows) => {
+
+
+    this.servicio.categoriaService(this.categoria).subscribe((rows) => {
       
       //variables que inicializo para el foreach
       let temp:producto;    //uso la interfaz producto
