@@ -46,7 +46,21 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(login).subscribe((formulario) => {
       if (this.checkbox_admin == true) {
-        alert("ENTRO")
+        this.auth.loginAdmin(login).subscribe((formulario) => {
+          if (formulario.message == "Correo y contraseña correctos") {
+            alert("Sesión iniciada como Administrador");
+            this.auth.guardarSenal();
+            this.auth.isLogin()
+            localStorage.setItem('loggedUser', login.correo);
+            window.location.href = '/admin';
+            this.router.navigateByUrl('/admin');
+          }
+          else {
+            alert("Fallido");
+            localStorage.setItem('loggedUser', "LOGIN");
+
+          }
+        });
       }
       else {
         if (formulario.message == "Correo y contraseña correctos") {
