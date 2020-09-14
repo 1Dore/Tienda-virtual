@@ -31,9 +31,8 @@ module.exports = (app) => {
 
         });
     });
-
+    
     //------------------------ADMIN------------------------------------------
-
     app.post('/LoginAdmin', (req, res, next) => {    
 
         let querry = `Select * from usuarios where  correo = '${req.body.correo}' and contraseña = '${req.body.contraseña}'`;

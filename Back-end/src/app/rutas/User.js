@@ -1,15 +1,17 @@
 const conn = require('../../config/serverDB');
 
 module.exports = (app) => {
-
-    //editar perfil
     
     //agregar direcciones
 
     //editar direcciones
 
+    //eliminar direccion
+
     //agregar tarjetas
 
     //editar tarjetas
+
+    //eliminar tarjeta
 
 }
