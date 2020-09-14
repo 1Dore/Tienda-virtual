@@ -12,6 +12,10 @@ interface producto {
   foto: String;
 }
 
+interface categoria{
+  categoria:String;
+}
+
 @Component({
   selector: 'app-listado-productos',
   templateUrl: './listado-productos.component.html',

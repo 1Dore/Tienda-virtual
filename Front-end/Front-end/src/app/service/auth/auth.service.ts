@@ -36,8 +36,8 @@ export class AuthService {
 
 
   // Codigo para enviar el categoria de producto de Menu Principal a Lista de Producto
-  enviarCategoria(categoria: String) {
-
+  enviarCategoria(categoria:String){
+    
     this.categoria = categoria;
     localStorage.setItem('Categoria', "" + categoria);
     this.categoriaDeLaLsita_productos.next(categoria);
