@@ -50,9 +50,23 @@ module.exports = (app) => {
         conn.query( querry, (error, formularios) => {
 
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status:1, message:`Courrier editado, la nueva ip es: ${req.boy.ip}` });
+            else res.json({status:1, message:`Courrier editado, la nueva ip es: ${req.body.ip}` });
 
         });
         
     });
+
+    //obtener ip de emisor
+    app.post('/getEmisor', (req, res, next) => {
+
+        let querry = `Select ip from emisores where compañia = ${req.boyd.nombre}`;
+
+        conn.query(querry, (err, formularios) => {
+
+            if (err) res.json({status: 0, message: `${err}`});
+            else res.json({status:1, message:"Emisor encontrado", formularios});
+            
+        })
+
+    })
 }

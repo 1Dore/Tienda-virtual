@@ -57,6 +57,37 @@ export class AuthService {
     let url = dominio + "newEmisor";
     return this.http.post(url, data, httpHeader);
   }
+  
+  getEmisor(data): Observable<any>{
+    let url = dominio + "gerEmisor";
+    return this.http.post(url, data, httpHeader);
+  }
+
+  askEmisor(ip, data):Observable<any>{
+    let url = ip;
+    return this.http.post(url, data);
+  }
+
+  getCourrier(data): Observable<any>{
+    let url = dominio + "getCourrier";
+    return this.http.post(url, data, httpHeader);
+  }
+
+  askCourrierCosto(ip, data):Observable<any>{
+    let url = ip;
+    return this.http.post(url, data);
+  }
+
+  askCourrierStatus(ip, data):Observable<any>{
+    let url = ip;
+    return this.http.post(url, data);
+  }
+
+  solicitarEnvio(ip, data):Observable<any>{
+    let url = ip;
+    return this.http.post(url, data);
+  }
+
 
 
   // Codigo para enviar el categoria de producto de Menu Principal a Lista de Producto
@@ -102,6 +133,7 @@ export class AuthService {
     localStorage.removeItem("isAdminLogin");
     this.router.navigateByUrl("/menu-principal");
   }
+
 
   //Funciones pertinentes al Carrito
   
