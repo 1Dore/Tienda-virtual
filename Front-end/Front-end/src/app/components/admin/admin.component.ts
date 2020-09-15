@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AgregarProductosComponent } from '../agregar-productos/agregar-productos.component';
 import { CourierComponent } from '../courier/courier.component';
 import { EmisoresComponent } from '../emisores/emisores.component';
 
@@ -19,11 +20,13 @@ export class AdminComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
+
   }
   openEmisor(): void {
     const dialogRef = this.dialog.open(EmisoresComponent, {
       width: '500px',
-      data: { name: this.ip_emisor, animal: this.name_emisor }
+      data: { ip_emisor: this.ip_emisor, name_emisor: this.name_emisor }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -33,6 +36,17 @@ export class AdminComponent implements OnInit {
   }
   openCourier(): void {
     const dialogRef = this.dialog.open(CourierComponent, {
+      width: '500px',
+      data: { ip_courier: this.ip_courier, name_courier: this.name_courier }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.ip_courier = result;
+    });
+  }
+  openProducto(): void {
+    const dialogRef = this.dialog.open(AgregarProductosComponent, {
       width: '500px',
       data: { name: this.ip_courier, animal: this.name_courier }
     });
