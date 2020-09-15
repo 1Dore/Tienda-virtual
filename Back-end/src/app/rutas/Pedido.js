@@ -70,6 +70,16 @@ module.exports = (app) => {
 
         });
     });
-    
+    //pedir productos byID
+    app.get('/getProductoById', (req, rex, next) => {
+        let query = `Select * From productos where pr_id = ${req.body.id}`;
+
+        conn.query( query, (error, formularios) => {
+
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status:1, formularios});
+
+        });
+    });
 
 }
