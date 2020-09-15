@@ -58,13 +58,14 @@ export class AuthService {
 
   }
 
+  getCategoria(){
+    this.categoria = localStorage.getItem('Categoria');
+    return this.categoria;
+  }
+
   categoriaService(dato): Observable<any> {
     let url = dominio + "getProductsBy";
     return this.http.post(url, dato, httpHeader);
-  }
-
-  getCategoria() {
-    return localStorage.getItem('Categoria');
   }
 
   isLogin() {
@@ -87,56 +88,61 @@ export class AuthService {
     this.router.navigateByUrl("/menu-principal");
   }
 
-  agregarCarrito(item: Number) {
+  //Funciones pertinentes al Carrito
+  
+  modificarCantidadCarrito(item: Number, tipo: boolean) {
     let temp: ContenidoCarrito = new ContenidoCarrito();
     this.traerListaCarrito();
-    let existente = this.items.find((producto) => item == producto.pr_id);
+    let existente = undefined != this.items.find((producto) => item == producto.pr_id);
 
-    if (!existente) {
-      temp.pr_id = item;
-      temp.pr_cantidad = 1;
-      this.items.push(temp);
+    if(tipo){
+      if (!existente) {
+        temp.pr_id = item;
+        temp.pr_cantidad = 1;
+        this.items.push(temp);
 
-    }
-    else {
-      this.items.forEach(element => {
-        if (element.pr_id == item) {
-          let index = this.items.indexOf(element);
-          this.items[index].pr_cantidad = Number(this.items[index].pr_cantidad) + 1;
-        }
-      });
+      }
+      else {
+        this.items.forEach(element => {
+          if (element.pr_id == item) {
+            let index = this.items.indexOf(element);
+            this.items[index].pr_cantidad = Number(this.items[index].pr_cantidad) + 1;
+          }
+        });
+      }
+    }else{
+      if (existente) {
+        this.items.forEach(element => {
+          if (element.pr_id == item) {
+            let index = this.items.indexOf(element);
+            temp.pr_id = item;
+            temp.pr_cantidad = Number(this.items[index].pr_cantidad) - 1;
+            this.items[index] = temp;
+            if(Number(this.items[index].pr_cantidad) < 1){
+              this.eliminardeCarrito(item);
+            }
+          }
+        });
+      }
     }
     this.guardarListaCarrito();
   }
 
-  sacardeCarrito(item: Number) {
-    let temp: ContenidoCarrito = new ContenidoCarrito();
-    this.traerListaCarrito();
-    let existente = this.items.find((producto) => item == producto.pr_id);
-
-    if (existente) {
-      this.items.forEach(element => {
-        if (element.pr_id == item) {
-          let index = this.items.indexOf(element);
-          this.items[index].pr_cantidad = Number(this.items[index].pr_cantidad) - 1;
-          if (this.items[index].pr_cantidad == 0) {
-            this.items.splice(index, 1);
-          }
-        }
-      });
-    }
-  }
 
   eliminardeCarrito(item: Number) {
-    this.items.forEach(element => {
-      if (element.pr_id == item) {
-        this.items.splice(this.items.indexOf(element), 1);
+    for (let i = 0; i < Number(localStorage.getItem('carritoLength')); i++) {
+      let temp: ContenidoCarrito = new ContenidoCarrito();
+      temp = JSON.parse(localStorage.getItem('item' + i));
+      if (temp.pr_id == item) {
+        this.items.splice(this.items.indexOf(temp), 1);
+        localStorage.removeItem('item' + i);
       }
-    });
+    }
   }
 
 
   getCarrito() {
+    this.traerListaCarrito();
     return this.items;
   }
 

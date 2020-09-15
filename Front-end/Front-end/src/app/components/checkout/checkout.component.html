@@ -1,3 +1,46 @@
+<p class="separator"></p>
+<h1 class="title">Mi Carreta</h1>
+
+<div class="container">
+    <div class="row">
+        <mat-card *ngFor="let producto of carrito_IDs">
+            <mat-card-title>titulo</mat-card-title>
+            <mat-card-content>
+                {{producto.pr_id}}
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions>
+                <div class="menu">
+                    <button (click)="delete_card(producto.pr_id)" mat-icon-button class="delete">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                    <button (click)="minus_one(producto.pr_id)" mat-icon-button class="quantity">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                        {{producto.pr_cantidad}}
+                    <button (click)="plus_one(producto.pr_id)" mat-icon-button>
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+        <div class="total">
+            <h3>
+                Total: Q{{total}}
+            </h3>
+        </div>
+        <mat-divider></mat-divider>
+        <br>
+        <div class="botones">
+            <button mat-raised-button class="register-full-width button" (click)="irA('/checkout')">Ir a Caja</button>
+            <br>
+            <br>
+            <button mat-raised-button class="register-full-width button" (click)="irA('/menu-principal')">Seguir
+                Comprando</button>
+        </div>
+
+    </div>
+</div>
 <!--<div class="upperbar">
     <a (click)="irA('/menu-principal')"> 
         <button mat-button><mat-icon class="center">home</mat-icon></button>
@@ -13,6 +56,7 @@
     </button>
 
 </div>-->
+<!--
 <p class="separator"></p>
 <h1 class="title">Mi Carreta</h1>
 
@@ -66,6 +110,6 @@
                 Comprando</button>
         </div>
 
-
     </div>
 </div>
+-->
