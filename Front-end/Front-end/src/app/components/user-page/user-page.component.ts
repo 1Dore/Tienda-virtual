@@ -3,6 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DireccionUsuarioComponent } from '../direccion-usuario/direccion-usuario.component';
 import { TarjetaUsuarioComponent } from '../tarjeta-usuario/tarjeta-usuario.component';
 
+class tarjeta{
+  numeroTarjeta: Number;
+}
+
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
@@ -23,6 +27,10 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  
+
+
   openTarjeta(): void {
     const dialogRef = this.dialog.open(TarjetaUsuarioComponent, {
       width: '500px',

@@ -16,18 +16,32 @@
         </div>
     </div>-->
     <p class="separator"></p>
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
+    <div class="container">
+        <div class="row">
             <div class="row">
                 <div class="col-6">
                     <mat-card>
                         <mat-card-header>
                             <mat-card-title>Agregar Tarjetas</mat-card-title>
                         </mat-card-header>
-                        <button (click)="openTarjeta()" mat-button>
-                            <img mat-card-image src="assets/img/card.png">
-                        </button>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-6">
+                                    <button (click)="openTarjeta()" mat-button>
+                                        <img mat-card-image src="assets/img/card.png">
+                                    </button>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem">Item 1</mat-list-item>
+                                    <mat-list-item role="listitem">Item 2</mat-list-item>
+                                    <mat-list-item role="listitem">Item 3</mat-list-item>
+                                  </mat-list>
+                            </div>
+                        </div>
                     </mat-card>
                 </div>
                 <div class="col-6">
@@ -35,14 +49,28 @@
                         <mat-card-header>
                             <mat-card-title>Agregrar Direcciones</mat-card-title>
                         </mat-card-header>
-                        <button (click)="openDireccion()" mat-button>
-                            <img mat-card-image src="assets/img/location.png">
-                        </button>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-6">
+                                    <button (click)="openDireccion()" mat-button>
+                                        <img mat-card-image src="assets/img/location.png">
+                                    </button>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem">Item 1</mat-list-item>
+                                    <mat-list-item role="listitem">Item 2</mat-list-item>
+                                    <mat-list-item role="listitem">Item 3</mat-list-item>
+                                  </mat-list>
+                            </div>
+                        </div>
                     </mat-card>
                 </div>
             </div>
         </div>
-        <div class="col-1"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
