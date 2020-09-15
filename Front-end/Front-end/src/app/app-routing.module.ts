@@ -13,6 +13,7 @@ import { DireccionUsuarioComponent } from './components/direccion-usuario/direcc
 import { TarjetaUsuarioComponent } from './components/tarjeta-usuario/tarjeta-usuario.component';
 import { AgregarProductosComponent } from './components/agregar-productos/agregar-productos.component';
 import { ExistenciasComponent } from './components/existencias/existencias.component';
+import { PagoProductoComponent } from './components/pago-producto/pago-producto.component';
 
 const routes: Routes = [
   { path: '', component: MenuPrincipalComponent },
@@ -29,7 +30,9 @@ const routes: Routes = [
   { path: 'direccion-usuario', component: DireccionUsuarioComponent },
   { path: 'tarjeta-usuario', component: TarjetaUsuarioComponent },
   { path: 'agregar-productos', component: AgregarProductosComponent },
-  { path: 'existencias', component: ExistenciasComponent }
+  { path: 'existencias', component: ExistenciasComponent },
+  { path: 'pago-producto', component: PagoProductoComponent }
+
 
 ];
 
