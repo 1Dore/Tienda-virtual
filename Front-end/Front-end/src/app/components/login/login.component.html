@@ -8,7 +8,8 @@
             <!-------------  email --------------------->
             <mat-form-field class="register-full-width">
                 <mat-label>Correo</mat-label>
-                <input matInput placeholder="name@gmail.com" type="input" formControlName="correo">
+                <input matInput placeholder="name@gmail.com" type="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
+                    formControlName="correo">
                 <mat-icon matSuffix>alternate_email</mat-icon>
             </mat-form-field>
 
