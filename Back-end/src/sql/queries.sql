@@ -20,15 +20,9 @@ create table direcciones(
 	dir_id serial,
 	direccion varchar (200),
     codigo_postal varchar(100),
-	primary key (dir_id)
-);
-
-create table relacion_direccion_y_usuarios(
-	dir_id int,
 	u_id int,
-	primary key (dir_id, u_id),
-	foreign key (dir_id) references direcciones(dir_id),
-	foreign key (u_id) references usuarios(u_id)
+	primary key (dir_id),
+	foreign key(u_id) references usuarios(u_id)
 );
 
 create table emisores(

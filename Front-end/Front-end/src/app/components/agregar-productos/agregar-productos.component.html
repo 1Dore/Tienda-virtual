@@ -3,7 +3,7 @@
     <p class="separator"></p>
 
     <div class="container">
-        <form class="register">
+        <form class="register" [formGroup] = "agregarProducto()">
 
             <mat-form-field class="register-full-width">
                 <mat-label>Título</mat-label>
@@ -39,9 +39,9 @@
             </mat-form-field>
 
             <mat-label>Añadir Imagenes</mat-label>
-            <input type="file">
+            <input type="file" name="filename">
             <p></p>
-            <button mat-raised-button class="register-full-width button">Agregar
+            <button mat-raised-button class="register-full-width button" type="submit" (click) = "onSubmit()" value="upload">Agregar
                 Producto</button>
             <p></p>
             <button (click)="irA('/existencias')" mat-raised-button class="register-full-width button">Verificar
