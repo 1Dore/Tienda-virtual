@@ -63,7 +63,6 @@ export class ListadoProductosComponent implements OnInit {
           this.lista_de_productos.push(temp);
 
         });
-        console.log(this.lista_de_productos);
       }
       else {
         alert("Producto no encontrado");
