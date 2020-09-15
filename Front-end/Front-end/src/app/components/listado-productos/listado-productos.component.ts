@@ -75,7 +75,7 @@ export class ListadoProductosComponent implements OnInit {
 
   agregarCarrito(id: Number){
     console.log(id);
-    this.servicio.agregarCarrito(id);
+    this.servicio.modificarCantidadCarrito(id, true);
     console.log(this.servicio.getCarrito());
   }
 
