@@ -4,16 +4,21 @@
 <div class="container">
     <div class="row">
         <mat-card *ngFor="let producto of carrito">
-            <mat-card-title><h2>{{producto.nombre}}</h2></mat-card-title>
+            <mat-card-title>
+                <h2>{{producto.nombre}}</h2>
+            </mat-card-title>
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
                 <mat-card-title> Autor: {{producto.autor}}</mat-card-title>
                 <br>
-               <div><mat-card-subtitle>{{producto.tipo}}</mat-card-subtitle></div> 
+                <div>
+                    <mat-card-subtitle>{{producto.tipo}}</mat-card-subtitle>
+                </div>
 
             </mat-card-header>
             <mat-card-content class="img">
-                <img class = "proporciones_imagen" style="margin-left: 120px;" mat-card-image src={{producto.foto}} alt={{producto.nombre}}> 
+                <img class="proporciones_imagen" style="margin-left: 120px;" mat-card-image src={{producto.foto}}
+                    alt={{producto.nombre}}>
                 <p>{{producto.descripcion}}</p>
                 <h3>Precio: {{producto.precio}}</h3>
             </mat-card-content>
@@ -26,7 +31,7 @@
                     <button (click)="minus_one(producto.id)" mat-icon-button class="quantity">
                         <mat-icon>remove</mat-icon>
                     </button>
-                        {{producto.cantidad}}
+                    {{producto.cantidad}}
                     <button (click)="plus_one(producto.id)" mat-icon-button>
                         <mat-icon>add</mat-icon>
                     </button>
@@ -41,7 +46,8 @@
         <mat-divider></mat-divider>
         <br>
         <div class="botones">
-            <button mat-raised-button class="register-full-width button" (click)="irA('/checkout')">Ir a Caja</button>
+            <button mat-raised-button class="register-full-width button" (click)="irA('/pago-producto')">Ir a
+                Caja</button>
             <br>
             <br>
             <button mat-raised-button class="register-full-width button" (click)="irA('/menu-principal')">Seguir

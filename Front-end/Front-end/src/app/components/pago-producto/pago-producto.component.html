@@ -1,0 +1,53 @@
+<!--<div class="upperbar"></div>-->
+<p class="separator"></p>
+
+<h1 class="title">Caja</h1>
+
+<div class="container">
+    <form class="register-form" [formGroup]="register">
+
+        <!---------- Emisor------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Emisor</mat-label>
+            <input matInput placeholder="name@gmail.com" type="text" formControlName="emisor">
+            <mat-icon matSuffix>alternate_email</mat-icon>
+        </mat-form-field>
+
+        <!---------- Nombre------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="John" formControlName="nombre">
+            <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <!---------- Apellido ------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Apellido</mat-label>
+            <input matInput placeholder="Smith" formControlName="apellido">
+            <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <!---------- Contraseña ------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" formControlName="contraseña">
+            <mat-icon matSuffix>security</mat-icon>
+        </mat-form-field>
+
+        <!---------- Validacion contraseña------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Repetir Contraseña</mat-label>
+            <input matInput type="password" formControlName="RContrasenia">
+            <mat-icon matSuffix>verified_user</mat-icon>
+        </mat-form-field>
+
+        <p></p>
+        <button [disabled]="register.invalid" mat-raised-button class="register-full-width button"
+            (click)="onSubmit('/menu-principal')">
+            Pagar
+        </button>
+        <p></p>
+        <button (click)="irA('/menu-principal')" type="submit" mat-raised-button
+            class="register-full-width button">Regresar al Carrito</button>
+    </form>
+</div>
