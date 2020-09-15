@@ -22,6 +22,9 @@
     </div>
     <!--ADMINISTRADOR-->
     <div *ngIf="auth.isAdminLogin()">
+        <button (click)="irA('/admin')" mat-button>
+            <mat-icon class="center">home</mat-icon>
+        </button>
         <button mat-button [matMenuTriggerFor]="belowMenu">Administrador: {{userDisplayName}}</button>
         <mat-menu #belowMenu="matMenu" yPosition="below">
             <button (click)="logout()" mat-menu-item>Cerrar Sesión</button>
