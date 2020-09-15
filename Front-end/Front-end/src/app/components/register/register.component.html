@@ -9,7 +9,8 @@
         <!---------- Correo------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Correo</mat-label>
-            <input matInput placeholder="name@gmail.com" formControlName="correo">
+            <input matInput placeholder="name@gmail.com" type="email"
+                pattern="[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}" formControlName="correo">
             <mat-icon matSuffix>alternate_email</mat-icon>
         </mat-form-field>
 
@@ -42,8 +43,8 @@
         </mat-form-field>
 
         <p></p>
-        <button [disabled] = "register.invalid" mat-raised-button class="register-full-width button"
-                (click)="onSubmit('/menu-principal')">
+        <button [disabled]="register.invalid" mat-raised-button class="register-full-width button"
+            (click)="onSubmit('/menu-principal')">
             Registrarse
         </button>
         <p></p>
