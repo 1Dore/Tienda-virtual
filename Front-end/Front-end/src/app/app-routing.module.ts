@@ -31,7 +31,6 @@ const routes: Routes = [
   { path: 'agregar-productos', component: AgregarProductosComponent },
   { path: 'existencias', component: ExistenciasComponent }
 
-
 ];
 
 @NgModule({
