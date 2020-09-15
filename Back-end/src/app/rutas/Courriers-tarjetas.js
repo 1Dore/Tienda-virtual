@@ -68,5 +68,19 @@ module.exports = (app) => {
             
         })
 
+    });
+
+    //obtener ip de courrier
+    app.post('/getCourrier', (req, res, next) => {
+
+        let querry = `Select ip from courrier where nombre = ${req.boyd.nombre}`;
+
+        conn.query(querry, (err, formularios) => {
+
+            if (err) res.json({status: 0, message: `${err}`});
+            else res.json({status:1, message:"Emisor encontrado", formularios});
+            
+        })
+
     })
 }
