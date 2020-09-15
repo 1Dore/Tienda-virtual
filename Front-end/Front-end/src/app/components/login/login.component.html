@@ -18,7 +18,10 @@
                 <input matInput type="password" formControlName="contraseña">
                 <mat-icon matSuffix>security</mat-icon>
             </mat-form-field>
-
+            <section>
+                <mat-checkbox [(ngModel)]="checkbox_admin" [ngModelOptions]="{standalone: true}">Administrador
+                </mat-checkbox>
+            </section>
             <p></p>
             <button [disabled]="login.invalid" (click)="onSubmit()" mat-raised-button
                 class="register-full-width button">Iniciar

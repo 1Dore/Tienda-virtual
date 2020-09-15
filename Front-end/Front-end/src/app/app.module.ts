@@ -22,6 +22,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { AdminComponent } from './components/admin/admin.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EmisoresComponent } from './components/emisores/emisores.component';
+import { CourierComponent } from './components/courier/courier.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
+import { TarjetaUsuarioComponent } from './components/tarjeta-usuario/tarjeta-usuario.component';
 
 
 @NgModule({
@@ -32,7 +38,12 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     LoginComponent,
     ListadoProductosComponent,
     CheckoutComponent,
-    AdminComponent
+    AdminComponent,
+    EmisoresComponent,
+    CourierComponent,
+    UserPageComponent,
+    DireccionUsuarioComponent,
+    TarjetaUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +62,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatListModule,
     MatDividerModule,
     MatToolbarModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatCheckboxModule
 
   ],
   providers: [],

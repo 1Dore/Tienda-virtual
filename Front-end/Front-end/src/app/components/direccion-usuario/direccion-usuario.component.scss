@@ -8,8 +8,8 @@
   margin-left: 20px;
   margin-right: 20px;
 }
-.register-form {
-  width: 90%;
+.register {
+  height: 100%;
 }
 .register-full-width {
   width: 90%;
@@ -18,4 +18,8 @@
 }
 .button{
     background-color: rgb(168, 223, 255);
+}
+.mat-dialog-content {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
 }
