@@ -6,7 +6,7 @@
         </button>
         <button mat-button [matMenuTriggerFor]="belowMenu">{{userDisplayName}}</button>
         <mat-menu #belowMenu="matMenu" yPosition="below">
-            <button mat-menu-item>Mi Cuenta</button>
+            <button mat-menu-item (click)="irA('/user-page')">Mi Cuenta</button>
             <button (click)="logout()" mat-menu-item>Cerrar Sesión</button>
         </mat-menu>
         <button (click)="irA('/checkout')" mat-mini-fab color="accent" class="checkout">
