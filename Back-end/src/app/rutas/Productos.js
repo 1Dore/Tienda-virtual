@@ -23,13 +23,25 @@ module.exports = (app) => {
         
         let querry = `Select * from productos where pr_categoria = '${req.body.categoria}'`;
         conn.query( querry, (error, formularios) => {
-
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status:1, formularios});
 
         });
 
     });
+
+        //pedir productos byID
+        app.post('/getProductoById', (req, res, next) => {
+            let query = `Select * From productos where pr_id = ${req.body.id}`;
+    
+            conn.query( query, (error, formularios) => {
+                console.log(query);
+                if (error) res.json({status: 0, message: `${error}`});
+                else res.json({status:1, formularios});
+    
+            });
+        });
+    
 
     //post de nuevo producto
     app.post('/newProduct', (req, res, next) => {    
@@ -60,7 +72,7 @@ module.exports = (app) => {
         
     });
 
-    app.get('/getProductoById', (req, rex, next) => {
+    app.get('/getProductsById', (req, rex, next) => {
         let query = `Select * From productos where pr_id = ${req.body.id}`;
 
         conn.query( query, (error, formularios) => {

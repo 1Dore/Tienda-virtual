@@ -44,12 +44,13 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(formulario).subscribe(data => {
 
-
       if (data.status == 1) this.router.navigateByUrl(ruta);
       else alert("Error al ejecutarse");
 
     });
+
     this.register.reset();
+
   }
 }
 
