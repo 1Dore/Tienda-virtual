@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+    <h1 class="title">Agregar Obra</h1>
+    <p class="separator"></p>
+
+    <div class="container">
+        <form class="register">
+
+            <mat-form-field class="register-full-width">
+                <mat-label>Título</mat-label>
+                <input matInput placeholder="Título de la Obra" type="input">
+                <mat-icon matSuffix>title</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="register-full-width">
+                <mat-label>Existencia</mat-label>
+                <input matInput placeholder="Cantidad Disponible" type="input">
+                <mat-icon matSuffix>amp_stories</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="register-full-width">
+                <mat-label>Categoría</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let categoria of categorias" [value]="categoria.value">
+                        {{categoria.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="register-full-width">
+                <mat-label>Autor</mat-label>
+                <input matInput placeholder="Nombre del Autor" type="input">
+                <mat-icon matSuffix>person_outline</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="register-full-width">
+                <mat-label>Descripción</mat-label>
+                <input matInput placeholder="Descripción de la Obra" type="input">
+                <mat-icon matSuffix>description</mat-icon>
+            </mat-form-field>
+
+            <mat-label>Añadir Imagenes</mat-label>
+            <input type="file">
+            <p></p>
+            <button mat-raised-button class="register-full-width button">Agregar
+                Producto</button>
+            <p></p>
+            <button (click)="irA('/existencias')" mat-raised-button class="register-full-width button">Verificar
+                Existencias</button>
+            <p></p>
+        </form>
+    </div>

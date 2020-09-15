@@ -1,0 +1,74 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth/auth.service';
+import { Categoria } from '../listado-productos/categoria';
+
+class Producto {
+  id: Number;
+  categoria: String;
+  nombre: String;
+  descripcion: String;
+  autor: String;
+  precio: Number;
+  foto: String;
+  exitencia: Number;
+}
+
+interface categoria {
+  categoria: String;
+}
+@Component({
+  selector: 'app-existencias',
+  templateUrl: './existencias.component.html',
+  styleUrls: ['./existencias.component.scss']
+})
+export class ExistenciasComponent implements OnInit {
+
+  lista_de_productos: Array<Producto>;
+
+
+  categoria: String;
+  user = 'PlaceHolder';
+
+  constructor(private router: Router, private servicio: AuthService) { }
+
+  ngOnInit(): void {
+    //igualo a la interfaz y mando json {"categoria": "cosa"}
+    this.categoria = this.servicio.getCategoria();
+    let data: Categoria = new Categoria();
+    data.categoria = this.categoria;
+
+    this.servicio.categoriaService(data).subscribe((rows) => {
+
+      //variables que inicializo para el foreach
+
+      this.lista_de_productos = new Array<Producto>();  //array de productoss
+
+
+      if (rows.formularios.rows.length > 0) {
+        rows.formularios.rows.forEach((element) => {
+          //meto las cosas al temp
+          let temp: Producto = new Producto();    //uso la interfaz producto
+          temp.id = element.pr_id;
+          temp.autor = element.pr_autor;
+          temp.categoria = element.pr_categoria;
+          temp.descripcion = element.pr_descripcion;
+          temp.foto = element.pr_foto;
+          temp.nombre = element.pr_nombre;
+          temp.precio = element.pr_precio;
+          temp.exitencia = element.pr_existencia;
+          //meto el temp a la lista
+          this.lista_de_productos.push(temp);
+
+        });
+        console.log(this.lista_de_productos);
+      }
+      else {
+        alert("Producto no encontrado");
+        console.log(rows.message);
+      }
+
+    });
+  }
+
+}

@@ -1,0 +1,17 @@
+<mat-card class="element" *ngFor="let producto of lista_de_productos">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title> Autor: {{producto.autor}}</mat-card-title>
+        <br>
+        <div>
+            <mat-card-subtitle>{{producto.tipo}}</mat-card-subtitle>
+        </div>
+        <img class="proporciones_imagen" mat-card-image src={{producto.foto}} alt={{producto.nombre}}>
+    </mat-card-header>
+    <mat-card-content class="img">
+        <h2>{{producto.nombre}}</h2>
+        <p>{{producto.descripcion}}</p>
+        <h3>Precio: {{producto.precio}}</h3>
+        <h3>Existencia: {{producto.existencia}}</h3>
+    </mat-card-content>
+</mat-card>

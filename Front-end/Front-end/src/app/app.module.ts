@@ -28,6 +28,9 @@ import { CourierComponent } from './components/courier/courier.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
 import { TarjetaUsuarioComponent } from './components/tarjeta-usuario/tarjeta-usuario.component';
+import { AgregarProductosComponent } from './components/agregar-productos/agregar-productos.component';
+import { ExistenciasComponent } from './components/existencias/existencias.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -43,7 +46,9 @@ import { TarjetaUsuarioComponent } from './components/tarjeta-usuario/tarjeta-us
     CourierComponent,
     UserPageComponent,
     DireccionUsuarioComponent,
-    TarjetaUsuarioComponent
+    TarjetaUsuarioComponent,
+    AgregarProductosComponent,
+    ExistenciasComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,8 @@ import { TarjetaUsuarioComponent } from './components/tarjeta-usuario/tarjeta-us
     MatDividerModule,
     MatToolbarModule,
     MatButtonToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
 
   ],
   providers: [],

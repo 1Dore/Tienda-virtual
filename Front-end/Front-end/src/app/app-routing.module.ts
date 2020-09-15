@@ -10,6 +10,9 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import { EmisoresComponent } from './components/emisores/emisores.component';
 import { CourierComponent } from './components/courier/courier.component';
 import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
+import { TarjetaUsuarioComponent } from './components/tarjeta-usuario/tarjeta-usuario.component';
+import { AgregarProductosComponent } from './components/agregar-productos/agregar-productos.component';
+import { ExistenciasComponent } from './components/existencias/existencias.component';
 
 const routes: Routes = [
   { path: '', component: MenuPrincipalComponent },
@@ -24,10 +27,9 @@ const routes: Routes = [
   { path: 'emisores', component: EmisoresComponent },
   { path: 'courier', component: CourierComponent },
   { path: 'direccion-usuario', component: DireccionUsuarioComponent },
-  { path: 'tarjeta-usuario', component: UserPageComponent }
-
-
-
+  { path: 'tarjeta-usuario', component: TarjetaUsuarioComponent },
+  { path: 'agregar-productos', component: AgregarProductosComponent },
+  { path: 'existencias', component: ExistenciasComponent }
 
 ];
 
