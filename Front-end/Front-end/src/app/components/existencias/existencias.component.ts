@@ -11,7 +11,7 @@ class Producto {
   autor: String;
   precio: Number;
   foto: String;
-  exitencia: Number;
+  existencia: Number;
 }
 
 interface categoria {
@@ -47,6 +47,7 @@ export class ExistenciasComponent implements OnInit {
 
       if (rows.formularios.rows.length > 0) {
         rows.formularios.rows.forEach((element) => {
+          console.log(element);
           //meto las cosas al temp
           let temp: Producto = new Producto();    //uso la interfaz producto
           temp.id = element.pr_id;
@@ -56,7 +57,7 @@ export class ExistenciasComponent implements OnInit {
           temp.foto = element.pr_foto;
           temp.nombre = element.pr_nombre;
           temp.precio = element.pr_precio;
-          temp.exitencia = element.pr_existencia;
+          temp.existencia = element.pr_existencia;
           //meto el temp a la lista
           this.lista_de_productos.push(temp);
 
