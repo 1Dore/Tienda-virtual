@@ -68,6 +68,11 @@ export class AuthService {
     return this.http.post(url, dato, httpHeader);
   }
 
+  getProductosById(dato): Observable<any>{
+    let url = dominio + "getProductoById";
+    return this.http.post(url, dato, httpHeader);
+  }
+
   isLogin() {
     let islog = localStorage.getItem("isLogin") === "valido";
     return islog;

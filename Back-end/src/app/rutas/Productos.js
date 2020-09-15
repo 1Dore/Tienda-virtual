@@ -60,7 +60,7 @@ module.exports = (app) => {
         
     });
 
-    app.get('/getProductoById', (req, rex, next) => {
+    app.get('/getProductsById', (req, rex, next) => {
         let query = `Select * From productos where pr_id = ${req.body.id}`;
 
         conn.query( query, (error, formularios) => {

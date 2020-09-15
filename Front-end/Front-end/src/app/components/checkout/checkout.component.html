@@ -3,22 +3,31 @@
 
 <div class="container">
     <div class="row">
-        <mat-card *ngFor="let producto of carrito_IDs">
-            <mat-card-title>titulo</mat-card-title>
-            <mat-card-content>
-                {{producto.pr_id}}
+        <mat-card *ngFor="let producto of carrito">
+            <mat-card-title><h2>{{producto.nombre}}</h2></mat-card-title>
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title> Autor: {{producto.autor}}</mat-card-title>
+                <br>
+               <div><mat-card-subtitle>{{producto.tipo}}</mat-card-subtitle></div> 
+
+            </mat-card-header>
+            <mat-card-content class="img">
+                <img class = "proporciones_imagen" style="margin-left: 120px;" mat-card-image src={{producto.foto}} alt={{producto.nombre}}> 
+                <p>{{producto.descripcion}}</p>
+                <h3>Precio: {{producto.precio}}</h3>
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-actions>
                 <div class="menu">
-                    <button (click)="delete_card(producto.pr_id)" mat-icon-button class="delete">
+                    <button (click)="delete_card(producto.id)" mat-icon-button class="delete">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
-                    <button (click)="minus_one(producto.pr_id)" mat-icon-button class="quantity">
+                    <button (click)="minus_one(producto.id)" mat-icon-button class="quantity">
                         <mat-icon>remove</mat-icon>
                     </button>
-                        {{producto.pr_cantidad}}
-                    <button (click)="plus_one(producto.pr_id)" mat-icon-button>
+                        {{producto.cantidad}}
+                    <button (click)="plus_one(producto.id)" mat-icon-button>
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -26,7 +35,7 @@
         </mat-card>
         <div class="total">
             <h3>
-                Total: Q{{total}}
+                Total: {{total}}
             </h3>
         </div>
         <mat-divider></mat-divider>
