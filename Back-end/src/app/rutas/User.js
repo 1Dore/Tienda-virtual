@@ -89,7 +89,7 @@ module.exports = (app) => {
     }); 
 
     //eliminar tarjeta
-    app.posr('/eliminarTarjetaByUser', (req, rex, next) => {
+    app.post('/eliminarTarjetaByUser', (req, rex, next) => {
         let query = `Delete From tarjetas Where t_id = ${req.body.t_id}`;
         if(error) res.status(500).json({status: 0, message: "No se pudo eliminar correctamente"});
             else res.json({status: 1, menssage: "Eliminado con exito"});
