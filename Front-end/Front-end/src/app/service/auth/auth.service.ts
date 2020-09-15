@@ -188,4 +188,49 @@ export class AuthService {
     }
     this.items = listaTemp;
   }
+
+
+  // Codigo para las direcciones segun usuario
+  getDireccionesByUser(dato): Observable<any>{
+    let url = dominio + "getDireccionesByUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  agregarDireccion(dato): Observable<any>{
+    let url = dominio + "newDireccionForUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  editarDireccion(dato): Observable<any>{
+    let url = dominio + "editDireccion";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  editarCodigoPostal(dato): Observable<any>{
+    let url = dominio + "editCodigoPostal";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  eliminarDireccion(dato): Observable<any>{
+    let url = dominio + "eliminarDireccionByUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+  
+  // Codigo para las Tarjetas segun usuario
+  getTarjetaByUser(dato): Observable<any>{
+    let url = dominio + "getTarjetasByUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  agregarTarjeta(dato): Observable<any>{
+    let url = dominio + "newTarjetaForUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  eliminarTarjeta(dato): Observable<any>{
+    let url = dominio + "eliminarTarjetaByUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+
 }

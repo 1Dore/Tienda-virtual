@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AdminComponent } from '../admin/admin.component';
@@ -20,11 +21,16 @@ export class AgregarProductosComponent implements OnInit {
     { value: 'E', viewValue: 'Escutltura' }
   ];
   constructor(public dialogRef: MatDialogRef<AdminComponent>, private router: Router) { }
+  agregarProducto: FormGroup;
 
   ngOnInit(): void {
   }
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
     this.dialogRef.close();
+  }
+
+  onSubmit(){
+
   }
 }

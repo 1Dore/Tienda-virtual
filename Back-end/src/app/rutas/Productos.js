@@ -35,7 +35,7 @@ module.exports = (app) => {
             let query = `Select * From productos where pr_id = ${req.body.id}`;
     
             conn.query( query, (error, formularios) => {
-
+                console.log(query);
                 if (error) res.json({status: 0, message: `${error}`});
                 else res.json({status:1, formularios});
     
