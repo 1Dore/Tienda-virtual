@@ -7,6 +7,10 @@ class ContenidoCarrito {
   pr_cantidad: Number;
 }
 
+class ID_producto{
+  id: Number;
+}
+
 class Producto {
   id: Number;
   categoria: String;
@@ -30,69 +34,83 @@ export class CheckoutComponent implements OnInit {
 
   carrito:Array<Producto> = new Array<Producto>();
 
-  user = 'PlaceHolder';
-  quantity = 1;
-  total = 0;
-  pr_id = 0;
-  pr_nombre = "";
-  pr_existencia = 0;
-  pr_categoria = "";
-  pr_autor = "";
-  pr_descipcion = "";
-  pr_fot = "";
+  total:Number = 0;
 
-  cards = [
-    {
-      img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      title: 'Montañas',
-      numero: this.pr_id,
-      description: 'Paisaje de montañas',
-      category: 'Fotografía',
-      author: 'Jhon Smith',
-      available: 10,
-      price: 5
-    },
-    {
-      img: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      title: 'Montañas',
-      numero: this.pr_id,
-      description: 'Paisaje de montañas',
-      category: 'Fotografía',
-      author: 'Jhon Smith',
-      available: 12,
-      price: 6
-    }
-  ];
-
-  constructor(private router: Router, private servico:AuthService) { }
+  constructor(private router: Router, private servicio:AuthService) { }
 
   ngOnInit(): void {
-    this.getCarritoIDs();
+
+    
+    this.carrito_IDs = this.servicio.getCarrito();
+    this.carrito_IDs.forEach(element => {
+      let temp: ID_producto = new ID_producto();
+      temp.id = element.pr_id;
+      this.getProductos(temp);
+    });
+    this.total = Number(this.total.toFixed(2));
   }
 
+  getProductos(id){
+    this.servicio.getProductosById(id).subscribe((rows) => {
 
+      //variables que inicializo para el foreach
+      if (rows.formularios.rows.length > 0) {
+        rows.formularios.rows.forEach((element) => {
+          //meto las cosas al temp
+          let temp:Producto = new Producto();    //uso la interfaz producto
+          temp.id = element.pr_id;
+          temp.autor = element.pr_autor;
+          temp.categoria = element.pr_categoria;
+          temp.descripcion = element.pr_descripcion;
+          temp.foto = element.pr_foto;
+          temp.nombre = element.pr_nombre;
+          temp.precio = element.pr_precio;
+          temp.cantidad = this.carrito_IDs.find((producto) => producto.pr_id == id.id).pr_cantidad;
+          //meto el temp a la lista
+          this.carrito.push(temp);
+          
+          this.total = Number(temp.cantidad) * Number(temp.precio) + Number(this.total);
+        });
+      }
+      else {
+        alert("Producto no encontrado");
+        console.log(rows.message);
+      }
+
+    });
+  }
+
+  //codgigo de modificacion del cada producto en el carrito
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
     this.getCarritoIDs();
   }
   
   plus_one(id:Number) {
-    this.servico.modificarCantidadCarrito(id, true);
+    this.servicio.modificarCantidadCarrito(id, true);
+    let x = Number(this.carrito.find((producto) => producto.id == id).cantidad);
+    this.carrito.find((producto) => producto.id == id).cantidad = Number(x) + 1;
+    this.total = Number(this.total) + Number(this.carrito.find((producto) => producto.id == id).precio);
+    this.total = Number(this.total.toFixed(2));
     this.getCarritoIDs();
   }
 
   minus_one(id:Number) {
-    this.servico.modificarCantidadCarrito(id, false);
+    this.servicio.modificarCantidadCarrito(id, false);
+    let x = Number(this.carrito.find((producto) => producto.id == id).cantidad);
+    this.carrito.find((producto) => producto.id == id).cantidad = Number(x) - 1;
+    this.total = Number(this.total) - Number(this.carrito.find((producto) => producto.id == id).precio);
+    this.total = Number(this.total.toFixed(2));
     this.getCarritoIDs();
   }
 
   delete_card(id:Number) {
-    this.servico.eliminardeCarrito(id);
+    this.servicio.eliminardeCarrito(id);
     this.getCarritoIDs();
   }
 
   getCarritoIDs(){
-    this.carrito_IDs = this.servico.getCarrito();
+    this.carrito_IDs = this.servicio.getCarrito();
   }
 
 }
