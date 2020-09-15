@@ -71,13 +71,19 @@ export class AuthService {
     let islog = localStorage.getItem("isLogin") === "valido";
     return islog;
   }
-
+  isAdminLogin() {
+    let adminislog = localStorage.getItem("isAdminLogin") === "valido";
+    return adminislog;
+  }
   guardarSenal() {
     localStorage.setItem("isLogin", "valido");
   }
-
+  guardarSenalAdmin() {
+    localStorage.setItem("isAdminLogin", "valido");
+  }
   logout() {
     localStorage.removeItem("isLogin");
+    localStorage.removeItem("isAdminLogin");
     this.router.navigateByUrl("/menu-principal");
   }
 

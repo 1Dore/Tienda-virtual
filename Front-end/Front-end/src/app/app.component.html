@@ -13,15 +13,20 @@
             <mat-icon class="icon">add_shopping_cart</mat-icon>
         </button>
     </div>
-    <div *ngIf="!auth.isLogin()">
+    <div *ngIf="!auth.isLogin() && !auth.isAdminLogin()">
         <button (click)="irA('/menu-principal')" mat-button>
             <mat-icon class="center">home</mat-icon>
         </button>
         <mat-button-toggle (click)="openDialog()">Iniciar Sesión
         </mat-button-toggle>
     </div>
-
-
+    <!--ADMINISTRADOR-->
+    <div *ngIf="auth.isAdminLogin()">
+        <button mat-button [matMenuTriggerFor]="belowMenu">Administrador: {{userDisplayName}}</button>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+            <button (click)="logout()" mat-menu-item>Cerrar Sesión</button>
+        </mat-menu>
+    </div>
 </div>
 
 <router-outlet></router-outlet>
