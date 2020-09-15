@@ -44,25 +44,25 @@ export class LoginComponent implements OnInit {
     login.contraseña = CryptoJS.SHA1(login.contraseña).toString();
     //---------------------------------------encriptacion---------------------------------
 
-    this.auth.login(login).subscribe((formulario) => {
-      if (this.checkbox_admin == true) {
-        this.auth.loginAdmin(login).subscribe((formulario) => {
-          if (formulario.message == "Correo y contraseña correctos") {
-            alert("Sesión iniciada como Administrador");
-            this.auth.guardarSenal();
-            this.auth.isLogin()
-            localStorage.setItem('loggedUser', login.correo);
-            window.location.href = '/admin';
-            this.router.navigateByUrl('/admin');
-          }
-          else {
-            alert("Fallido");
-            localStorage.setItem('loggedUser', "LOGIN");
+    if (this.checkbox_admin == true) {
+      this.auth.loginAdmin(login).subscribe((formulario) => {
+        if (formulario.message == "Correo y contraseña correctos") {
+          alert("Sesión iniciada como Administrador");
+          this.auth.guardarSenalAdmin();
+          this.auth.isAdminLogin()
+          localStorage.setItem('loggedUser', login.correo);
+          window.location.href = '/admin';
+          this.router.navigateByUrl('/admin');
+        }
+        else {
+          alert("Fallido");
+          localStorage.setItem('loggedUser', "LOGIN");
 
-          }
-        });
-      }
-      else {
+        }
+      });
+    }
+    else {
+      this.auth.login(login).subscribe((formulario) => {
         if (formulario.message == "Correo y contraseña correctos") {
           alert("Exitoso");
           this.auth.guardarSenal();
@@ -76,11 +76,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('loggedUser', "LOGIN");
 
         }
-      }
-      this.login.reset();
+      });
     }
-
-    )
+    this.login.reset();
   };
 }
 
