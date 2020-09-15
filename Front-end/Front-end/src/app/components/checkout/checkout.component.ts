@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+interface ContenidoCarrito {
+  pr_id: Number;
+  pr_cantidad: Number;
+}
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
+
 export class CheckoutComponent implements OnInit {
+
 
   user = 'PlaceHolder';
   quantity = 1;
@@ -58,6 +64,8 @@ export class CheckoutComponent implements OnInit {
       this.quantity = 1;
       this.total = Number(price) * this.quantity;
     }
+    this.total = Number(price) * Number(this.quantity);
+
   }
   plus_one() {
     let available = (this.cards.map(i => i.available));
@@ -69,8 +77,7 @@ export class CheckoutComponent implements OnInit {
       this.total = Number(price) * Number(this.quantity);
       this.total = Number(this.total);
     }
-
-
+    this.total = Number(price) * Number(this.quantity);
   }
   delete_card() {
     //let numero = (this.cards.map(i => i.numero))

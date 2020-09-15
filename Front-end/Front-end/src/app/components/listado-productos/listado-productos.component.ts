@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 import { Categoria } from './categoria';
 
 class Producto {
+  id: Number;
   categoria: String;
   nombre: String;
   descripcion: String;
@@ -51,6 +52,7 @@ export class ListadoProductosComponent implements OnInit {
         rows.formularios.rows.forEach((element) => {
           //meto las cosas al temp
           let temp:Producto = new Producto();    //uso la interfaz producto
+          temp.id = element.pr_id;
           temp.autor = element.pr_autor;
           temp.categoria = element.pr_categoria;
           temp.descripcion = element.pr_descripcion;
@@ -71,6 +73,11 @@ export class ListadoProductosComponent implements OnInit {
     });
   }
 
+  agregarCarrito(id: Number){
+    console.log(id);
+    this.servicio.agregarCarrito(id);
+    console.log(this.servicio.getCarrito());
+  }
 
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);

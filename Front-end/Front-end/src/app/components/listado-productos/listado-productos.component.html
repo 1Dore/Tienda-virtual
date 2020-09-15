@@ -32,7 +32,7 @@
                 <h3>Precio: {{producto.precio}}</h3>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button>Agregar al Carro</button>
+                <button mat-button (click)="agregarCarrito(producto.id)">Agregar al Carro</button>
             </mat-card-actions>
         </mat-card>
 </body>

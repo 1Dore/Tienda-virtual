@@ -13,7 +13,8 @@ import CryptoJS from 'crypto-js';
 })
 export class LoginComponent implements OnInit {
 
-  login: FormGroup
+  login: FormGroup;
+  checkbox_admin: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<MenuPrincipalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private fb: FormBuilder,
@@ -44,28 +45,38 @@ export class LoginComponent implements OnInit {
     //---------------------------------------encriptacion---------------------------------
 
     this.auth.login(login).subscribe((formulario) => {
+      if (this.checkbox_admin == true) {
+        this.auth.loginAdmin(login).subscribe((formulario) => {
+          if (formulario.message == "Correo y contraseña correctos") {
+            alert("Sesión iniciada como Administrador");
+            this.auth.guardarSenal();
+            this.auth.isLogin()
+            localStorage.setItem('loggedUser', login.correo);
+            window.location.href = '/admin';
+            this.router.navigateByUrl('/admin');
+          }
+          else {
+            alert("Fallido");
+            localStorage.setItem('loggedUser', "LOGIN");
 
-      /*if(formulario.message == "Correo y contraseña correctos"){
-        this.router.navigateByUrl(ruta);
-      }
-      else{
-        alert("Correo o contraseña incorrectos");
-      }
-    });*/
-      if (formulario.message == "Correo y contraseña correctos") {
-        alert("Exitoso");
-        this.auth.guardarSenal();
-        this.auth.isLogin()
-        localStorage.setItem('loggedUser', login.correo);
-        window.location.href = '/menu-principal';
-        this.router.navigateByUrl('/menu-principal');
+          }
+        });
       }
       else {
-        alert("Fallido");
-        localStorage.setItem('loggedUser', "LOGIN");
+        if (formulario.message == "Correo y contraseña correctos") {
+          alert("Exitoso");
+          this.auth.guardarSenal();
+          this.auth.isLogin()
+          localStorage.setItem('loggedUser', login.correo);
+          window.location.href = '/menu-principal';
+          this.router.navigateByUrl('/menu-principal');
+        }
+        else {
+          alert("Fallido");
+          localStorage.setItem('loggedUser', "LOGIN");
 
+        }
       }
-
       this.login.reset();
     }
 
