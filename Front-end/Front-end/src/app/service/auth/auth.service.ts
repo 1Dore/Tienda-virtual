@@ -153,6 +153,9 @@ export class AuthService {
         localStorage.removeItem('item' + i);
       }
     }
+    Number(localStorage.getItem('carritoLength'));
+    localStorage.setItem('carritoLength', (Number(localStorage.getItem('carritoLength')) - 1) + "");
+    this.guardarListaCarrito();
   }
 
 

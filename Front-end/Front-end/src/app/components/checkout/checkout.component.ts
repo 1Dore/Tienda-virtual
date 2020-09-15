@@ -101,11 +101,16 @@ export class CheckoutComponent implements OnInit {
     this.carrito.find((producto) => producto.id == id).cantidad = Number(x) - 1;
     this.total = Number(this.total) - Number(this.carrito.find((producto) => producto.id == id).precio);
     this.total = Number(this.total.toFixed(2));
+    if(x == 1){
+      this.delete_card(id);
+    }
     this.getCarritoIDs();
   }
 
   delete_card(id:Number) {
     this.servicio.eliminardeCarrito(id);
+    let index = this.carrito.indexOf(this.carrito.find((producto) => producto.id == id));
+    this.carrito.splice(index, 1);
     this.getCarritoIDs();
   }
 
