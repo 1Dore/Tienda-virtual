@@ -6,20 +6,18 @@ module.exports = (app) => {
     app.post('/newCourrier', (req, res, next) => {
 
         let query = `Insert into courrier (c_ip, c_nombre) values ('${req.body.ip}', '${req.body.nombre}')`;
-        
         conn.query(query, (error, form, cols) => {
 
             if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
-
-            else res.json({status: 1, menssage: "Insercion realizada"});
+            else res.json({status: 1, menssage:"Insercion realizada"});
 
         });
     });
 
     //editar courier
-    app.post('/editCantidad', (req, res, next) => {    
+    app.post('/editCourrier', (req, res, next) => {    
 
-        let querry = `Update emisores set c_ip = ${req.body.ip} where c_nombre = '${req.body.nombre}'`;
+        let querry = `Update courrier set c_ip = ${req.body.ip} where c_nombre = '${req.body.nombre}'`;
 
         conn.query( querry, (error, formularios) => {
 
