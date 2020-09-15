@@ -8,28 +8,11 @@
             <!-------------  IP --------------------->
             <mat-form-field class="register-full-width">
                 <mat-label>Numero de Tarjeta</mat-label>
-                <input matInput placeholder="#" type="input">
+                <input matInput placeholder="#" type="text" pattern="\d" maxlength="16">
                 <mat-icon matSuffix>credit_card</mat-icon>
             </mat-form-field>
 
             <!-------------  Nombre --------------------->
-            <mat-form-field class="register-full-width">
-                <mat-label>Mes de Vencimiento</mat-label>
-                <input matInput placeholder="01" type="input">
-                <mat-icon matSuffix>date_range</mat-icon>
-            </mat-form-field>
-            <mat-form-field class="register-full-width">
-                <mat-label>Año de Vencimiento</mat-label>
-                <input matInput placeholder="2020" type="input">
-                <mat-icon matSuffix>date_range</mat-icon>
-            </mat-form-field>
-
-            <!-------------  Nombre --------------------->
-            <mat-form-field class="register-full-width">
-                <mat-label>Codigo de Seguridad</mat-label>
-                <input matInput placeholder="#" type="input">
-                <mat-icon matSuffix>vpn_key</mat-icon>
-            </mat-form-field>
             <mat-form-field class="register-full-width">
                 <mat-label>Nombre de Tarjeta</mat-label>
                 <input matInput placeholder="John Smith" type="input">

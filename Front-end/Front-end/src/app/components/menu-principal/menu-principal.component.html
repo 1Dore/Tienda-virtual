@@ -26,44 +26,41 @@
             </mat-form-field>
         </div>
     </form>
-
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
-            <div class="row">
-                <div class="col-4">
-                    <mat-card>
-                        <mat-card-header>
-                            <mat-card-title>Fotos</mat-card-title>
-                        </mat-card-header>
-                        <button mat-button (click)="enviarTipoF()">
-                            <img mat-card-image src="assets/img/fotos_simbolo.png">
-                        </button>
-                    </mat-card>
+    <div class="container">
+        <div class="row">
+                <div class="row">
+                    <div class="col-4">
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Fotos</mat-card-title>
+                            </mat-card-header>
+                            <button mat-button (click)="enviarTipoF()">
+                                <img mat-card-image src="assets/img/fotos_simbolo.png">
+                            </button>
+                        </mat-card>
+                    </div>
+                    <div class="col-4">
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Pinturas</mat-card-title>
+                            </mat-card-header>
+                            <button mat-button (click)="enviarTipoP()">
+                                <img mat-card-image src="assets/img/pinturas_simbolo.png">
+                            </button>
+                        </mat-card>
+                    </div>
+                    <div class="col-4">
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Esculturas</mat-card-title>
+                            </mat-card-header>
+                            <button mat-button (click)="enviarTipoE()">
+                                <img mat-card-image src="assets/img/esculturas_simbolo.png">
+                            </button>
+                        </mat-card>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <mat-card>
-                        <mat-card-header>
-                            <mat-card-title>Pinturas</mat-card-title>
-                        </mat-card-header>
-                        <button mat-button (click)="enviarTipoP()">
-                            <img mat-card-image src="assets/img/pinturas_simbolo.png">
-                        </button>
-                    </mat-card>
-                </div>
-                <div class="col-4">
-                    <mat-card>
-                        <mat-card-header>
-                            <mat-card-title>Esculturas</mat-card-title>
-                        </mat-card-header>
-                        <button mat-button (click)="enviarTipoE()">
-                            <img mat-card-image src="assets/img/esculturas_simbolo.png">
-                        </button>
-                    </mat-card>
-                </div>
-            </div>
         </div>
-        <div class="col-1"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
