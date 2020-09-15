@@ -1,10 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
-interface ContenidoCarrito {
+class ContenidoCarrito {
   pr_id: Number;
   pr_cantidad: Number;
 }
+
+class Producto {
+  id: Number;
+  categoria: String;
+  nombre: String;
+  descripcion: String;
+  autor: String;
+  precio: Number;
+  foto: String;
+  cantidad: Number;
+}
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -13,6 +26,9 @@ interface ContenidoCarrito {
 
 export class CheckoutComponent implements OnInit {
 
+  carrito_IDs:Array<ContenidoCarrito> = new Array<ContenidoCarrito>();
+
+  carrito:Array<Producto> = new Array<Producto>();
 
   user = 'PlaceHolder';
   quantity = 1;
@@ -48,40 +64,35 @@ export class CheckoutComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private servico:AuthService) { }
 
   ngOnInit(): void {
-
+    this.getCarritoIDs();
   }
+
+
   irA(ruta: string) {
     this.router.navigateByUrl(ruta);
+    this.getCarritoIDs();
   }
-  minus_one() {
-    let price = (this.cards.map(i => i.price));
+  
+  plus_one(id:Number) {
+    this.servico.modificarCantidadCarrito(id, true);
+    this.getCarritoIDs();
+  }
 
-    this.quantity--;
-    if (this.quantity < 0) {
-      this.quantity = 1;
-      this.total = Number(price) * this.quantity;
-    }
-    this.total = Number(price) * Number(this.quantity);
+  minus_one(id:Number) {
+    this.servico.modificarCantidadCarrito(id, false);
+    this.getCarritoIDs();
+  }
 
+  delete_card(id:Number) {
+    this.servico.eliminardeCarrito(id);
+    this.getCarritoIDs();
   }
-  plus_one() {
-    let available = (this.cards.map(i => i.available));
-    let price = (this.cards.map(i => i.price));
 
-    this.quantity++;
-    if (this.quantity > Number(available)) {
-      this.quantity = Number(available);
-      this.total = Number(price) * Number(this.quantity);
-      this.total = Number(this.total);
-    }
-    this.total = Number(price) * Number(this.quantity);
+  getCarritoIDs(){
+    this.carrito_IDs = this.servico.getCarrito();
   }
-  delete_card() {
-    //let numero = (this.cards.map(i => i.numero))
-    let numero = 0;
-    this.cards.pop[numero];
-  }
+
 }
