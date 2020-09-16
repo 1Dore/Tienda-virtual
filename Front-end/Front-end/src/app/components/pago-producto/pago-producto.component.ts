@@ -6,7 +6,6 @@ import { formulario } from './formularioTarjeta';
 
 class Emisor {
   value: String;
-  viewValue: String;
 }
 
 class Courier {
@@ -20,11 +19,7 @@ class Courier {
 })
 export class PagoProductoComponent implements OnInit {
 
-  emisores: Emisor[] = [
-    { value: 'banrural', viewValue: 'Banrural' },
-    { value: 'gyt', viewValue: 'G&T' },
-    { value: 'bac', viewValue: 'BAC' }
-  ];
+  emisores: Emisor[] = [];
   couriers: Courier[];
 
   pago: FormGroup;
