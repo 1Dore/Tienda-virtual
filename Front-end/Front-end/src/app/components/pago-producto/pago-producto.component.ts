@@ -4,18 +4,13 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { formulario } from './formularioTarjeta';
 
-interface Emisor {
+class Emisor {
   value: String;
   viewValue: String;
 }
 
-interface Courier {
+class Courier {
   value: String;
-  viewValue: String;
-}
-
-class CourierC {
-  nombre: String;
 }
 
 @Component({
@@ -30,7 +25,7 @@ export class PagoProductoComponent implements OnInit {
     { value: 'gyt', viewValue: 'G&T' },
     { value: 'bac', viewValue: 'BAC' }
   ];
-  couriers: Courier[] = [];
+  couriers: Courier[];
 
   pago: FormGroup;
   courier: String;
@@ -38,6 +33,8 @@ export class PagoProductoComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
+    let temp = new Array<Courier>();
+
 
     this.pago = this.fb.group({
       nombre: ['', Validators.required],
@@ -57,8 +54,12 @@ export class PagoProductoComponent implements OnInit {
       console.log(res);
       res.formularios.rows.forEach((element) => {
         console.log(element.c_nombre);
-        this.couriers.push(element.c_nombre);
+        this.couriers = [{ value: element.c_nombre }];
+        temp.push(this.couriers[0]);
+
       });
+      this.couriers = temp;
+
     });
 
   }
