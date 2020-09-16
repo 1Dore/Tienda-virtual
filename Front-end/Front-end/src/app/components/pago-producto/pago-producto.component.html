@@ -17,28 +17,28 @@
         <!---------- Numero ------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Numero de Tarjeta</mat-label>
-            <input matInput placeholder="#" type="number" formControlName="numero" maxlength="16">
+            <input matInput placeholder="#" type="number" formControlName="tarjeta" maxlength="16">
             <mat-icon matSuffix>credit_card</mat-icon>
         </mat-form-field>
 
         <!---------- Mes de Vencimiento ------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Mes de Vencimiento</mat-label>
-            <input matInput placeholder="#" type="number" formControlName="mes" maxlength="2">
+            <input matInput placeholder="#" type="number" formControlName="fecha_vencY" maxlength="2">
             <mat-icon matSuffix>date_range</mat-icon>
         </mat-form-field>
 
         <!---------- Año de Vencimiento ------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Año de Vencimiento</mat-label>
-            <input matInput placeholder="#" type="number" formControlName="anio" maxlength="4">
+            <input matInput placeholder="#" type="number" formControlName="fecha_vencM" maxlength="4">
             <mat-icon matSuffix>date_range</mat-icon>
         </mat-form-field>
 
         <!---------- Codigo de Seguridad ------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Codigo de Seguridad</mat-label>
-            <input matInput placeholder="123" formControlName="codigo" type="number" maxlength="3">
+            <input matInput placeholder="123" formControlName="codigo" type="num_seguridad" maxlength="3">
             <mat-icon matSuffix>security</mat-icon>
         </mat-form-field>
 
