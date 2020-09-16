@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { formulario } from '../../components/pago-producto/formularioTarjeta';
 //import { runInThisContext } from 'vm';
 
 class ContenidoCarrito {
@@ -63,9 +64,10 @@ export class AuthService {
     return this.http.post(url, data, httpHeader);
   }
 
-  askEmisor(ip, data):Observable<any>{
-    let url = ip;
-    return this.http.post(url, data);
+  solicitarAutorizacion(ip, data:formulario):Observable<any>{
+    let url = ip+`autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
+                  &num_seguridad=${data.num_seguridad}&monto=${data.monto}&tienda=DIA&formato=JSON`;
+    return this.http.get(url);
   }
 
   getCourrier(data): Observable<any>{
@@ -75,18 +77,15 @@ export class AuthService {
 
   askCourrierCosto(ip, data):Observable<any>{
     let url = ip;
-    return this.http.post(url, data);
+    return this.http.post(url, data, httpHeader);
   }
 
   askCourrierStatus(ip, data):Observable<any>{
     let url = ip;
-    return this.http.post(url, data);
+    return this.http.post(url, data, httpHeader);
   }
 
-  solicitarEnvio(ip, data):Observable<any>{
-    let url = ip;
-    return this.http.post(url, data);
-  }
+
 
 
 

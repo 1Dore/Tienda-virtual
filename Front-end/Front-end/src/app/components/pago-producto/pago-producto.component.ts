@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
+import {formulario } from './formularioTarjeta';
+
+
 
 @Component({
   selector: 'app-pago-producto',
@@ -19,10 +22,12 @@ export class PagoProductoComponent implements OnInit {
   ngOnInit(): void {
     this.register = this.fb.group({
       nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      correo: ['', Validators.required],
-      contraseña: ['', Validators.required],
-    })
+      tarjeta: ['', Validators.required],
+      fecha_venc: ['', Validators.required],
+      num_seguridad: ['', Validators.required],
+      monto: ['', Validators.required],
+      emisor: ['', Validators.required]
+    });
   }
 
   irA(ruta: string) {
@@ -30,26 +35,22 @@ export class PagoProductoComponent implements OnInit {
   }
 
   onSubmit(ruta: string) {
-    let formulario = this.register.value;
-
-    //---------------------------------------encriptacion-------------------------------
-    /*var passwordBytes = CryptoJS.enc.Utf16LE.parse(formulario.contraseña);
-    var sha1Hash = CryptoJS.SHA1(passwordBytes);
-    var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
-    formulario.contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
-    formulario.contraseña = CryptoJS.SHA1(formulario.contraseña).toString();*/
-    //---------------------------------------encriptacion---------------------------------
-
-
-    this.auth.register(formulario).subscribe(data => {
-
-      if (data.status == 1) this.router.navigateByUrl(ruta);
-      else alert("Error al ejecutarse");
-
+    let form:formulario;
+    form = new formulario();
+    //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
+    form.nombre = this.register.value.nombre;
+    form.tarjeta = this.register.value.tarjeta;
+    form.fecha_venc = this.register.value.fecha_venc;
+    form.num_seguridad = this.register.value.num_seguridad;
+    form.monto = this.register.value.monto;
+    let emisor = this.register.value.emisor;
+    this.auth.getEmisor(emisor).subscribe(data => {
+      emisor = data.formularios.e_ip;
     });
 
-    this.register.reset();
-
+    this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
+      
+    });
   }
 
 }
