@@ -91,12 +91,12 @@ export class AuthService {
   }
 
   askCourrierEnvio(ip, data): Observable<any> {
-    let url = ip + `envio?`;
+    let url = ip + `envio?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.direccion}&tienda=DIA`;
     return this.http.get(url, httpHeader);
   }
 
   askCourrierStatus(ip, data): Observable<any> {
-    let url = ip;
+    let url = ip + `status?orden=${data.pedido_id}&tienda=DIA&formato=JSON`;
     return this.http.get(url, httpHeader);
   }
 
