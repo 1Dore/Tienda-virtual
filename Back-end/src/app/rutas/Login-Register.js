@@ -9,7 +9,7 @@ module.exports = (app) => {
         conn.query( querry, (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});
             else if (formularios.rows.length > 0) {
-                res.json({status: 1, message: "Correo y contraseña correctos"});
+                res.json({status: 1, message: "Correo y contraseña correctos", id:formularios.rows[0].u_id});
             } 
             else {
                 res.json({status: 0, message: "No coincidió el correo y contraseña"})
