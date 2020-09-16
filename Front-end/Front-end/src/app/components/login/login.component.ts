@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
           this.auth.guardarSenal();
           this.auth.isLogin()
           localStorage.setItem('loggedUser', login.correo);
-          localStorage.setItem('UserID', login.u_id);
+          localStorage.setItem('UserID', formulario.id);
           window.location.href = '/menu-principal';
           this.router.navigateByUrl('/menu-principal');
         }
