@@ -73,8 +73,11 @@ export class UserPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed'); 
-      let x = {u_id: this.u_id, direccion: result.direccion, codigo_postal: result.zona};
-      console.log(x);
+      let y;
+      this.servicio.getDireccionId( {u_id: this.u_id, direccion: result.direccion}).subscribe((result) => {
+        y = result.formulario.rows[0];
+      });
+      let x = {u_id: this.u_id, dir_id: y, direccion: result.direccion, codigo_postal: result.zona};
       this.agregarDireccion(x);
     });
   }
@@ -152,7 +155,7 @@ export class UserPageComponent implements OnInit {
         });
       }
       else {
-        alert("Tarjeta no encontrada");
+        alert("Sin direcciones guardadas");
         console.log(rows.message);
       }
 

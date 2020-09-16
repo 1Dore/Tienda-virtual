@@ -63,7 +63,17 @@ module.exports = (app) => {
         });
     });
 
-    
+    //get Direction ID
+    app.post('/getDireccionID', (req, res, next) => {
+        let query = `Select dir_id From direcciones Where u_id = ${req.body.u_id} AND direccion = '${req.body.direccion}'`;
+
+        conn.query( query, (error, formularios) => {
+
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status:1, formularios});
+
+        });
+    });
 
     //--------------------------------------------
 
