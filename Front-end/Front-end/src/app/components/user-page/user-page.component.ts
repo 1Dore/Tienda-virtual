@@ -39,13 +39,14 @@ export class UserPageComponent implements OnInit {
   codigo: Number;
   nombre: String;
 
-  zona: String;
-  direccion: String;
+  zona: string;
+  direccion: string;
 
   constructor(public dialog: MatDialog, private servicio: AuthService) { }
 
   ngOnInit(): void {
     this.u_id = Number(localStorage.getItem('UserID'));
+    this.getDirecciones();
   }
 
    
@@ -72,7 +73,9 @@ export class UserPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed'); 
-      this.agregarDireccion({u_id: this.u_id, direccion: result.direccion, codigo_postal: result.zona});
+      let x = {u_id: this.u_id, direccion: result.direccion, codigo_postal: result.zona};
+      console.log(x);
+      this.agregarDireccion(x);
     });
   }
 
@@ -132,12 +135,13 @@ export class UserPageComponent implements OnInit {
   getDirecciones(){
     let user: User = new User();
     user.u_id = this.u_id;
+    console.log(user);
     this.servicio.getDireccionesByUser(user).subscribe((rows) => {
-
       //variables que inicializo para el foreach
       if (rows.formularios.rows.length > 0) {
         rows.formularios.rows.forEach((element) => {
           //meto las cosas al temp
+          
           let temp:Direccion = new Direccion();    //uso la interfaz Direccion
           temp.u_id = this.u_id;
           temp.direccion = element.direccion;
