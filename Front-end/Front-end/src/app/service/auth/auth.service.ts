@@ -136,6 +136,9 @@ export class AuthService {
   logout() {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("isAdminLogin");
+    this.eliminarListaCarrito();
+    localStorage.removeItem('UserID');
+    localStorage.removeItem('loggedUser');
     this.router.navigateByUrl("/menu-principal");
   }
 
@@ -290,6 +293,28 @@ export class AuthService {
 
   eliminarTarjeta(dato): Observable<any> {
     let url = dominio + "eliminarTarjetaByUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+
+  // Codigo pertinente a los pedidos
+  getPedidos(dato): Observable<any> {
+    let url = dominio + "getPedidos";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  getC_name(dato): Observable<any> {
+    let url = dominio + "getC_name";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  getU_name(dato): Observable<any> {
+    let url = dominio + "getU_name";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  getE_name(dato): Observable<any> {
+    let url = dominio + "getE_name";
     return this.http.post(url, dato, httpHeader);
   }
 

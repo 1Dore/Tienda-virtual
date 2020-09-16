@@ -117,5 +117,4 @@ export class CheckoutComponent implements OnInit {
   getCarritoIDs(){
     this.carrito_IDs = this.servicio.getCarrito();
   }
-
 }
