@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import {formulario } from './formularioTarjeta';
 
-
-
 interface Emisor {
   value: String;
   viewValue: String;
 }
+
 @Component({
   selector: 'app-pago-producto',
   templateUrl: './pago-producto.component.html',
