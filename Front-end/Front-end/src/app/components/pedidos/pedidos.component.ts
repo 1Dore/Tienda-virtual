@@ -13,6 +13,7 @@ class Pedido{
   e_name:string
   c_id:number;
   c_name:string;
+  total:number;
 }
 
 @Component({
@@ -46,6 +47,8 @@ export class PedidosComponent implements OnInit {
           temp.u_id = this.u_id;
           temp.e_id = element.e_id;
           temp.c_id = element.c_id;
+          temp.total = element.total;
+
 
           // Nombre del Emisor
           this.servico.getE_name({e_id: element.e_id}).subscribe((rows) => {
@@ -66,7 +69,6 @@ export class PedidosComponent implements OnInit {
               temp.c_name =  'No Encontrado';
             }
           })
-          
 
           //Nombre del Usuario
           this.servico.getU_name({u_id: element.u_id}).subscribe((rows) => {

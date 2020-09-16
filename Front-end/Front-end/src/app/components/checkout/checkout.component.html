@@ -20,7 +20,7 @@
                 <img class="proporciones_imagen" style="margin-left: 120px;" mat-card-image src={{producto.foto}}
                     alt={{producto.nombre}}>
                 <p>{{producto.descripcion}}</p>
-                <h3>Precio: {{producto.precio}}</h3>
+                <h3>Precio: Q{{producto.precio}}</h3>
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-actions>
@@ -40,13 +40,13 @@
         </mat-card>
         <div class="total">
             <h3>
-                Total: {{total}}
+                Total: Q{{total}}
             </h3>
         </div>
         <mat-divider></mat-divider>
         <br>
         <div class="botones">
-            <button mat-raised-button class="register-full-width button" (click)="irA('/pago-producto')">Ir a
+            <button mat-raised-button class="register-full-width button" (click)="guardarMontoTotal('/pago-producto')">Ir a
                 Caja</button>
             <br>
             <br>
