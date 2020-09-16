@@ -55,8 +55,24 @@ export class PagoProductoComponent implements OnInit {
 
   onSubmit(ruta: string) {
     let form: formulario;
+    let cobertura:Boolean = true;
     form = new formulario();
-    //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
+
+    //para pedir courrier
+    let direccion = this.pago.value.courier
+    this.auth.getCourrier(direccion).subscribe(data => {
+
+      if (data.consultaprecio.costo > 0){
+        alert("El courrier tiene cobertura");
+        this.pago.value.monto = this.pago.value.monto + data.consultaprecio.costo;
+      }
+      else {
+        cobertura = false;    //si es false no hace cobro alguno
+      }
+
+    });
+
+
     form.nombre = this.pago.value.nombre;
     form.tarjeta = this.pago.value.tarjeta;
     form.fecha_venc = this.pago.value.fecha_vencY + " " + this.pago.value.fecha_vencM;
@@ -65,13 +81,24 @@ export class PagoProductoComponent implements OnInit {
 
     let emisor = this.pago.value.emisor;
 
-    this.auth.getEmisor(emisor).subscribe(data => {
-      emisor = data.formularios.e_ip;
-    });
+    //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
+    //para pagar con tarjeta
+    if(cobertura){  //si no hay cobertura no se hace ningun cobro
 
-    this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
-      console.log("aqui deberia de haber algo");
-    });
+      this.auth.getEmisor(emisor).subscribe(data => {
+        emisor = data.formularios.e_ip;
+      });
+  
+      this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
+        console.log("aqui deberia de haber algo");
+      });
+      this.pago.reset();
+    }
+
+    else{
+      alert("Este courrier no tiene cobertura, por favor seleccione otro");
+    }
+
   }
 
 }

@@ -17,7 +17,7 @@ module.exports = (app) => {
     //agregar direcciones    
     app.post('/newDireccionForUser', (req, res, next) => {
 
-        let query = `Insert into direcciones (u_id, direccion, codigo_posta) values (${req.body.u_id}, '${req.body.direccion}', '${reg.body.codigo_postal})'`;
+        let query = `Insert into direcciones (u_id, direccion, codigo_postal) values (${req.body.u_id}, '${req.body.direccion}', '${reg.body.codigo_postal}')`;
         
         conn.query(query, (error, form, cols) => {
 
