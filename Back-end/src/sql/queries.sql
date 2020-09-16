@@ -67,12 +67,13 @@ create table pedido(
 	codigo_postal int,
 	estatus varchar(100),
 	u_id int,
-	e_id int,
-	c_id int,
+	compañia varchar(100),
+	c_nombre varchar(100),
+	numero int,
 	primary key(p_id),
 	foreign key(u_id) references usuarios(u_id),
-	foreign key(e_id) references emisores(e_id),
-	foreign key(c_id) references courrier(c_id)
+	foreign key(compañia) references emisores(compañia),
+	foreign key(c_nombre) references courrier(c_nombre)
 );
 
 create table carrito(

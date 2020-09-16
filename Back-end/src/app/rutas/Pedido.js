@@ -5,7 +5,7 @@ module.exports = (app) => {
     //crear pedido, viene vaco, en el checkout se crea el pedido como tal
     app.post('/newPedido', (req, res, next) => {
 
-        let query = `Insert into pedido (u_id) values (${req.body.u_id})`;
+        let query = `Insert into pedido (u_id, dir_entrega, codigo_postal, compañia, c_nombre, total) values (${req.body.u_id}, '${req.body.dir_entrega}', ${req.body.codigo_postal}, '${req.body.compañia}', '${req.body.c_nombre}', ${req.body.monto})`;
         
         conn.query(query, (error, form, cols) => {
 

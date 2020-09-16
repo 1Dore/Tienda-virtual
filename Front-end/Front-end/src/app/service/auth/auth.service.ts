@@ -64,6 +64,11 @@ export class AuthService {
     return this.http.post(url, data, httpHeader);
   }
 
+  createNewPedido(data):Observable<any>{
+    let url = dominio + "newPedido";
+    return this.http.post(url, data, httpHeader);
+  }
+
   solicitarAutorizacion(ip, data: formulario): Observable<any> {
     let url = ip + `autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
                   &num_seguridad=${data.num_seguridad}&monto=${data.monto}&tienda=DIA&formato=JSON`;
@@ -76,14 +81,20 @@ export class AuthService {
   }
 
   askCourrierCosto(ip, data): Observable<any> {
-    let url = ip;
-    return this.http.post(url, data, httpHeader);
+    let url = ip+`consulta?destino=${data.direccion}&formato=JSON`;
+    return this.http.get(url, httpHeader);
+  }
+
+  askCourrierEnvio(ip, data):Observable<any>{
+    let url = ip + `envio?`;
+    return this.http.get(url, httpHeader);
   }
 
   askCourrierStatus(ip, data): Observable<any> {
     let url = ip;
-    return this.http.post(url, data, httpHeader);
+    return this.http.get(url, httpHeader);
   }
+
   //CODIGO PARA TOMAR LOS COURIER DE LA BASE DE DATOS
 
   getAllCourriers():Observable<any> {
@@ -118,6 +129,8 @@ export class AuthService {
     let url = dominio + "getProductoById";
     return this.http.post(url, dato, httpHeader);
   }
+
+
 
   isLogin() {
     let islog = localStorage.getItem("isLogin") === "valido";
