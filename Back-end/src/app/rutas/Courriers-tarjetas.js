@@ -28,6 +28,8 @@ module.exports = (app) => {
         
     });
 
+    
+
     //agregar emisor
     app.post('/newEmisor', (req, res, next) => {
 
@@ -43,7 +45,7 @@ module.exports = (app) => {
     });
 
     //editar emisor
-    app.post('/editCantidad', (req, res, next) => {    
+    app.post('/editEmisor', (req, res, next) => {    
 
         let querry = `Update emisores set e_ip = ${req.body.ip} where compañia = '${req.body.nombre}'`;
 
@@ -82,5 +84,18 @@ module.exports = (app) => {
             
         })
 
-    })
+    });
+
+    app.get('/getAllCourriers', (req, res, next) => {
+
+        let querry = `Select nombre from courrier`;
+
+        conn.query(querry, (err, formularios) => {
+
+            if(err) res.json({status:0, message: `${err}`});
+            else res.json({status:1, message:"retornando todos los courriers", formularios});
+
+        });
+
+    });
 }
