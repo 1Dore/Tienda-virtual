@@ -23,7 +23,7 @@ export class AuthService {
 
 
   categoria: String;
-  private items = new Array<ContenidoCarrito>();
+  private items:Array<ContenidoCarrito> = new Array<ContenidoCarrito>();
   private categoriaDeLaLsita_productos = new Subject<String>();
   enviarcategoria = this.categoriaDeLaLsita_productos.asObservable();
 
@@ -177,14 +177,26 @@ export class AuthService {
 
 
   eliminardeCarrito(item: Number) {
-    for (let i = 0; i < Number(localStorage.getItem('carritoLength')); i++) {
-      let temp: ContenidoCarrito = new ContenidoCarrito();
-      temp = JSON.parse(localStorage.getItem('item' + i));
-      if (temp.pr_id == item) {
-        this.items.splice(this.items.indexOf(temp), 1);
-        localStorage.removeItem('item' + i);
+    let x:number;
+    let index;
+    this.traerListaCarrito();
+    let producto:ContenidoCarrito = this.items.find((producto) => producto.pr_id === item);
+
+    if (producto != undefined) {
+      index = this.items.indexOf(producto);
+      for (let i = 0; i < this.items.length; i++) {
+        let temp = JSON.parse(localStorage.getItem('item' + i));
+        if (Number(temp.pr_id) === item) {
+          localStorage.removeItem('item' + i);
+        }
       }
+      
     }
+    this.items.splice(index, 1);
+    x = Number(localStorage.getItem('carritoLength'));
+    localStorage.setItem('carritoLength', (x - 1) + "");
+    this.guardarListaCarrito();
+    
   }
 
 
@@ -208,14 +220,20 @@ export class AuthService {
       localStorage.setItem('item' + i, JSON.stringify(element));
       i++;
     });
+    
+
     localStorage.setItem('carritoLength', this.items.length + "");
+
   }
 
   traerListaCarrito() {
     let listaTemp = new Array<ContenidoCarrito>();
     for (let i = 0; i < Number(localStorage.getItem('carritoLength')); i++) {
       let temp: ContenidoCarrito = new ContenidoCarrito();
-      temp = JSON.parse(localStorage.getItem('item' + i));
+      let temp2;
+      temp2 = JSON.parse(localStorage.getItem('item' + i));
+      temp.pr_cantidad = Number(temp2.pr_cantidad);
+      temp.pr_id = Number(temp2.pr_id);
       listaTemp.push(temp);
     }
     this.items = listaTemp;
@@ -246,6 +264,11 @@ export class AuthService {
 
   eliminarDireccion(dato): Observable<any>{
     let url = dominio + "eliminarDireccionByUser";
+    return this.http.post(url, dato, httpHeader);
+  }
+
+  getDireccionId(dato): Observable<any>{
+    let url = dominio + 'getDireccionID';
     return this.http.post(url, dato, httpHeader);
   }
   
