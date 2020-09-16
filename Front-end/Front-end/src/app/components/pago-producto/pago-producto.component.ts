@@ -59,7 +59,7 @@ export class PagoProductoComponent implements OnInit {
     });
 
     this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
-      
+        console.log("aqui deberia de haber algo");
     });
   }
 
