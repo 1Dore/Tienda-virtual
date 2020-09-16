@@ -86,7 +86,7 @@ export class AuthService {
   }
   //CODIGO PARA TOMAR LOS COURIER DE LA BASE DE DATOS
 
-  getAllCourriers() {
+  getAllCourriers():Observable<any> {
 
     let url = dominio + "getAllCourriers";
     return this.http.get(url, httpHeader);

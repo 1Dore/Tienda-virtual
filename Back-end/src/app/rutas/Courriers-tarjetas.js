@@ -88,7 +88,7 @@ module.exports = (app) => {
 
     app.get('/getAllCourriers', (req, res, next) => {
 
-        let querry = `Select nombre from courrier`;
+        let querry = `Select c_nombre from courrier`;
 
         conn.query(querry, (err, formularios) => {
 

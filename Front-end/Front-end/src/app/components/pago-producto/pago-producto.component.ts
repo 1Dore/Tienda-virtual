@@ -38,6 +38,7 @@ export class PagoProductoComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
+
     this.pago = this.fb.group({
       nombre: ['', Validators.required],
       tarjeta: ['', Validators.required],
@@ -49,10 +50,13 @@ export class PagoProductoComponent implements OnInit {
       courier: ['', Validators.required],
     });
 
-    this.auth.getAllCourriers()
-      .subscribe((res) => {
-        this.couriers;
-      })
+    this.auth.getAllCourriers().subscribe((res) => {
+      console.log(res);
+        res.formularios.rows.forEach((element) => {
+          console.log(element);
+          this.couriers.push(element.c_nombre);
+        });
+      });
 
   }
 
