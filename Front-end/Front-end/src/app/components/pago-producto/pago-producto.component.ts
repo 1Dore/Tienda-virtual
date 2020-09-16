@@ -49,7 +49,6 @@ export class PagoProductoComponent implements OnInit {
       codigo_postal: ['', Validators.required],
 
     });
-    let temp = new Array<any>();
     this.auth.getAllCourriers().subscribe((res) => {
       console.log(res);
       res.formularios.rows.forEach((element) => {
