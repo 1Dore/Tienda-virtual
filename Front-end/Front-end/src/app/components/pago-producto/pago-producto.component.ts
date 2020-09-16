@@ -29,7 +29,8 @@ export class PagoProductoComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
-    let temp = new Array<Courier>();
+    let temp_couriers = new Array<Courier>();
+    let temp_emisores = new Array<Emisor>();
 
 
     this.pago = this.fb.group({
@@ -49,13 +50,23 @@ export class PagoProductoComponent implements OnInit {
       res.formularios.rows.forEach((element) => {
         console.log(element.c_nombre);
         this.couriers = [{ value: element.c_nombre }];
-        temp.push(this.couriers[0]);
+        temp_couriers.push(this.couriers[0]);
 
       });
-      this.couriers = temp;
+      this.couriers = temp_couriers;
 
     });
+    this.auth.getAllEmisores().subscribe((res) => {
+      console.log(res);
+      res.formularios.rows.compañia.forEach((element) => {
+        console.log(element.compañia);
+        this.emisores = [{ value: element.compañia }];
+        temp_emisores.push(this.emisores[0]);
 
+      });
+      this.emisores = temp_emisores;
+
+    });
   }
 
   irA(ruta: string) {
