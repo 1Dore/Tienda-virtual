@@ -7,8 +7,8 @@
         <!---------- Emisor------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Emisor</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let emisor of emisores" [value]="emisor.value" formControlName="emisor">
+            <mat-select formControlName="emisor">
+                <mat-option *ngFor="let emisor of emisores" [value]="emisor.value">
                     {{emisor.viewValue}}
                 </mat-option>
             </mat-select>
@@ -38,20 +38,29 @@
         <!---------- Codigo de Seguridad ------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Codigo de Seguridad</mat-label>
-            <input matInput placeholder="123" formControlName="num_seguridadigo" type="number" maxlength="3">
+            <input matInput placeholder="123" type="number" formControlName="num_seguridad" maxlength="3">
             <mat-icon matSuffix>security</mat-icon>
         </mat-form-field>
 
         <!---------- Nombre------------------------------------------------------->
         <mat-form-field class="register-full-width">
             <mat-label>Nombre</mat-label>
-            <input matInput placeholder="John" formControlName="nombre">
+            <input matInput placeholder="John" formControlName="nombre" type="text">
             <mat-icon matSuffix>person_outline</mat-icon>
         </mat-form-field>
 
+        <!---------- Courier------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Courier</mat-label>
+            <mat-select formControlName="courier">
+                <mat-option *ngFor="let courier of couriers" [value]="courier.value">
+                    {{courier.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <p></p>
         <button [disabled]="pago.invalid" mat-raised-button class="register-full-width button"
-            (click)="onSubmit('/menu-principal')">
+            (click)="onSubmit('/menu-principal')" type="submit">
             Pagar
         </button>
         <p></p>

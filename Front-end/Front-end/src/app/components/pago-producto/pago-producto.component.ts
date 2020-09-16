@@ -2,11 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import {formulario } from './formularioTarjeta';
+import { formulario } from './formularioTarjeta';
 
 interface Emisor {
   value: String;
   viewValue: String;
+}
+
+interface Courier {
+  value: String;
+  viewValue: String;
+}
+
+class CourierC {
+  nombre: String;
 }
 
 @Component({
@@ -21,6 +30,7 @@ export class PagoProductoComponent implements OnInit {
     { value: 'gyt', viewValue: 'G&T' },
     { value: 'bac', viewValue: 'BAC' }
   ];
+  couriers: Array<CourierC>[] = [];
 
   pago: FormGroup;
 
@@ -34,7 +44,8 @@ export class PagoProductoComponent implements OnInit {
       fecha_vencY: ['', Validators.required],
       num_seguridad: ['', Validators.required],
       monto: ['', Validators.required],
-      emisor: ['', Validators.required]
+      emisor: ['', Validators.required],
+      courier: ['', Validators.required],
     });
   }
 
@@ -43,12 +54,12 @@ export class PagoProductoComponent implements OnInit {
   }
 
   onSubmit(ruta: string) {
-    let form:formulario;
+    let form: formulario;
     form = new formulario();
     //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
     form.nombre = this.pago.value.nombre;
     form.tarjeta = this.pago.value.tarjeta;
-    form.fecha_venc = this.pago.value.fecha_vencY + " "+ this.pago.value.fecha_vencM;
+    form.fecha_venc = this.pago.value.fecha_vencY + " " + this.pago.value.fecha_vencM;
     form.num_seguridad = this.pago.value.num_seguridad;
     form.monto = this.pago.value.monto;
 
@@ -59,7 +70,7 @@ export class PagoProductoComponent implements OnInit {
     });
 
     this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
-        console.log("aqui deberia de haber algo");
+      console.log("aqui deberia de haber algo");
     });
   }
 
