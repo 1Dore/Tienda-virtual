@@ -4,18 +4,13 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { formulario } from './formularioTarjeta';
 
-interface Emisor {
+class Emisor {
   value: String;
   viewValue: String;
 }
 
-interface Courier {
+class Courier {
   value: String;
-  viewValue: String;
-}
-
-class CourierC {
-  nombre: String;
 }
 
 @Component({
@@ -30,15 +25,17 @@ export class PagoProductoComponent implements OnInit {
     { value: 'gyt', viewValue: 'G&T' },
     { value: 'bac', viewValue: 'BAC' }
   ];
-  couriers: Courier[] = [];
+  couriers: Courier[];
 
   pago: FormGroup;
   courier: String;
-  orden:String;
+  orden: String;
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
+    let temp = new Array<Courier>();
+
 
     this.pago = this.fb.group({
       nombre: ['', Validators.required],
@@ -52,17 +49,17 @@ export class PagoProductoComponent implements OnInit {
       codigo_postal: ['', Validators.required],
 
     });
-    let temp = new Array<any>();
     this.auth.getAllCourriers().subscribe((res) => {
       console.log(res);
-        res.formularios.rows.forEach((element) => {
-          console.log(element);
-          temp.push(element.c_nombre);
-        });
-          this.couriers = temp;
+      res.formularios.rows.forEach((element) => {
+        console.log(element.c_nombre);
+        this.couriers = [{ value: element.c_nombre }];
+        temp.push(this.couriers[0]);
+
       });
+      this.couriers = temp;
 
-
+    });
 
   }
 
@@ -72,8 +69,8 @@ export class PagoProductoComponent implements OnInit {
 
   onSubmit(ruta: string) {
     let form: formulario;
-    let cobertura:Boolean = true;
-    let pagado:Boolean = false;
+    let cobertura: Boolean = true;
+    let pagado: Boolean = false;
     form = new formulario();
 
     //para pedir courrier
@@ -83,8 +80,8 @@ export class PagoProductoComponent implements OnInit {
       direccionip = data.formularios.rows.ip;
     });
 
-    this.auth.askCourrierCosto(direccionip, direccion).subscribe(x =>{
-      if (x.consultaprecio.costo > 0){
+    this.auth.askCourrierCosto(direccionip, direccion).subscribe(x => {
+      if (x.consultaprecio.costo > 0) {
         alert("El courrier tiene cobertura");
         this.pago.value.monto = this.pago.value.monto + x.consultaprecio.costo;
       }
@@ -99,7 +96,7 @@ export class PagoProductoComponent implements OnInit {
     form.tarjeta = this.pago.value.tarjeta;
     form.fecha_venc = this.pago.value.fecha_vencY + " " + this.pago.value.fecha_vencM;
     form.num_seguridad = this.pago.value.num_seguridad;
-    form.monto =Number (localStorage.getItem('total'));
+    form.monto = Number(localStorage.getItem('total'));
     form.courrier = this.pago.value.courrier;
 
     let emisor = this.pago.value.emisor;
@@ -114,7 +111,7 @@ export class PagoProductoComponent implements OnInit {
 
       this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
         form.numero = data.autorizacion.numero
-        pagado=true;
+        pagado = true;
       });
       this.pago.reset();
     }
@@ -122,11 +119,11 @@ export class PagoProductoComponent implements OnInit {
     else {
       alert("Este courrier no tiene cobertura, por favor seleccione otro");
     }
-    if(pagado){
+    if (pagado) {
       //inicializo el pedido con todos los campos
-      form.u_id = Number (localStorage.getItem('UserID'));
+      form.u_id = Number(localStorage.getItem('UserID'));
       this.auth.createNewPedido(form).subscribe(x => {
-        if(x.status == 1) console.log("pedido creado");
+        if (x.status == 1) console.log("pedido creado");
         else console.log(x);
       });
       //hago el pedido al courrier
@@ -135,7 +132,7 @@ export class PagoProductoComponent implements OnInit {
       });
 
     }
-    else{
+    else {
       alert("pago rechazado");
     }
 

@@ -68,7 +68,7 @@
             <mat-label>Courier</mat-label>
             <mat-select formControlName="courier">
                 <mat-option *ngFor="let courier of couriers" [value]="courier.value">
-                    {{courier.viewValue}}
+                    {{courier.value}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
