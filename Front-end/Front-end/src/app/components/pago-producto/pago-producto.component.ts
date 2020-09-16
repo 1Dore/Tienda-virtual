@@ -6,6 +6,10 @@ import {formulario } from './formularioTarjeta';
 
 
 
+interface Emisor {
+  value: String;
+  viewValue: String;
+}
 @Component({
   selector: 'app-pago-producto',
   templateUrl: './pago-producto.component.html',
@@ -13,17 +17,22 @@ import {formulario } from './formularioTarjeta';
 })
 export class PagoProductoComponent implements OnInit {
 
+  emisores: Emisor[] = [
+    { value: 'banrural', viewValue: 'Banrural' },
+    { value: 'gyt', viewValue: 'G&T' },
+    { value: 'bac', viewValue: 'BAC' }
+  ];
 
-
-  register: FormGroup;
+  pago: FormGroup;
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.register = this.fb.group({
+    this.pago = this.fb.group({
       nombre: ['', Validators.required],
       tarjeta: ['', Validators.required],
-      fecha_venc: ['', Validators.required],
+      fecha_vencM: ['', Validators.required],
+      fecha_vencY: ['', Validators.required],
       num_seguridad: ['', Validators.required],
       monto: ['', Validators.required],
       emisor: ['', Validators.required]
@@ -38,13 +47,13 @@ export class PagoProductoComponent implements OnInit {
     let form:formulario;
     form = new formulario();
     //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
-    form.nombre = this.register.value.nombre;
-    form.tarjeta = this.register.value.tarjeta;
-    form.fecha_venc = this.register.value.fecha_venc;
-    form.num_seguridad = this.register.value.num_seguridad;
-    form.monto = this.register.value.monto;
+    form.nombre = this.pago.value.nombre;
+    form.tarjeta = this.pago.value.tarjeta;
+    form.fecha_venc = this.pago.value.fecha_vencY + " "+ this.pago.value.fecha_vencM;
+    form.num_seguridad = this.pago.value.num_seguridad;
+    form.monto = this.pago.value.monto;
 
-    let emisor = this.register.value.emisor;
+    let emisor = this.pago.value.emisor;
 
     this.auth.getEmisor(emisor).subscribe(data => {
       emisor = data.formularios.e_ip;
