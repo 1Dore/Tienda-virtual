@@ -50,8 +50,7 @@ import { PagoProductoComponent } from './components/pago-producto/pago-producto.
     TarjetaUsuarioComponent,
     AgregarProductosComponent,
     ExistenciasComponent,
-    PagoProductoComponent
-  ],
+    PagoProductoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
