@@ -117,4 +117,9 @@ export class CheckoutComponent implements OnInit {
   getCarritoIDs(){
     this.carrito_IDs = this.servicio.getCarrito();
   }
+
+  guardarMontoTotal(ruta:string){
+    localStorage.setItem('total', this.total + '');
+    this.irA(ruta);
+  }
 }

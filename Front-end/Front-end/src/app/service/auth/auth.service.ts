@@ -152,6 +152,7 @@ export class AuthService {
     this.eliminarListaCarrito();
     localStorage.removeItem('UserID');
     localStorage.removeItem('loggedUser');
+    localStorage.removeItem('total');
     this.router.navigateByUrl("/menu-principal");
   }
 
