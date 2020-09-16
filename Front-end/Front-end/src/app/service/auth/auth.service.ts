@@ -24,7 +24,7 @@ export class AuthService {
 
 
   categoria: String;
-  private items:Array<ContenidoCarrito> = new Array<ContenidoCarrito>();
+  private items: Array<ContenidoCarrito> = new Array<ContenidoCarrito>();
   private categoriaDeLaLsita_productos = new Subject<String>();
   enviarcategoria = this.categoriaDeLaLsita_productos.asObservable();
 
@@ -49,42 +49,48 @@ export class AuthService {
 
   }
 
-  addCourrier(data): Observable<any>{
+  addCourrier(data): Observable<any> {
     let url = dominio + "newCourrier";
     return this.http.post(url, data, httpHeader);
   }
 
-  addEmisor(data): Observable<any>{
+  addEmisor(data): Observable<any> {
     let url = dominio + "newEmisor";
     return this.http.post(url, data, httpHeader);
   }
-  
-  getEmisor(data): Observable<any>{
+
+  getEmisor(data): Observable<any> {
     let url = dominio + "gerEmisor";
     return this.http.post(url, data, httpHeader);
   }
 
-  solicitarAutorizacion(ip, data:formulario):Observable<any>{
-    let url = ip+`autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
+  solicitarAutorizacion(ip, data: formulario): Observable<any> {
+    let url = ip + `autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
                   &num_seguridad=${data.num_seguridad}&monto=${data.monto}&tienda=DIA&formato=JSON`;
     return this.http.get(url);
   }
 
-  getCourrier(data): Observable<any>{
+  getCourrier(data): Observable<any> {
     let url = dominio + "getCourrier";
     return this.http.post(url, data, httpHeader);
   }
 
-  askCourrierCosto(ip, data):Observable<any>{
+  askCourrierCosto(ip, data): Observable<any> {
     let url = ip;
     return this.http.post(url, data, httpHeader);
   }
 
-  askCourrierStatus(ip, data):Observable<any>{
+  askCourrierStatus(ip, data): Observable<any> {
     let url = ip;
     return this.http.post(url, data, httpHeader);
   }
+  //CODIGO PARA TOMAR LOS COURIER DE LA BASE DE DATOS
 
+  getAllCourriers() {
+
+    let url = dominio + "getAllCourriers";
+    return this.http.get(url, httpHeader);
+  }
 
 
 
@@ -98,7 +104,7 @@ export class AuthService {
 
   }
 
-  getCategoria(){
+  getCategoria() {
     this.categoria = localStorage.getItem('Categoria');
     return this.categoria;
   }
@@ -108,7 +114,7 @@ export class AuthService {
     return this.http.post(url, dato, httpHeader);
   }
 
-  getProductosById(dato): Observable<any>{
+  getProductosById(dato): Observable<any> {
     let url = dominio + "getProductoById";
     return this.http.post(url, dato, httpHeader);
   }
@@ -133,15 +139,14 @@ export class AuthService {
     this.router.navigateByUrl("/menu-principal");
   }
 
-
   //Funciones pertinentes al Carrito
-  
+
   modificarCantidadCarrito(item: Number, tipo: boolean) {
     let temp: ContenidoCarrito = new ContenidoCarrito();
     this.traerListaCarrito();
     let existente = undefined != this.items.find((producto) => item == producto.pr_id);
 
-    if(tipo){
+    if (tipo) {
       if (!existente) {
         temp.pr_id = item;
         temp.pr_cantidad = 1;
@@ -156,7 +161,7 @@ export class AuthService {
           }
         });
       }
-    }else{
+    } else {
       if (existente) {
         this.items.forEach(element => {
           if (element.pr_id == item) {
@@ -164,7 +169,7 @@ export class AuthService {
             temp.pr_id = item;
             temp.pr_cantidad = Number(this.items[index].pr_cantidad) - 1;
             this.items[index] = temp;
-            if(Number(this.items[index].pr_cantidad) < 1){
+            if (Number(this.items[index].pr_cantidad) < 1) {
               this.eliminardeCarrito(item);
             }
           }
@@ -176,10 +181,10 @@ export class AuthService {
 
 
   eliminardeCarrito(item: Number) {
-    let x:number;
+    let x: number;
     let index;
     this.traerListaCarrito();
-    let producto:ContenidoCarrito = this.items.find((producto) => producto.pr_id === item);
+    let producto: ContenidoCarrito = this.items.find((producto) => producto.pr_id === item);
 
     if (producto != undefined) {
       index = this.items.indexOf(producto);
@@ -189,13 +194,13 @@ export class AuthService {
           localStorage.removeItem('item' + i);
         }
       }
-      
+
     }
     this.items.splice(index, 1);
     x = Number(localStorage.getItem('carritoLength'));
     localStorage.setItem('carritoLength', (x - 1) + "");
     this.guardarListaCarrito();
-    
+
   }
 
 
@@ -219,7 +224,7 @@ export class AuthService {
       localStorage.setItem('item' + i, JSON.stringify(element));
       i++;
     });
-    
+
 
     localStorage.setItem('carritoLength', this.items.length + "");
 
@@ -240,49 +245,49 @@ export class AuthService {
 
 
   // Codigo para las direcciones segun usuario
-  getDireccionesByUser(dato): Observable<any>{
+  getDireccionesByUser(dato): Observable<any> {
     let url = dominio + "getDireccionesByUser";
     return this.http.post(url, dato, httpHeader);
   }
 
-  agregarDireccion(dato): Observable<any>{
+  agregarDireccion(dato): Observable<any> {
     let url = dominio + "newDireccionForUser";
     console.log(dato);
     return this.http.post(url, dato, httpHeader);
   }
 
-  editarDireccion(dato): Observable<any>{
+  editarDireccion(dato): Observable<any> {
     let url = dominio + "editDireccion";
     return this.http.post(url, dato, httpHeader);
   }
 
-  editarCodigoPostal(dato): Observable<any>{
+  editarCodigoPostal(dato): Observable<any> {
     let url = dominio + "editCodigoPostal";
     return this.http.post(url, dato, httpHeader);
   }
 
-  eliminarDireccion(dato): Observable<any>{
+  eliminarDireccion(dato): Observable<any> {
     let url = dominio + "eliminarDireccionByUser";
     return this.http.post(url, dato, httpHeader);
   }
 
-  getDireccionId(dato): Observable<any>{
+  getDireccionId(dato): Observable<any> {
     let url = dominio + 'getDireccionID';
     return this.http.post(url, dato, httpHeader);
   }
-  
+
   // Codigo para las Tarjetas segun usuario
-  getTarjetaByUser(dato): Observable<any>{
+  getTarjetaByUser(dato): Observable<any> {
     let url = dominio + "getTarjetasByUser";
     return this.http.post(url, dato, httpHeader);
   }
 
-  agregarTarjeta(dato): Observable<any>{
+  agregarTarjeta(dato): Observable<any> {
     let url = dominio + "newTarjetaForUser";
     return this.http.post(url, dato, httpHeader);
   }
 
-  eliminarTarjeta(dato): Observable<any>{
+  eliminarTarjeta(dato): Observable<any> {
     let url = dominio + "eliminarTarjetaByUser";
     return this.http.post(url, dato, httpHeader);
   }

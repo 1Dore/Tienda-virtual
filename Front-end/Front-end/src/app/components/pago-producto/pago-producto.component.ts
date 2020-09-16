@@ -30,9 +30,10 @@ export class PagoProductoComponent implements OnInit {
     { value: 'gyt', viewValue: 'G&T' },
     { value: 'bac', viewValue: 'BAC' }
   ];
-  couriers: Array<CourierC>[] = [];
+  couriers: any[] = [];
 
   pago: FormGroup;
+  courier: String;
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
@@ -47,6 +48,12 @@ export class PagoProductoComponent implements OnInit {
       emisor: ['', Validators.required],
       courier: ['', Validators.required],
     });
+
+    this.auth.getAllCourriers()
+      .subscribe((res) => {
+        this.couriers;
+      })
+
   }
 
   irA(ruta: string) {
