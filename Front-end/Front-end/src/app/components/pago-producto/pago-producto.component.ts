@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
+interface Emisor {
+  value: String;
+  viewValue: String;
+}
 @Component({
   selector: 'app-pago-producto',
   templateUrl: './pago-producto.component.html',
@@ -10,18 +14,23 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 })
 export class PagoProductoComponent implements OnInit {
 
+  emisores: Emisor[] = [
+    { value: 'banrural', viewValue: 'Banrural' },
+    { value: 'gyt', viewValue: 'G&T' },
+    { value: 'bac', viewValue: 'BAC' }
+  ];
 
-
-  register: FormGroup;
+  pago: FormGroup;
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.register = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      correo: ['', Validators.required],
-      contraseña: ['', Validators.required],
+    this.pago = this.fb.group({
+      emisor: ['', Validators.required],
+      numero: ['', Validators.required],
+      mes: ['', Validators.required],
+      anio: ['', Validators.required],
+      codigo: ['', Validators.required]
     })
   }
 
@@ -30,7 +39,7 @@ export class PagoProductoComponent implements OnInit {
   }
 
   onSubmit(ruta: string) {
-    let formulario = this.register.value;
+    let formulario = this.pago.value;
 
     //---------------------------------------encriptacion-------------------------------
     /*var passwordBytes = CryptoJS.enc.Utf16LE.parse(formulario.contraseña);
@@ -41,14 +50,14 @@ export class PagoProductoComponent implements OnInit {
     //---------------------------------------encriptacion---------------------------------
 
 
-    this.auth.register(formulario).subscribe(data => {
+    /*this.auth.register(formulario).subscribe(data => {
 
       if (data.status == 1) this.router.navigateByUrl(ruta);
       else alert("Error al ejecutarse");
 
     });
 
-    this.register.reset();
+    this.pago.reset();*/
 
   }
 
