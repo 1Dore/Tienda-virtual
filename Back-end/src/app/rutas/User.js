@@ -6,7 +6,7 @@ module.exports = (app) => {
     app.post('/getDireccionesByUser', (req, res, next) => {
         let query = `Select * From direcciones Where u_id = ${req.body.u_id}`;
 
-        conn.query( querry, (error, formularios) => {
+        conn.query( query, (error, formularios) => {
 
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status:1, formularios});
@@ -56,8 +56,11 @@ module.exports = (app) => {
     //eliminar direccion
     app.post('/eliminarDireccionByUser', (req, rex, next) => {
         let query = `Delete From direcciones Where dir_id = ${req.body.dir_id}`;
-        if(error) res.status(500).json({status: 0, message: "No se pudo eliminar correctamente"});
+
+        conn.query(query, (error, formularios) => {
+            if(error) res.status(500).json({status: 0, message: "No se pudo eliminar correctamente"});
             else res.json({status: 1, menssage: "Eliminado con exito"});
+        });
     });
 
     
@@ -68,7 +71,7 @@ module.exports = (app) => {
     app.post('/getTarjetasByUser', (req, res, next) => {
         let query = `Select * From tarjeta Where u_id = ${req.body.u_id}`;
 
-        conn.query( querry, (error, formularios) => {
+        conn.query( query, (error, formularios) => {
 
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status:1, formularios});
@@ -91,8 +94,10 @@ module.exports = (app) => {
     //eliminar tarjeta
     app.post('/eliminarTarjetaByUser', (req, rex, next) => {
         let query = `Delete From tarjetas Where t_id = ${req.body.t_id}`;
-        if(error) res.status(500).json({status: 0, message: "No se pudo eliminar correctamente"});
+        conn.query(query, (error, formularios) => {
+            if(error) res.status(500).json({status: 0, message: "No se pudo eliminar correctamente"});
             else res.json({status: 1, menssage: "Eliminado con exito"});
+        });
     });
 
 
