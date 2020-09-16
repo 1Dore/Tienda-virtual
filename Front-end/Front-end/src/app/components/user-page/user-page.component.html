@@ -37,7 +37,7 @@
                             <div class="row">
                                 <mat-list role="list">
                                 <mat-list-item role="listitem" *ngFor="let tarjeta of tarjetas">
-                                        
+                                    
                                     <button mat-icon-button> <mat-icon>edit</mat-icon> </button>
                                     <button mat-icon-button> <mat-icon>clear</mat-icon> </button>  
                                 </mat-list-item>
@@ -69,7 +69,7 @@
                             <div class="row">
                                 <mat-list role="list">
                                     <mat-list-item role="listitem" *ngFor="let direccion of direcciones">
-                                        
+                                        {{direccion.dir_id}}
                                         <button mat-icon-button> <mat-icon>edit</mat-icon> </button>
                                         <button mat-icon-button> <mat-icon>clear</mat-icon> </button>  
                                     </mat-list-item>
