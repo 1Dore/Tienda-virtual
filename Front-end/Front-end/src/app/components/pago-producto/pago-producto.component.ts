@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/service/auth/auth.service';
+import { AuthService } from '../../service/auth/auth.service';
 import { formulario } from './formularioTarjeta';
 
 class Emisor {
@@ -145,3 +145,4 @@ export class PagoProductoComponent implements OnInit {
   }
 
 }
+

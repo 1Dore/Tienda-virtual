@@ -99,7 +99,7 @@ module.exports = (app) => {
 
     });
 
-    app.post('/getAllEmisores', (req, res, next) => {
+    app.get('/getAllEmisores', (req, res, next) => {
 
         let querry = `Select * from emisores`;
 
