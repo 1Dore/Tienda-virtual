@@ -43,7 +43,7 @@ export class PagoProductoComponent implements OnInit {
     form.fecha_venc = this.register.value.fecha_venc;
     form.num_seguridad = this.register.value.num_seguridad;
     form.monto = this.register.value.monto;
-    
+
     let emisor = this.register.value.emisor;
 
     this.auth.getEmisor(emisor).subscribe(data => {
@@ -51,7 +51,7 @@ export class PagoProductoComponent implements OnInit {
     });
 
     this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
-
+      
     });
   }
 
