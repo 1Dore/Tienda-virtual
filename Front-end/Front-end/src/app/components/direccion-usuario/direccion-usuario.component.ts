@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserPageComponent } from '../user-page/user-page.component';
 
-interface Direccion{
-  direccion:string;
-  zona:string;
+interface Direccion {
+  direccion: string;
+  codigo_postal: string;
 }
 
 @Component({
