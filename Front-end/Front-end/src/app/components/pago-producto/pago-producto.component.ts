@@ -58,7 +58,7 @@ export class PagoProductoComponent implements OnInit {
     });
     this.auth.getAllEmisores().subscribe((res) => {
       console.log(res);
-      res.formularios.rows.compañia.forEach((element) => {
+      res.formularios.rows.forEach((element) => {
         console.log(element.compañia);
         this.emisores = [{ value: element.compañia }];
         temp_emisores.push(this.emisores[0]);
