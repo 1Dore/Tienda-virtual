@@ -9,7 +9,7 @@
             <mat-label>Emisor</mat-label>
             <mat-select formControlName="emisor">
                 <mat-option *ngFor="let emisor of emisores" [value]="emisor.value">
-                    {{emisor.viewValue}}
+                    {{emisor.value}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

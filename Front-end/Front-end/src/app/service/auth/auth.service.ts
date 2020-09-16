@@ -64,7 +64,12 @@ export class AuthService {
     return this.http.post(url, data, httpHeader);
   }
 
-  createNewPedido(data):Observable<any>{
+  getAllEmisores(): Observable<any> {
+
+    let url = dominio + "getAllEmisores";
+    return this.http.get(url, httpHeader);
+  }
+  createNewPedido(data): Observable<any> {
     let url = dominio + "newPedido";
     return this.http.post(url, data, httpHeader);
   }
@@ -81,11 +86,11 @@ export class AuthService {
   }
 
   askCourrierCosto(ip, data): Observable<any> {
-    let url = ip+`consulta?destino=${data.direccion}&formato=JSON`;
+    let url = ip + `consulta?destino=${data.direccion}&formato=JSON`;
     return this.http.get(url, httpHeader);
   }
 
-  askCourrierEnvio(ip, data):Observable<any>{
+  askCourrierEnvio(ip, data): Observable<any> {
     let url = ip + `envio?`;
     return this.http.get(url, httpHeader);
   }
@@ -97,7 +102,7 @@ export class AuthService {
 
   //CODIGO PARA TOMAR LOS COURIER DE LA BASE DE DATOS
 
-  getAllCourriers():Observable<any> {
+  getAllCourriers(): Observable<any> {
 
     let url = dominio + "getAllCourriers";
     return this.http.get(url, httpHeader);
