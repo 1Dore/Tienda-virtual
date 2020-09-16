@@ -39,7 +39,7 @@ export class UserPageComponent implements OnInit {
   codigo: Number;
   nombre: String;
 
-  zona: string;
+  codigo_postal: string;
   direccion: string;
 
   constructor(public dialog: MatDialog, private servicio: AuthService) { }
@@ -68,16 +68,12 @@ export class UserPageComponent implements OnInit {
   openDireccion(): void {
     const dialogRef = this.dialog.open(DireccionUsuarioComponent, {
       width: '500px',
-      data: { zona: this.zona, direccion: this.direccion}
+      data: { codigo_postal: this.codigo_postal, direccion: this.direccion}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed'); 
-      let y;
-      this.servicio.getDireccionId( {u_id: this.u_id, direccion: result.direccion}).subscribe((result) => {
-        y = result.formulario.rows[0];
-      });
-      let x = {u_id: this.u_id, dir_id: y, direccion: result.direccion, codigo_postal: result.zona};
+      let x = {u_id: this.u_id, direccion: result.direccion, codigo_postal: result.codigo_postal};
       this.agregarDireccion(x);
     });
   }
@@ -87,7 +83,7 @@ export class UserPageComponent implements OnInit {
   modificarDireccion(direccion:string, codigo_postal:string, dir_id:Number){
     const dialogRef = this.dialog.open(DireccionUsuarioComponent, {
       width: '500px',
-      data: { zona: codigo_postal, direccion: direccion, dir_id: dir_id }
+      data: { codigo_postal: codigo_postal, direccion: direccion, dir_id: dir_id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -99,7 +95,9 @@ export class UserPageComponent implements OnInit {
 
   agregarDireccion(direccion){
     this.direcciones.push(direccion);
-    this.servicio.agregarDireccion(direccion);
+    this.servicio.agregarDireccion(direccion).subscribe((x) => {
+      console.log(x);
+    });
   }
 
 

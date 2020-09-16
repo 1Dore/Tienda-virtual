@@ -18,7 +18,7 @@ module.exports = (app) => {
     app.post('/newDireccionForUser', (req, res, next) => {
 
         let query = `Insert into direcciones (u_id, direccion, codigo_postal) values (${req.body.u_id}, '${req.body.direccion}', '${req.body.codigo_postal}')`;
-        console.log(query);
+        
         conn.query(query, (error, form, cols) => {
 
             if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});

@@ -253,6 +253,7 @@ export class AuthService {
   agregarDireccion(dato): Observable<any> {
     let url = dominio + "newDireccionForUser";
     console.log(dato);
+    console.log(url);
     return this.http.post(url, dato, httpHeader);
   }
 

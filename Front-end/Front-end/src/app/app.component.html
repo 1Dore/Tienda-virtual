@@ -4,6 +4,9 @@
         <button (click)="irA('/menu-principal')" mat-button>
             <mat-icon class="center">home</mat-icon>
         </button>
+        <button (click)="irA('/pedidos')" mat-button>
+            Pedidos
+        </button>
         <button mat-button [matMenuTriggerFor]="belowMenu">{{userDisplayName}}</button>
         <mat-menu #belowMenu="matMenu" yPosition="below">
             <button mat-menu-item (click)="irA('/user-page')">Mi Cuenta</button>
@@ -14,6 +17,7 @@
         </button>
     </div>
     <div *ngIf="!auth.isLogin() && !auth.isAdminLogin()">
+        
         <button (click)="irA('/menu-principal')" mat-button>
             <mat-icon class="center">home</mat-icon>
         </button>

@@ -32,6 +32,7 @@ import { AgregarProductosComponent } from './components/agregar-productos/agrega
 import { ExistenciasComponent } from './components/existencias/existencias.component';
 import { MatSelectModule } from '@angular/material/select';
 import { PagoProductoComponent } from './components/pago-producto/pago-producto.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { PagoProductoComponent } from './components/pago-producto/pago-producto.
     TarjetaUsuarioComponent,
     AgregarProductosComponent,
     ExistenciasComponent,
-    PagoProductoComponent],
+    PagoProductoComponent,
+    PedidosComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
