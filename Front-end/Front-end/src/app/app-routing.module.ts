@@ -14,6 +14,7 @@ import { TarjetaUsuarioComponent } from './components/tarjeta-usuario/tarjeta-us
 import { AgregarProductosComponent } from './components/agregar-productos/agregar-productos.component';
 import { ExistenciasComponent } from './components/existencias/existencias.component';
 import { PagoProductoComponent } from './components/pago-producto/pago-producto.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 
 const routes: Routes = [
   { path: '', component: MenuPrincipalComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'tarjeta-usuario', component: TarjetaUsuarioComponent },
   { path: 'agregar-productos', component: AgregarProductosComponent },
   { path: 'existencias', component: ExistenciasComponent },
-  { path: 'pago-producto', component: PagoProductoComponent }
+  { path: 'pago-producto', component: PagoProductoComponent },
+  { path: 'pedidos', component: PedidosComponent}
 
 
 ];
