@@ -30,7 +30,7 @@ export class PagoProductoComponent implements OnInit {
     { value: 'gyt', viewValue: 'G&T' },
     { value: 'bac', viewValue: 'BAC' }
   ];
-  couriers: any[] = [];
+  couriers: Courier[] = [];
 
   pago: FormGroup;
   courier: String;
@@ -48,15 +48,18 @@ export class PagoProductoComponent implements OnInit {
       monto: ['', Validators.required],
       emisor: ['', Validators.required],
       courier: ['', Validators.required],
+      direccion: ['', Validators.required],
+      codigo_postal: ['', Validators.required],
+
     });
 
     this.auth.getAllCourriers().subscribe((res) => {
       console.log(res);
-        res.formularios.rows.forEach((element) => {
-          console.log(element);
-          this.couriers.push(element.c_nombre);
-        });
+      res.formularios.rows.forEach((element) => {
+        console.log(element.c_nombre);
+        this.couriers.push(element.c_nombre);
       });
+    });
 
   }
 
@@ -66,14 +69,14 @@ export class PagoProductoComponent implements OnInit {
 
   onSubmit(ruta: string) {
     let form: formulario;
-    let cobertura:Boolean = true;
+    let cobertura: Boolean = true;
     form = new formulario();
 
     //para pedir courrier
     let direccion = this.pago.value.courier
     this.auth.getCourrier(direccion).subscribe(data => {
 
-      if (data.consultaprecio.costo > 0){
+      if (data.consultaprecio.costo > 0) {
         alert("El courrier tiene cobertura");
         this.pago.value.monto = this.pago.value.monto + data.consultaprecio.costo;
       }
@@ -94,19 +97,19 @@ export class PagoProductoComponent implements OnInit {
 
     //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
     //para pagar con tarjeta
-    if(cobertura){  //si no hay cobertura no se hace ningun cobro
+    if (cobertura) {  //si no hay cobertura no se hace ningun cobro
 
       this.auth.getEmisor(emisor).subscribe(data => {
         emisor = data.formularios.e_ip;
       });
-  
+
       this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
         console.log("aqui deberia de haber algo");
       });
       this.pago.reset();
     }
 
-    else{
+    else {
       alert("Este courrier no tiene cobertura, por favor seleccione otro");
     }
 
