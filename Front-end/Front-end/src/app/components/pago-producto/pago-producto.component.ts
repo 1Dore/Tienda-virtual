@@ -30,7 +30,7 @@ export class PagoProductoComponent implements OnInit {
     { value: 'gyt', viewValue: 'G&T' },
     { value: 'bac', viewValue: 'BAC' }
   ];
-  couriers: any[] = [];
+  couriers: Courier[] = [];
 
   pago: FormGroup;
   courier: String;
@@ -48,6 +48,9 @@ export class PagoProductoComponent implements OnInit {
       num_seguridad: ['', Validators.required],
       emisor: ['', Validators.required],
       courier: ['', Validators.required],
+      direccion: ['', Validators.required],
+      codigo_postal: ['', Validators.required],
+
     });
     let temp = new Array<any>();
     this.auth.getAllCourriers().subscribe((res) => {
@@ -58,8 +61,6 @@ export class PagoProductoComponent implements OnInit {
         });
           this.couriers = temp;
       });
-
-    //inicializo el pedido
 
 
 
@@ -105,12 +106,12 @@ export class PagoProductoComponent implements OnInit {
     form.compañia = emisor;
     //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
     //para pagar con tarjeta
-    if(cobertura){  //si no hay cobertura no se hace ningun cobro
+    if (cobertura) {  //si no hay cobertura no se hace ningun cobro
 
       this.auth.getEmisor(emisor).subscribe(data => {
         emisor = data.formularios.rows.e_ip;
       });
-  
+
       this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
         form.numero = data.autorizacion.numero
         pagado=true;
@@ -118,7 +119,7 @@ export class PagoProductoComponent implements OnInit {
       this.pago.reset();
     }
 
-    else{
+    else {
       alert("Este courrier no tiene cobertura, por favor seleccione otro");
     }
     if(pagado){

@@ -57,6 +57,15 @@ module.exports = (app) => {
         
     });
 
+    app.post('/getPedidos', (req, res, next) => {
+        let query = `Select * From pedido Where u_id = ${req.body.u_id}`;
+
+        conn.query(query, (error, formularios) => {
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, formularios});
+        });
+    });
+
     //guardar carrito
     app.post('/pushCarrito', (req, res, next) => {
 
@@ -70,6 +79,37 @@ module.exports = (app) => {
 
         });
     });
+
+    // Obtener el Nombre de un Curier
+    app.post('/getC_name', (req, res, next) => {
+        let query = `Select c_nombre Form courrier Where c_id = ${req.body.c_id}`;
+        conn.query(query, (error, formularios) => {
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, formularios});
+        });
+    });
+    
+
+    // Obtener el Nombre de un Usuario
+    app.post('/getU_name', (req, res, next) => {
+        let query = `Select nombre, apellido Form usuarios Where u_id = ${req.body.u_id}`;
+        conn.query(query, (error, formularios) => {
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, formularios});
+        });
+    });
+
+    // Obtener el Nombre de un Emisor
+    app.post('/getE_name', (req, res, next) => {
+        let query = `Select compañia Form emisores Where e_id = ${req.body.e_id}`;
+        conn.query(query, (error, formularios) => {
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, formularios});
+        });
+    });
+
+
+    
 
     
 
