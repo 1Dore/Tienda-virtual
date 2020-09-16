@@ -98,4 +98,17 @@ module.exports = (app) => {
         });
 
     });
+
+    app.post('/getAllEmisores', (req, res, next) => {
+
+        let querry = `Select * from emisores`;
+
+        conn.query(querry, (err, formularios) => {
+
+            if (err) res.json({status: 0, message: `${err}`});
+            else res.json({status:1, message:"Emisor encontrado", formularios});
+            
+        })
+
+    });
 }
