@@ -3,23 +3,23 @@
     <p class="separator"></p>
 
     <div class="container">
-        <form class="register" [formGroup] = "agregarProducto">
+        <form class="register" [formGroup]="agregarProducto">
 
             <mat-form-field class="register-full-width">
                 <mat-label>Título</mat-label>
-                <input matInput placeholder="Título de la Obra" type="input">
+                <input matInput placeholder="Título de la Obra" type="text" formControlName="nombre">
                 <mat-icon matSuffix>title</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="register-full-width">
                 <mat-label>Existencia</mat-label>
-                <input matInput placeholder="Cantidad Disponible" type="input">
+                <input matInput placeholder="Cantidad Disponible" type="number" formControlName="existencia">
                 <mat-icon matSuffix>amp_stories</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="register-full-width">
                 <mat-label>Categoría</mat-label>
-                <mat-select>
+                <mat-select formControlName="categoria">
                     <mat-option *ngFor="let categoria of categorias" [value]="categoria.value">
                         {{categoria.viewValue}}
                     </mat-option>
@@ -28,20 +28,27 @@
 
             <mat-form-field class="register-full-width">
                 <mat-label>Autor</mat-label>
-                <input matInput placeholder="Nombre del Autor" type="input">
+                <input matInput placeholder="Nombre del Autor" type="text" formControlName="autor">
                 <mat-icon matSuffix>person_outline</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="register-full-width">
                 <mat-label>Descripción</mat-label>
-                <input matInput placeholder="Descripción de la Obra" type="input">
+                <input matInput placeholder="Descripción de la Obra" type="text" formControlName="descripcion">
                 <mat-icon matSuffix>description</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="register-full-width">
+                <mat-label>Precio</mat-label>
+                <input matInput placeholder="Descripción de la Obra" type="number" formControlName="precio">
+                <mat-icon matSuffix>attach_money</mat-icon>
             </mat-form-field>
 
             <mat-label>Añadir Imagenes</mat-label>
             <input type="file" name="filename">
             <p></p>
-            <button mat-raised-button class="register-full-width button" type="submit" (click) = "onSubmit()" value="upload">Agregar
+            <button mat-raised-button [disabled]="agregarProducto.invalid" class="register-full-width button"
+                type="submit" (click)="onSubmit('/admin')">Agregar
                 Producto</button>
             <p></p>
             <button (click)="irA('/existencias')" mat-raised-button class="register-full-width button">Verificar

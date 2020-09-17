@@ -54,7 +54,7 @@ export class AuthService {
     return this.http.post(url, data, httpHeader);
   }
 
-  editCourier(data): Observable<any>{
+  editCourier(data): Observable<any> {
     let url = dominio + "editCourrier";
     return this.http.post(url, data, httpHeader);
   }
@@ -74,7 +74,7 @@ export class AuthService {
     return this.http.post(url, data, httpHeader);
   }
 
-  editEmisor(data): Observable<any>{
+  editEmisor(data): Observable<any> {
     let url = dominio + "editEmisor";
     return this.http.post(url, data, httpHeader);
   }
@@ -126,7 +126,14 @@ export class AuthService {
     return this.http.post(url, dato, httpHeader);
   }
 
+  //CODIGO PARA INSERTAR PRODUCTOS
 
+  insertProduct(data): Observable<any> {
+
+    let url = dominio + "newProduct";
+    return this.http.post(url, data, httpHeader);
+
+  }
 
   isLogin() {
     let islog = localStorage.getItem("isLogin") === "valido";
@@ -346,7 +353,7 @@ export class AuthService {
   }
 
   //Empiezo a pedir tarjetas
-  getEmisorIP (data): Observable<any> {  //ip de tarjetas
+  getEmisorIP(data): Observable<any> {  //ip de tarjetas
     let url = dominio + "getEmisorIP";
     return this.http.post(url, data, httpHeader);
   }
