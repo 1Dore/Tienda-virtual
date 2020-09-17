@@ -1,8 +1,9 @@
-export class formCourrier{
+export class formCourrier {
         //para crear un pedido
-        p_id:Number//
-        courrier:Number//
-        direccion:String
-        codigo_postal:String
-        nombre:String
+        p_id: Number//
+        courrier: Number//
+        direccion: String
+        codigo_postal: String
+        nombre: String
+        estatus: String
 }
