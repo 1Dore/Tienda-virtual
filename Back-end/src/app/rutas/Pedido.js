@@ -30,6 +30,19 @@ module.exports = (app) => {
         
     });
 
+    app.post('/getPedidoNulls', (req, res, next) => {    
+
+        let querry = `select * from pedido where dir_entrega is null`;
+
+        conn.query( querry, (error, formularios) => {
+
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status:1, message:"Pedido retornado", formularios});
+
+        });
+        
+    });
+
 
 
     //consultar estatus del pedido

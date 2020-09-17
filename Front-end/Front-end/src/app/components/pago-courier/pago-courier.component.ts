@@ -78,6 +78,7 @@ export class PagoCourierComponent implements OnInit {
     this.auth.getCourrierIP(datos_courrier).subscribe(data => {
         datos_courrier.ip = data.formularios.rows[0].c_ip;
         this.despuesConsulta(datos_courrier);
+
     });
   }
 

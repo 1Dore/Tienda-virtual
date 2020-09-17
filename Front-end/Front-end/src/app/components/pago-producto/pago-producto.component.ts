@@ -49,7 +49,8 @@ export class PagoProductoComponent implements OnInit {
 
       });
       this.emisores = temp_emisores;
-
+      let prnt = JSON.parse(localStorage.getItem('datos_Courrier'));
+      console.log(prnt.courrier);
     });
   }
 
