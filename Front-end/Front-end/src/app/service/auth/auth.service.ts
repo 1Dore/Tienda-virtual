@@ -12,6 +12,7 @@ class ContenidoCarrito {
 }
 const httpHeader = {
   headers: new HttpHeaders({ 'Content-type': 'application/json' })
+  
 }
 
 const dominio = environment.dominio;
