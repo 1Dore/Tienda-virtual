@@ -337,7 +337,7 @@ export class AuthService {
   }
 
   getPedidoIDNulls(data): Observable<any>{
-    let url: dominio + "getPedidoNulls";
+    let url = dominio + "getPedidoNulls";
     return this.http.post(url, data, httpHeader);
   }
 
