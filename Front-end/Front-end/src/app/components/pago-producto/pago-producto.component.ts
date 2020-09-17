@@ -6,6 +6,7 @@ import { AuthService } from '../../service/auth/auth.service';
 import { PagoCourierComponent } from '../pago-courier/pago-courier.component';
 import { formulario } from './formularioTarjeta';
 import { formCourrier } from './formularioCourrier';
+import { info } from 'console';
 
 class Emisor {
   value: String;
@@ -49,9 +50,10 @@ export class PagoProductoComponent implements OnInit {
 
       });
       this.emisores = temp_emisores;
-      let prnt = JSON.parse(localStorage.getItem('datos_Courrier'));
-      console.log(prnt.courrier);
+      console.log(JSON.parse(localStorage.getItem('datos_Courrier')));
     });
+
+    
   }
 
   irA(ruta: string) {
@@ -110,11 +112,18 @@ export class PagoProductoComponent implements OnInit {
   }
 
   enviarPedido(){
+
     let info_Pedido:formCourrier = new formCourrier();
     let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
     info_Pedido.nombre = this.pago.value.nombre;
     info_Pedido.codigo_postal = temp.postal;
     info_Pedido.direccion = temp.direccion;
+    info_Pedido.p_id = Number(localStorage.getItem('p_id'));
+
+  }
+
+  enviarPedidoFinal(info_Pedido:formCourrier){
+    this.auth.askCourrierEnvio(info_Pedido).subscribe(x => alert("Se envio el pedido"));
   }
 
 }

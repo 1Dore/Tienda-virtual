@@ -358,6 +358,10 @@ export class AuthService {
     return this.http.get(url);
   }
 
+  terminarPedido(data){
+    
+  }
+
   askCourrierEnvio(data): Observable<any> {
     let url = data.ip + `envio.php?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.direccion}&tienda=DIA`;
     console.log(url);
