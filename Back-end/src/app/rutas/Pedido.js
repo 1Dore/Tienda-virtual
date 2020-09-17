@@ -32,7 +32,7 @@ module.exports = (app) => {
 
     app.post('/getPedidoNulls', (req, res, next) => {    
 
-        let querry = `select * from pedido where dir_entrega is null`;
+        let querry = `select * from pedido where u_id = ${req.body.u_id} and dir_entrega is null`;
 
         conn.query( querry, (error, formularios) => {
 

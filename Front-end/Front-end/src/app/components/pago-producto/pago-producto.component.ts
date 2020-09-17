@@ -6,7 +6,7 @@ import { AuthService } from '../../service/auth/auth.service';
 import { PagoCourierComponent } from '../pago-courier/pago-courier.component';
 import { formulario } from './formularioTarjeta';
 import { formCourrier } from './formularioCourrier';
-import { info } from 'console';
+//import { info } from 'console';
 
 class Emisor {
   value: String;
@@ -53,7 +53,7 @@ export class PagoProductoComponent implements OnInit {
       console.log(JSON.parse(localStorage.getItem('datos_Courrier')));
     });
 
-    
+
   }
 
   irA(ruta: string) {

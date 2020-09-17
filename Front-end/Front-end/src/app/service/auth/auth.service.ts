@@ -339,6 +339,9 @@ export class AuthService {
 
 
   //Codigo para pedir tarjetas o Courrier estan en orden de uso
+  //el inicio de pago de un carrito
+
+  
   getCourrierIP(data): Observable<any> {
     let url = dominio + "getCourrierIP";
     return this.http.post(url, data, httpHeader);
