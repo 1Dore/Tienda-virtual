@@ -87,6 +87,8 @@ export class PagoCourierComponent implements OnInit {
     let datos_courrier = new sendCourrier();
     datos_courrier = data;
 
+    localStorage.setItem('datos_Courrier', JSON.stringify(datos_courrier));
+    //JSON.parse(localStorage.getItem('datos_Courrier')
     let subtotal =Number (localStorage.getItem('total'));
 
     //cuanto me cobra?
