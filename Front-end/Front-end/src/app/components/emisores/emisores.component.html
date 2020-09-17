@@ -1,26 +1,61 @@
 <div mat-dialog-content>
-    <h1 class="title">Agregar Banco Emisor</h1>
-    <p class="separator"></p>
+    <div *ngIf="mod">
+        <h1 class="title">Agregar Banco Emisor</h1>
+        <p class="separator"></p>
 
-    <div class="container">
-        <form class="register" [formGroup] = "newEmisor">
+        <div class="container">
+            <form class="register" [formGroup] = "newEmisor">
 
-            <!-------------  IP --------------------->
-            <mat-form-field class="register-full-width">
-                <mat-label>IP Emisor</mat-label>
-                <input matInput placeholder="IP#" type="input" formControlName="ip">
-                <mat-icon matSuffix>location_on</mat-icon>
-            </mat-form-field>
+                <!-------------  IP --------------------->
+                <mat-form-field class="register-full-width">
+                    <mat-label>IP Emisor</mat-label>
+                    <input matInput placeholder="IP#" type="input" formControlName="ip">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                </mat-form-field>
 
-            <!-------------  Nombre --------------------->
-            <mat-form-field class="register-full-width">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre Banco" type="input" formControlName="nombre">
-                <mat-icon matSuffix>contacts</mat-icon>
-            </mat-form-field>
-            <p></p>
-            <button mat-raised-button class="register-full-width button" (click)="agregarEmisor()">Agregar
-                Emisor</button>
-            <p></p>
-        </form>
+                <!-------------  Nombre --------------------->
+                <mat-form-field class="register-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre Banco" type="input" formControlName="nombre">
+                    <mat-icon matSuffix>contacts</mat-icon>
+                </mat-form-field>
+                <p></p>
+                <button mat-raised-button class="register-full-width button" (click)="agregarEmisor()">Agregar
+                    Emisor</button>
+                <p></p>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="!mod">
+        <h1 class="title">Editar Banco Emisor</h1>
+        <p class="separator"></p>
+
+        <div class="container">
+            <form class="register" [formGroup] = "newEmisor">
+
+                <!------------- Nombre --------------------->
+                <mat-form-field class="register-full-width">
+                    {{datos.nombre}}
+                    <input hidden matInput type="input" value="datos.nombre" formControlName="nombre">
+                </mat-form-field>
+
+                <!------------- IP --------------------->
+                <mat-form-field class="register-full-width">
+                    <mat-label>IP Emisor</mat-label>
+                    <input matInput type="input"  formControlName="ip">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                </mat-form-field>
+
+                <!------------- Extencion --------------------->
+                <mat-form-field class="register-full-width">
+                    <mat-label>Extencion Emisor</mat-label>
+                    <input matInput type="input" formControlName="extencion">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                </mat-form-field>
+                <p></p>
+                <button mat-raised-button class="register-full-width button" (click)="editarEmisor()">Editar
+                    Emisor</button>
+                <p></p>
+            </form>
+        </div>
     </div>

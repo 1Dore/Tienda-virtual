@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { AdminComponent } from '../admin/admin.component';
 
 class emisor{
-  ip:String
-  nombre:String
+  ip:String;
+  nombre:String;
+  id: number;
+  extencion: string;
 }
 
 @Component({
@@ -16,19 +18,37 @@ class emisor{
 })
 export class EmisoresComponent implements OnInit {
 
-  newEmisor:FormGroup
+  newEmisor:FormGroup;
+  mod: boolean;
+  url: string;
 
-  constructor(private auth:AuthService, private fb:FormBuilder, public dialogRef:MatDialogRef<AdminComponent>) { }
+  constructor(private auth:AuthService, private fb:FormBuilder, public dialogRef:MatDialogRef<AdminComponent>,
+              @Inject(MAT_DIALOG_DATA) public datos:emisor) { }
 
   ngOnInit(): void {
     this.newEmisor = this.fb.group({
 
       ip: ['', Validators.required],
-      nombre: ['', Validators.required]
+      nombre: ['', Validators.required],
+      extencion: ['', Validators.required]
 
     })
+    this.url = this.datos.ip + "";
+    this.mod = this.datos.id == undefined;
   }
 
+  editarEmisor(){
+    let data:emisor = new emisor();
+    data.ip = this.newEmisor.value.ip;
+    data.extencion = this.newEmisor.value.extencion;
+    data.nombre = this.datos.nombre;
+    data.id = this.datos.id
+    this.auth.editEmisor(data).subscribe((x) => {
+      if(x.status == 1) alert("Emisor editado existosamente");
+      else alert("Ha ocurriodo un error");
+    })
+  }
+  
   agregarEmisor(){
     let data:emisor;
     data = new emisor();

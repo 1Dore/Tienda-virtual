@@ -1,26 +1,54 @@
 <div mat-dialog-content>
-    <h1 class="title">Agregar Courier</h1>
-    <p class="separator"></p>
+    <div *ngIf="mod">
+        <h1 class="title">Agregar Courier</h1>
+        <p class="separator"></p>
 
-    <div class="container">
-        <form class="register" [formGroup] = "newCourrier">
+        <div class="container">
+            <form class="register" [formGroup] = "newCourrier">
 
-            <!-------------  IP --------------------->
-            <mat-form-field class="register-full-width">
-                <mat-label>IP Courier</mat-label>
-                <input matInput placeholder="IP#" type="input" formControlName="ip">
-                <mat-icon matSuffix>location_on</mat-icon>
-            </mat-form-field>
+                <!-------------  IP --------------------->
+                <mat-form-field class="register-full-width">
+                    <mat-label>IP Courier</mat-label>
+                    <input matInput placeholder="IP#" type="input" formControlName="ip">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                </mat-form-field>
 
-            <!-------------  Nombre --------------------->
-            <mat-form-field class="register-full-width">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre Courier" type="input" formControlName="nombre">
-                <mat-icon matSuffix>contacts</mat-icon>
-            </mat-form-field>
-            <p></p>
-            <button mat-raised-button class="register-full-width button" (click)="agregarCourrier()">Agregar
-                Courier</button>
-            <p></p>
-        </form>
+                <!-------------  Nombre --------------------->
+                <mat-form-field class="register-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre Courier" type="input" formControlName="nombre">
+                    <mat-icon matSuffix>contacts</mat-icon>
+                </mat-form-field>
+                <p></p>
+                <button mat-raised-button class="register-full-width button" (click)="agregarCourrier()">Agregar
+                    Courier</button>
+                <p></p>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="!mod">
+        <h1 class="title">Editar Courier</h1>
+        <p class="separator"></p>
+
+        <div class="container">
+            <form class="register" [formGroup] = "newCourrier">
+
+                <!-------------  Nombre --------------------->
+                <mat-form-field class="register-full-width">
+                    {{datos.nombre}}
+                    <input matInput hidden type="input" formControlName="nombre" value="datos.nombre">
+                </mat-form-field>
+
+                <!-------------  IP --------------------->
+                <mat-form-field class="register-full-width">
+                    <mat-label>IP Courier</mat-label>
+                    <input matInput placeholder="IP#" type="input" formControlName="ip">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                </mat-form-field>
+                <p></p>
+                <button mat-raised-button class="register-full-width button" (click)="editarCourier()">Editar
+                    Courier</button>
+                <p></p>
+            </form>
+        </div>
     </div>

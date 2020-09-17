@@ -25,9 +25,33 @@
                         <mat-card-header>
                             <mat-card-title>Agregar Emisor</mat-card-title>
                         </mat-card-header>
-                        <button (click)="openEmisor()" mat-button>
-                            <img mat-card-image src="assets/img/emisor.png">
-                        </button>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-6">
+                                    <button (click)="openEmisor()" mat-button>
+                                        <img mat-card-image src="assets/img/emisor.png">
+                                    </button>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <mat-list role="list">
+                                    <div  *ngFor="let emisor of emisores">
+                                        <mat-list-item role="listitem">
+                                            <div class="container">
+                                                <div class="row">
+                                                    Nombre: {{emisor.compania}}
+                                                </div>
+                                            </div>
+                                            <button mat-icon-button (click)="changeEmisor(emisor.e_id, emisor.e_ip, emisor.compania)"> <mat-icon>edit</mat-icon> </button>
+                                            <button mat-icon-button (click)="eliminarEmisor(emisor.id)"> <mat-icon>clear</mat-icon> </button>  
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                    </div>
+                                </mat-list>
+                            </div>
+                        </div>
                     </mat-card>
                 </div>
                 <div class="col-4">
@@ -35,9 +59,33 @@
                         <mat-card-header>
                             <mat-card-title>Agregrar Courier</mat-card-title>
                         </mat-card-header>
-                        <button (click)="openCourier()" mat-button>
-                            <img mat-card-image src="assets/img/courier.png">
-                        </button>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-6">
+                                    <button (click)="openCourier()" mat-button>
+                                        <img mat-card-image src="assets/img/courier.png">
+                                    </button>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <mat-list role="list">
+                                    <div  *ngFor="let courier of couriers">
+                                        <mat-list-item role="listitem">
+                                            <div class="container">
+                                                <div class="row">
+                                                    Nombre: {{courier.c_nombre}}
+                                                </div>
+                                            </div>
+                                            <button mat-icon-button (click)="changeCourier(courier.c_id, courier.c_ip, courier.c_nombre)"> <mat-icon>edit</mat-icon> </button>
+                                            <button mat-icon-button (click)="eliminarCourier(courier.c_id)"> <mat-icon>clear</mat-icon> </button>  
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                    </div>
+                                </mat-list>
+                            </div>
+                        </div>
                     </mat-card>
                 </div>
                 <div class="col-4">
