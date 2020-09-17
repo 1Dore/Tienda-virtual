@@ -19,6 +19,7 @@ class courrier{
 export class CourierComponent implements OnInit {
 
   newCourrier:FormGroup
+  edit: FormGroup;
   mod: boolean;
   url: string;
 
@@ -28,6 +29,11 @@ export class CourierComponent implements OnInit {
     this.newCourrier = this.fb.group({
       ip: ['', Validators.required],
       nombre: ['', Validators.required]
+    })
+
+    this.edit = this.fb.group({
+      ip: ['', Validators.required],
+
     })
 
     this.url = this.datos.ip + "";

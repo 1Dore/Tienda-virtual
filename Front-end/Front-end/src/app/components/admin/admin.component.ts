@@ -84,7 +84,11 @@ export class AdminComponent implements OnInit {
   }
 
   eliminarEmisor(id:number){
-    this.servicio.eliminaEmisor({id: id});
+    this.servicio.eliminaEmisor({id: id}).subscribe((x) => {
+      if(x.status == 1) alert("eliminacion exitosa");
+      else alert("no se pudo eliminar"); 
+    });
+    this.emisores.splice(this.emisores.indexOf(this.emisores.find((x) => x.e_id == id)), 1);
   }
 
 
@@ -124,7 +128,11 @@ export class AdminComponent implements OnInit {
   }
 
   eliminarCourier(id:number){
-    this.servicio.eliminarCourier({id: id});
+    this.servicio.eliminarCourier({id: id}).subscribe((x) => {
+        if(x.status == 1) alert("eliminacion exitosa");
+        else alert("no se pudo eliminar"); 
+      this.couriers.splice(this.couriers.indexOf(this.couriers.find((x) => x.c_id == id)), 1);
+    });
   }
 
 

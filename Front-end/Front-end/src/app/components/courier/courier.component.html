@@ -31,18 +31,18 @@
         <p class="separator"></p>
 
         <div class="container">
-            <form class="register" [formGroup] = "newCourrier">
+            <form class="register" [formGroup] = "edit">
 
                 <!-------------  Nombre --------------------->
                 <mat-form-field class="register-full-width">
                     {{datos.nombre}}
-                    <input matInput hidden type="input" formControlName="nombre" value="datos.nombre">
+                    <input matInput hidden type="input"  value="datos.nombre">
                 </mat-form-field>
 
                 <!-------------  IP --------------------->
                 <mat-form-field class="register-full-width">
                     <mat-label>IP Courier</mat-label>
-                    <input matInput placeholder="IP#" type="input" formControlName="ip">
+                    <input matInput placeholder="IP#" type="text" formControlName="ip">
                     <mat-icon matSuffix>location_on</mat-icon>
                 </mat-form-field>
                 <p></p>
