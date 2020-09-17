@@ -148,19 +148,20 @@ export class PagoProductoComponent implements OnInit {
         alert("Pedido terminado.")
         console.log("IMPRIMIRE EL STATUS");
         console.log(res.status);
-        return res.status;
+        this.enviarPedidoFinal(info_Pedido);
       }
       else {
         alert("Error");
         console.log("IMPRIMIRE EL STATUS");
         console.log(res.status);
-        return res.status;
       }
     });
   }
+
+
+  
   enviarPedidoFinal(info_Pedido: formCourrier) {
     this.auth.askCourrierEnvio(info_Pedido).subscribe(x => alert("Se envio el pedido"));
-
   }
 
 }
