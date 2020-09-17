@@ -7,6 +7,14 @@ import { formulario } from '../pago-producto/formularioTarjeta';
 class Courier {
   value: String;
 }
+
+class sendCourrier{
+    direccion:String
+    postal:String
+    courrier:String
+    ip:String
+}
+
 @Component({
   selector: 'app-pago-courier',
   templateUrl: './pago-courier.component.html',
@@ -20,6 +28,10 @@ export class PagoCourierComponent implements OnInit {
   orden: String;
   direccion: String;
   codigo: String;
+  total:Number;
+  costoCourrier = 0;
+  cobertura: boolean;
+
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -56,8 +68,43 @@ export class PagoCourierComponent implements OnInit {
   }
 
   onConsulta() {
-    
+
+    let datos_courrier = new sendCourrier();
+    datos_courrier.courrier = this.pago.value.courier;
+    datos_courrier.direccion = this.pago.value.direccion;
+    datos_courrier.postal = this.pago.value.codigo_postal;
+    datos_courrier.ip = " ";
+    //obtengo la ip de courrier
+    this.auth.getCourrierIP(datos_courrier).subscribe(data => {
+        datos_courrier.ip = data.formularios.rows[0].c_ip;
+        this.despuesConsulta(datos_courrier);
+    });
+
+
   }
+
+  despuesConsulta(data:sendCourrier){
+    let datos_courrier = new sendCourrier();
+    datos_courrier = data;
+
+    let subtotal =Number (localStorage.getItem('total'));
+
+    //cuanto me cobra?
+    this.auth.askCourrierCosto(datos_courrier).subscribe(data => {
+      if (data.consultarprecio[3].costo > 0){
+        this.costoCourrier = Number(data.consultaprecio.costo);
+        this.total = subtotal + this.costoCourrier;
+        this.cobertura = true;
+      }
+      else{
+        alert("No hay cobertura en tu zona, prueba con otro courrier");
+        this.cobertura = false;
+      }
+
+    });
+
+  }
+
 
 
 }
