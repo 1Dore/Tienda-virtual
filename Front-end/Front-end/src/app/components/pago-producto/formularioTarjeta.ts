@@ -5,5 +5,6 @@ export class formulario{
     fecha_venc:String//
     num_seguridad:Number//
     monto:Number//
-
+    emisor:String//
+    ip:String//
   }

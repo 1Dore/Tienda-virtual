@@ -79,16 +79,16 @@ export class PagoCourierComponent implements OnInit {
         datos_courrier.ip = data.formularios.rows[0].c_ip;
         this.despuesConsulta(datos_courrier);
     });
-
-
   }
 
+
+
+  
   despuesConsulta(data:sendCourrier){
     let datos_courrier = new sendCourrier();
     datos_courrier = data;
 
-    localStorage.setItem('datos_Courrier', JSON.stringify(datos_courrier));
-    //JSON.parse(localStorage.getItem('datos_Courrier')
+
     let subtotal =Number (localStorage.getItem('total'));
 
     //cuanto me cobra?
@@ -96,6 +96,9 @@ export class PagoCourierComponent implements OnInit {
       if (Number(data.consultarprecio[3].costo) > 0){
         this.costoCourrier = Number(data.consultaprecio.costo);
         this.total = subtotal + this.costoCourrier;
+        localStorage.setItem('total', this.total+'');
+        localStorage.setItem('datos_Courrier', JSON.stringify(datos_courrier));
+        //JSON.parse(localStorage.getItem('datos_Courrier')
         this.cobertura = true;
       }
       else{

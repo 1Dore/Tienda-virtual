@@ -19,7 +19,7 @@ class Emisor {
 export class PagoProductoComponent implements OnInit {
 
   emisores: Emisor[] = [];
-
+  
   pago: FormGroup;
   courier: String;
   orden: String;
@@ -37,8 +37,8 @@ export class PagoProductoComponent implements OnInit {
       fecha_vencM: ['', Validators.required],
       fecha_vencY: ['', Validators.required],
       num_seguridad: ['', Validators.required],
-      nombre: ['', Validators.required]
-
+      nombre: ['', Validators.required],
+      emisor: ['', Validators.required]
     });
 
     this.auth.getAllEmisores().subscribe((res) => {
@@ -73,13 +73,35 @@ export class PagoProductoComponent implements OnInit {
     
     pago.num_seguridad = this.pago.value.num_seguridad;
     pago.nombre = this.pago.value.nombre;
-
-    //autorizacion de pago
     
 
+    //autorizacion de pago
+    pago.monto =Number (localStorage.getItem('total'));
+    pago.emisor = this.pago.value.emisor
+    this.auth.getEmisorIP(pago).subscribe(data => {
+
+      pago.ip = data.formularios.rows[0].c_ip;
+      this.despuesConsultaIP(pago);
+
+    });
 
   }
 
+
+  despuesConsultaIP(pago:formulario){
+    let datos_tarjeta:formulario = pago;
+
+    this.auth.solicitarAutorizacion(datos_tarjeta).subscribe(data => {
+
+
+
+    });
+    
+  }
+
+  enviarPedido(){
+    
+  }
 
 }
 
