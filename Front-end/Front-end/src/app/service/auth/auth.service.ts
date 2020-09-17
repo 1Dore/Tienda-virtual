@@ -4,7 +4,6 @@ import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { formulario } from '../../components/pago-producto/formularioTarjeta';
-import { url } from 'inspector';
 //import { runInThisContext } from 'vm';
 
 class ContenidoCarrito {
@@ -366,7 +365,7 @@ export class AuthService {
   askCourrierCosto(data): Observable<any> {
     let ip = data.ip;
     console.log(data);
-    let url = ip + `consulta.php?destino=${data.postal}&formato=JSON`;
+    let url = ip + `/consulta.php?destino=${data.postal}&formato=JSON`;
     console.log(url);
     return this.http.get(url, httpHeader);
   }
@@ -378,7 +377,7 @@ export class AuthService {
   }
 
   solicitarAutorizacion(data: formulario): Observable<any> {  //pagar con tarjeta
-    let url = data.ip + `autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
+    let url = data.ip + `/autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
                   &num_seguridad=${data.num_seguridad}&monto=${data.monto}&tienda=DIA&formato=JSON`;
     console.log(url);
     return this.http.get(url);
@@ -390,7 +389,7 @@ export class AuthService {
   }
 
   askCourrierEnvio(data): Observable<any> {
-    let url = data.ip + `envio.php?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.codigo_postal}&direccion=${data.direccion}&tienda=DIA`;
+    let url = data.ip + `/envio.php?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.codigo_postal}&direccion=${data.direccion}&tienda=DIA`;
     console.log(url);
     return this.http.get(url, httpHeader);
   }
