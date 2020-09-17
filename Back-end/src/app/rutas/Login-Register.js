@@ -51,7 +51,7 @@ module.exports = (app) => {
 
     app.post('/newAdmin', (req, res, next) => {
 
-        let query = `Insert into Usuarios (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
+        let query = `Insert into administradores (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
         
         conn.query(query, (error, form, cols) => {
 

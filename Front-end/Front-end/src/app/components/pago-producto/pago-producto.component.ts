@@ -81,10 +81,11 @@ export class PagoProductoComponent implements OnInit {
     form = new formulario();
 
     //para pedir courrier
-    let direccion;
+    let direccion = this.pago.value.direccion;
     let direccionip = this.pago.value.courier; //busco el courrier por nombre
     this.auth.getCourrier(direccionip).subscribe(data => {  //adquiero la ip del courrier buscado por nombre
       direccionip = data.formularios.rows.ip;
+      console.log(direccionip);
     });
 
     this.auth.askCourrierCosto(direccionip, direccion).subscribe(x => {
@@ -101,11 +102,11 @@ export class PagoProductoComponent implements OnInit {
     //le doy al formulario los valores que fueron ingresados en el html
     form.nombre = this.pago.value.nombre;
     form.tarjeta = this.pago.value.tarjeta;
-    form.fecha_venc = this.pago.value.fecha_vencY + " " + this.pago.value.fecha_vencM;
+    form.fecha_venc = this.pago.value.fecha_vencY + "" + this.pago.value.fecha_vencM;
     form.num_seguridad = this.pago.value.num_seguridad;
     form.monto = Number(localStorage.getItem('total'));
     form.courrier = this.pago.value.courrier;
-
+    form.dir_entrega = direccion;
     let emisor = this.pago.value.emisor;
     form.compañia = emisor;
     //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho

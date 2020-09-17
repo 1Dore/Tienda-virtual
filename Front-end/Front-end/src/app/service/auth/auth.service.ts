@@ -60,7 +60,7 @@ export class AuthService {
   }
 
   getEmisor(data): Observable<any> {
-    let url = dominio + "gerEmisor";
+    let url = dominio + "getEmisor";
     return this.http.post(url, data, httpHeader);
   }
 
@@ -75,28 +75,32 @@ export class AuthService {
   }
 
   solicitarAutorizacion(ip, data: formulario): Observable<any> {
-    let url = ip + `autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
+    let url = ip + `/autorizacion?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
                   &num_seguridad=${data.num_seguridad}&monto=${data.monto}&tienda=DIA&formato=JSON`;
+    console.log(url);
     return this.http.get(url);
   }
 
   getCourrier(data): Observable<any> {
     let url = dominio + "getCourrier";
+    console.log(url);
     return this.http.post(url, data, httpHeader);
   }
 
   askCourrierCosto(ip, data): Observable<any> {
-    let url = ip + `consulta?destino=${data.direccion}&formato=JSON`;
+    let url = ip + `consulta.php?destino=${data.direccion}&formato=JSON`;
+    console.log(url);
     return this.http.get(url, httpHeader);
   }
 
   askCourrierEnvio(ip, data): Observable<any> {
-    let url = ip + `envio?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.direccion}&tienda=DIA`;
+    let url = ip + `envio.php?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.direccion}&tienda=DIA`;
+    console.log(url);
     return this.http.get(url, httpHeader);
   }
 
   askCourrierStatus(ip, data): Observable<any> {
-    let url = ip + `status?orden=${data.pedido_id}&tienda=DIA&formato=JSON`;
+    let url = ip + `status.php?orden=${data.pedido_id}&tienda=DIA&formato=JSON`;
     return this.http.get(url, httpHeader);
   }
 
