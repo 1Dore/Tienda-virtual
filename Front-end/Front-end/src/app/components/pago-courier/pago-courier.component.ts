@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
@@ -23,6 +23,12 @@ export class PagoCourierComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.pago = this.fb.group({
+      courier: ['', Validators.required],
+      direccion: ['', Validators.required],
+      codigo_postal: ['', Validators.required],
+
+    });
     let temp_couriers = new Array<Courier>();
 
     this.auth.getAllCourriers().subscribe((res) => {
