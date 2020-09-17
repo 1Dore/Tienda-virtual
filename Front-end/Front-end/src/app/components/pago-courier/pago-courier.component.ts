@@ -86,15 +86,20 @@ export class PagoCourierComponent implements OnInit {
 
 
   
-  despuesConsulta(data:sendCourrier){
+  despuesConsulta(datos:sendCourrier){
     let datos_courrier = new sendCourrier();
-    datos_courrier = data;
+    datos_courrier = datos;
 
 
     let subtotal =Number (localStorage.getItem('total'));
 
     //cuanto me cobra?
     this.auth.askCourrierCosto(datos_courrier).subscribe(data => {
+      if(data.status == 0){
+        console.log(data.error);
+      }
+
+      console.log(data.consultarprecio);
       if (Number(data.consultarprecio[3].costo) > 0){
         this.costoCourrier = Number(data.consultaprecio.costo);
         this.total = subtotal + this.costoCourrier;

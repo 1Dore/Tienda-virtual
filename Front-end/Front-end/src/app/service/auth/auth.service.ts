@@ -364,9 +364,7 @@ export class AuthService {
 
   askCourrierCosto(data): Observable<any> {
     let ip = data.ip;
-    console.log(data);
     let url = ip + `consulta.php?destino=${data.postal}&formato=JSON`;
-    console.log(url);
     return this.http.get(url, httpHeader);
   }
 
