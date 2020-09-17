@@ -47,7 +47,7 @@ module.exports = (app) => {
     //editar emisor
     app.post('/editEmisor', (req, res, next) => {    
 
-        let querry = `Update emisores set e_ip = ${req.body.ip}, extencion = ${req.body.extencion} where compañia = '${req.body.nombre}'`;
+        let querry = `Update emisores set e_ip = ${req.body.ip}, extencion = '${req.body.extencion}' where compañia = '${req.body.nombre}'`;
 
         conn.query( querry, (error, formularios) => {
 

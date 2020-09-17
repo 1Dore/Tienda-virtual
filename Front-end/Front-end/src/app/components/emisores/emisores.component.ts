@@ -19,6 +19,7 @@ class emisor{
 export class EmisoresComponent implements OnInit {
 
   newEmisor:FormGroup;
+  edit:FormGroup;
   mod: boolean;
   url: string;
 
@@ -30,17 +31,23 @@ export class EmisoresComponent implements OnInit {
 
       ip: ['', Validators.required],
       nombre: ['', Validators.required],
+
+    });
+
+    this.edit = this.fb.group({
+
+      ip: ['', Validators.required],
       extencion: ['', Validators.required]
 
-    })
+    });
     this.url = this.datos.ip + "";
     this.mod = this.datos.id == undefined;
   }
 
   editarEmisor(){
     let data:emisor = new emisor();
-    data.ip = this.newEmisor.value.ip;
-    data.extencion = this.newEmisor.value.extencion;
+    data.ip = this.edit.value.ip;
+    data.extencion = this.edit.value.extencion;
     data.nombre = this.datos.nombre;
     data.id = this.datos.id
     this.auth.editEmisor(data).subscribe((x) => {
