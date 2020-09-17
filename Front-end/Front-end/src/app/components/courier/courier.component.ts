@@ -19,6 +19,7 @@ class courrier{
 export class CourierComponent implements OnInit {
 
   newCourrier:FormGroup
+  edit: FormGroup;
   mod: boolean;
   url: string;
 
@@ -28,6 +29,10 @@ export class CourierComponent implements OnInit {
     this.newCourrier = this.fb.group({
       ip: ['', Validators.required],
       nombre: ['', Validators.required]
+    })
+
+    this.edit = this.fb.group({
+      ip: ['', Validators.required],
     })
 
     this.url = this.datos.ip + "";
@@ -48,7 +53,7 @@ export class CourierComponent implements OnInit {
   agregarCourrier(){
     let formulario:courrier;
     formulario = new courrier();
-    formulario.ip = this.newCourrier.value.ip;
+    formulario.ip = this.edit.value.ip;
     formulario.nombre = this.newCourrier.value.nombre;
     this.auth.addCourrier(formulario).subscribe(x => {
 
@@ -57,7 +62,7 @@ export class CourierComponent implements OnInit {
       }
 
       else{
-        alert("Ocurrio un error");
+        alert("Ocurrio un error" +formulario.ip);
       }
 
     })
