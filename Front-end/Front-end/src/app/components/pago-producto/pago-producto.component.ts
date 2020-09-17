@@ -27,7 +27,7 @@ export class PagoProductoComponent implements OnInit {
   orden: String;
   direccion: String;
   codigo: String;
-
+  estats: String;
   u_id: number;
 
 
@@ -136,16 +136,20 @@ export class PagoProductoComponent implements OnInit {
     let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
     info_Pedido.direccion = temp.direccion;
     info_Pedido.codigo_postal = temp.postal;
+    info_Pedido.estatus = "PENDIENTE";
     info_Pedido.courrier = temp.courrier;
     info_Pedido.nombre = this.pago.value.nombre;
     this.auth.terminarPedido(info_Pedido).subscribe((res) => {
       if (res.status == 1) {
         alert("Pedido terminado.")
+        console.log("IMPRIMIRE EL STATUS");
         console.log(res.status);
         return res.status;
       }
       else {
         alert("Error");
+        console.log("IMPRIMIRE EL STATUS");
+        console.log(res.status);
         return res.status;
       }
     });
