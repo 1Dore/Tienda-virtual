@@ -40,14 +40,14 @@
         </mat-card>
         <div class="total">
             <h3>
-                Total: Q{{total}}
+                Sub-Total: Q{{total}}
             </h3>
         </div>
         <mat-divider></mat-divider>
         <br>
         <div class="botones">
-            <button mat-raised-button class="register-full-width button" (click)="guardarMontoTotal('/pago-producto')">Ir a
-                Caja</button>
+            <button mat-raised-button class="register-full-width button" (click)="openDialog()">Seleccionar
+                Courier</button>
             <br>
             <br>
             <button mat-raised-button class="register-full-width button" (click)="irA('/menu-principal')">Seguir
