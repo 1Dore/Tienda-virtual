@@ -1,0 +1,38 @@
+<p class="separator"></p>
+<h1 class="title">Pago</h1>
+
+<div class="container">
+    <form class="register-form" [formGroup]="pago">
+        <!---------- Direccion------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Dirección</mat-label>
+            <input matInput placeholder="10 Av, 12 Calle" formControlName="direccion" type="text">
+            <mat-icon matSuffix>directions</mat-icon>
+        </mat-form-field>
+
+        <!---------- Codigo Postal------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Código Postal</mat-label>
+            <input matInput placeholder="10001" formControlName="codigo_postal" type="text">
+            <mat-icon matSuffix>local_post_office</mat-icon>
+        </mat-form-field>
+
+        <!---------- Courier------------------------------------------------------->
+        <mat-form-field class="register-full-width">
+            <mat-label>Courier</mat-label>
+            <mat-select formControlName="courier">
+                <mat-option *ngFor="let courier of couriers" [value]="courier.value">
+                    {{courier.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p></p>
+        <button [disabled]="pago.invalid" mat-raised-button class="register-full-width button"
+            (click)="onSubmit('/pago-producto')" type="submit">
+            Ir a Caja
+        </button>
+        <p></p>
+        <button (click)="irA('/checkout')" type="submit" mat-raised-button class="register-full-width button">Regresar
+            al Carrito</button>
+    </form>
+</div>

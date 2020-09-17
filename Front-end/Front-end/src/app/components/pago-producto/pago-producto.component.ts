@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
+import { PagoCourierComponent } from '../pago-courier/pago-courier.component';
 import { formulario } from './formularioTarjeta';
 
 class Emisor {
@@ -20,13 +22,14 @@ class Courier {
 export class PagoProductoComponent implements OnInit {
 
   emisores: Emisor[] = [];
-  couriers: Courier[];
 
   pago: FormGroup;
   courier: String;
   orden: String;
+  direccion: String;
+  codigo: String;
 
-  constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
+  constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     let temp_couriers = new Array<Courier>();
@@ -45,17 +48,7 @@ export class PagoProductoComponent implements OnInit {
       codigo_postal: ['', Validators.required],
 
     });
-    this.auth.getAllCourriers().subscribe((res) => {
-      console.log(res);
-      res.formularios.rows.forEach((element) => {
-        console.log(element.c_nombre);
-        this.couriers = [{ value: element.c_nombre }];
-        temp_couriers.push(this.couriers[0]);
 
-      });
-      this.couriers = temp_couriers;
-
-    });
     this.auth.getAllEmisores().subscribe((res) => {
       console.log(res);
       res.formularios.rows.forEach((element) => {
@@ -143,6 +136,16 @@ export class PagoProductoComponent implements OnInit {
     }
 
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PagoCourierComponent, {
+      width: '500px',
+      data: { courier: this.courier, direccion: this.direccion, codigo: this.codigo }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.courier = result;
+    });
+  }
 }
 
