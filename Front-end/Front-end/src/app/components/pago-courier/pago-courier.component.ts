@@ -91,7 +91,7 @@ export class PagoCourierComponent implements OnInit {
 
     //cuanto me cobra?
     this.auth.askCourrierCosto(datos_courrier).subscribe(data => {
-      if (data.consultarprecio[3].costo > 0){
+      if (Number(data.consultarprecio[3].costo) > 0){
         this.costoCourrier = Number(data.consultaprecio.costo);
         this.total = subtotal + this.costoCourrier;
         this.cobertura = true;
