@@ -76,7 +76,8 @@ export class PagoCourierComponent implements OnInit {
     datos_courrier.ip = " ";
     //obtengo la ip de courrier
     this.auth.getCourrierIP(datos_courrier).subscribe(data => {
-        datos_courrier.ip = data.formularios.rows[0].c_ip;
+        datos_courrier.ip = data.formularios.rows[0].c_ip + '/';
+        console.log(datos_courrier.ip);
         this.despuesConsulta(datos_courrier);
 
     });
