@@ -27,9 +27,14 @@ export class PagoProductoComponent implements OnInit {
   direccion: String;
   codigo: String;
 
+  u_id: number;
+
+
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    
+    this.u_id = Number(localStorage.getItem('UserID'));
     let temp_emisores = new Array<Emisor>();
 
 
@@ -52,6 +57,8 @@ export class PagoProductoComponent implements OnInit {
       let prnt = JSON.parse(localStorage.getItem('datos_Courrier'));
       console.log(prnt.courrier);
     });
+
+    this.auth.newPedido({u_id: this.u_id});
   }
 
   irA(ruta: string) {
@@ -115,6 +122,12 @@ export class PagoProductoComponent implements OnInit {
     info_Pedido.nombre = this.pago.value.nombre;
     info_Pedido.codigo_postal = temp.postal;
     info_Pedido.direccion = temp.direccion;
+    this.auth.getPedidoIDNulls({u_id: this.u_id}).subscribe((res) => {
+      if(res.formularios.rows.length > 0){
+        info_Pedido.p_id = res.formularios.rows[0].p_id;
+      }
+    });
+    this.auth.askCourrierEnvio(info_Pedido);
   }
 
 }
