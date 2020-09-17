@@ -7,4 +7,5 @@ export class formulario{
     monto:Number//
     emisor:String//
     ip:String//
+    extension:String//
   }

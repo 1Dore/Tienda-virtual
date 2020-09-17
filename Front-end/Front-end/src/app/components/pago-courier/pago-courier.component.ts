@@ -92,15 +92,11 @@ export class PagoCourierComponent implements OnInit {
 
 
     let subtotal =Number (localStorage.getItem('total'));
-
+    console.log("el subtotal es:"+ subtotal);
     //cuanto me cobra?
     this.auth.askCourrierCosto(datos_courrier).subscribe(data => {
-      if(data.status == 0){
-        console.log(data.error);
-      }
 
-      console.log(data.consultarprecio);
-      if (Number(data.consultarprecio[3].costo) > 0){
+      if (Number(data.consultaprecio.costo) > 0){
         this.costoCourrier = Number(data.consultaprecio.costo);
         this.total = subtotal + this.costoCourrier;
         localStorage.setItem('total', this.total+'');

@@ -73,25 +73,25 @@ export class PagoProductoComponent implements OnInit {
     //este ifelse es para cercioroarnos de mandar los meses tip YYYY0M cuando M < 10
     if (this.pago.value.fecha_vencM < 10) {
       pago.fecha_venc = "0" + this.pago.value.fecha_vencM;
-      pago.fecha_venc = this.pago.value.fecha_vencY + pago.fecha_venc;
+      pago.fecha_venc = String(this.pago.value.fecha_vencY +""+ pago.fecha_venc);
     }
     else {
       //esto manda YYYYMM cuando M > 10
-      pago.fecha_venc = this.pago.value.fecha_vencY + pago.fecha_venc;
+      pago.fecha_venc = this.pago.value.fecha_vencY+ "" + this.pago.value.fecha_vencM;
     }
 
     pago.num_seguridad = this.pago.value.num_seguridad;
     pago.nombre = this.pago.value.nombre;
-    pago.ip = " "
+    pago.ip = " ";
+    pago.extension = " ";
 
-    //autorizacion de pago
-    pago.monto = Number(localStorage.getItem('total'));
+    //pedir ip
+    pago.monto =Number (localStorage.getItem('total'));
     pago.emisor = this.pago.value.emisor
-    console.log(pago);
     this.auth.getEmisorIP(pago).subscribe(data => {
-
-      pago.ip = data.formularios.rows[0].c_ip;
-      console.log(pago);
+      console.log(data.formularios.rows[0]);
+      pago.ip = data.formularios.rows[0].e_ip;
+      pago.extension = data.formularios.rows[0].extencion;
       this.despuesConsultaIP(pago);
 
     });

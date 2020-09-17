@@ -61,7 +61,7 @@ module.exports = (app) => {
     //obtener ip de emisor
     app.post('/getEmisorIP', (req, res, next) => {
 
-        let querry = `Select e_ip from emisores where compañia = '${req.body.emisor}'`;
+        let querry = `Select e_ip, extencion from emisores where compañia = '${req.body.emisor}'`;
 
         conn.query(querry, (err, formularios) => {
 
