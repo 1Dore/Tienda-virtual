@@ -30,7 +30,7 @@ export class PagoCourierComponent implements OnInit {
   codigo: String;
   total:Number = 0;
   costoCourrier = 0;
-  cobertura: boolean = true;
+  cobertura: boolean = false;
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
