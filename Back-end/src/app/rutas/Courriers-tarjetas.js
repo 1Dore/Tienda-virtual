@@ -64,7 +64,7 @@ module.exports = (app) => {
         let querry = `Select e_ip, extencion from emisores where compañia = '${req.body.emisor}'`;
 
         conn.query(querry, (err, formularios) => {
-
+            console.log(querry);
             if (err) res.json({status: 0, message: `${err}`});
             else res.json({status:1, message:"Emisor encontrado", formularios});
             

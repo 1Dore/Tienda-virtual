@@ -69,6 +69,9 @@ export class PagoProductoComponent implements OnInit {
 
     let pago: formulario = new formulario();
     pago.tarjeta = this.pago.value.tarjeta;
+    pago.ip = " ";
+    pago.extension = " ";
+    pago.emisor = this.pago.value.emisor
 
     //este ifelse es para cercioroarnos de mandar los meses tip YYYY0M cuando M < 10
     if (this.pago.value.fecha_vencM < 10) {
@@ -82,12 +85,11 @@ export class PagoProductoComponent implements OnInit {
 
     pago.num_seguridad = this.pago.value.num_seguridad;
     pago.nombre = this.pago.value.nombre;
-    pago.ip = " ";
-    pago.extension = " ";
+
 
     //pedir ip
     pago.monto =Number (localStorage.getItem('total'));
-    pago.emisor = this.pago.value.emisor
+    console.log(pago);
     this.auth.getEmisorIP(pago).subscribe(data => {
       console.log(data.formularios.rows[0]);
       pago.ip = data.formularios.rows[0].e_ip;
