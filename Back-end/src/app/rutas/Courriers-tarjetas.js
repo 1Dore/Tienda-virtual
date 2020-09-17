@@ -34,7 +34,7 @@ module.exports = (app) => {
     app.post('/newEmisor', (req, res, next) => {
 
         let query = `Insert into emisores (e_ip, compañia) values ('${req.body.ip}', '${req.body.nombre}')`;
-        
+
         conn.query(query, (error, form, cols) => {
 
             if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
@@ -48,7 +48,7 @@ module.exports = (app) => {
     app.post('/editEmisor', (req, res, next) => {    
 
         let querry = `Update emisores set e_ip = '${req.body.ip}', extencion = '${req.body.extencion}' where compañia = '${req.body.nombre}'`;
-
+        console.log(querry);
         conn.query( querry, (error, formularios) => {
 
             if (error) res.json({status: 0, message: `${error}`});
@@ -64,7 +64,7 @@ module.exports = (app) => {
         let querry = `Select e_ip, extencion from emisores where compañia = '${req.body.emisor}'`;
 
         conn.query(querry, (err, formularios) => {
-
+            console.log(querry);
             if (err) res.json({status: 0, message: `${err}`});
             else res.json({status:1, message:"Emisor encontrado", formularios});
             

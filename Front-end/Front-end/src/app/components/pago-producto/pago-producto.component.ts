@@ -69,6 +69,9 @@ export class PagoProductoComponent implements OnInit {
 
     let pago: formulario = new formulario();
     pago.tarjeta = this.pago.value.tarjeta;
+    pago.ip = " ";
+    pago.extension = " ";
+    pago.emisor = this.pago.value.emisor
 
     //este ifelse es para cercioroarnos de mandar los meses tip YYYY0M cuando M < 10
     if (this.pago.value.fecha_vencM < 10) {
@@ -82,12 +85,14 @@ export class PagoProductoComponent implements OnInit {
 
     pago.num_seguridad = this.pago.value.num_seguridad;
     pago.nombre = this.pago.value.nombre;
-    pago.ip = " ";
-    pago.extension = " ";
+
+    if(pago.nombre.indexOf(' ') >= 0){
+     pago.nombre =  pago.nombre.replace(" ", "%20");
+    }
 
     //pedir ip
     pago.monto =Number (localStorage.getItem('total'));
-    pago.emisor = this.pago.value.emisor
+    console.log(pago);
     this.auth.getEmisorIP(pago).subscribe(data => {
       console.log(data.formularios.rows[0]);
       pago.ip = data.formularios.rows[0].e_ip;
@@ -101,10 +106,9 @@ export class PagoProductoComponent implements OnInit {
 
   despuesConsultaIP(pago: formulario) {
     let datos_tarjeta: formulario = pago;
-    console.log(datos_tarjeta);
     this.auth.solicitarAutorizacion(datos_tarjeta).subscribe(data => {
-
-      if (data.autorizacion.numero > 0) {
+      console.log(data);  
+      if (data.autorización.numero > 0) {
         alert("Pago aceptado")
         this.terminarPedido()
       }
@@ -144,19 +148,20 @@ export class PagoProductoComponent implements OnInit {
         alert("Pedido terminado.")
         console.log("IMPRIMIRE EL STATUS");
         console.log(res.status);
-        return res.status;
+        this.enviarPedidoFinal(info_Pedido);
       }
       else {
         alert("Error");
         console.log("IMPRIMIRE EL STATUS");
         console.log(res.status);
-        return res.status;
       }
     });
   }
+
+
+  
   enviarPedidoFinal(info_Pedido: formCourrier) {
     this.auth.askCourrierEnvio(info_Pedido).subscribe(x => alert("Se envio el pedido"));
-
   }
 
 }

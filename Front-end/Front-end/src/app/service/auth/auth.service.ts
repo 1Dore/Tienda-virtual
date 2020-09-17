@@ -76,6 +76,7 @@ export class AuthService {
   }
 
   editEmisor(data): Observable<any> {
+    console.log(data);
     let url = dominio + "editEmisor";
     return this.http.post(url, data, httpHeader);
   }
@@ -378,9 +379,10 @@ export class AuthService {
   }
 
   solicitarAutorizacion(data: formulario): Observable<any> {  //pagar con tarjeta
-    let url = data.ip + `/autorizacion${data.extension}?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}
-                  &num_seguridad=${data.num_seguridad}&monto=${data.monto}&tienda=DIA&formato=JSON`;
+    console.log(data.nombre);
+    let url = data.ip + `autorizacion${data.extension}?tarjeta=${data.tarjeta}&nombre=${data.nombre}&fecha_venc=${data.fecha_venc}&num_seguridad=${data.num_seguridad}&monto=${data.monto}&tienda=DIA&formato=JSON`;
     console.log(url);
+    //url = encodeURI(url)
     return this.http.get(url);
   }
 
