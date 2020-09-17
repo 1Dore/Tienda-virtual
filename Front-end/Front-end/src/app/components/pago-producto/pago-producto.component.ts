@@ -126,12 +126,30 @@ export class PagoProductoComponent implements OnInit {
     this.auth.getPedidoIDNulls({ u_id: this.u_id }).subscribe((res) => {
       if (res.formularios.rows.length > 0) {
         info_Pedido.p_id = res.formularios.rows[0].p_id;
+        this.statusPedido();
       }
     });
-
-
   }
 
+  statusPedido() {
+    let info_Pedido: formCourrier = new formCourrier();
+    let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
+    info_Pedido.direccion = temp.direccion;
+    info_Pedido.codigo_postal = temp.postal;
+    info_Pedido.courrier = temp.courrier;
+    info_Pedido.nombre = this.pago.value.nombre;
+    this.auth.terminarPedido(info_Pedido).subscribe((res) => {
+      if (res.status == 1) {
+        alert("Pedido terminado.")
+        console.log(res.status);
+        return res.status;
+      }
+      else {
+        alert("Error");
+        return res.status;
+      }
+    });
+  }
   enviarPedidoFinal(info_Pedido: formCourrier) {
     this.auth.askCourrierEnvio(info_Pedido).subscribe(x => alert("Se envio el pedido"));
 

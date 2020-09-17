@@ -4,7 +4,6 @@ import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { formulario } from '../../components/pago-producto/formularioTarjeta';
-import { url } from 'inspector';
 //import { runInThisContext } from 'vm';
 
 class ContenidoCarrito {
@@ -343,7 +342,7 @@ export class AuthService {
     return this.http.post(url, data, httpHeader);
   }
 
-  getPedidoIDNulls(data): Observable<any>{
+  getPedidoIDNulls(data): Observable<any> {
     let url = dominio + "getPedidoNulls";
     return this.http.post(url, data, httpHeader);
   }
@@ -384,7 +383,7 @@ export class AuthService {
     return this.http.get(url);
   }
 
-  terminarPedido(data):Observable<any>{
+  terminarPedido(data): Observable<any> {
     let url = dominio + `completarPedido`;
     return this.http.post(url, data, httpHeader);
   }
@@ -400,5 +399,5 @@ export class AuthService {
     return this.http.get(url, httpHeader);
   }
 
-  
+
 }
