@@ -47,7 +47,7 @@ module.exports = (app) => {
     //editar emisor
     app.post('/editEmisor', (req, res, next) => {    
 
-        let querry = `Update emisores set e_ip = ${req.body.ip} where compañia = '${req.body.nombre}'`;
+        let querry = `Update emisores set e_ip = ${req.body.ip}, extencion = ${req.body.extencion} where compañia = '${req.body.nombre}'`;
 
         conn.query( querry, (error, formularios) => {
 
@@ -110,5 +110,32 @@ module.exports = (app) => {
             
         })
 
+    });
+
+    app.post('/deleteEmisor', (req, res, next) => {
+        let query = `Delete From emisores Where e_id = ${req.body.id}`;
+
+        conn.query(query, (error, form, cols) => {
+            if(error) res.status(500).json({status: 0, message: "No se pudo eliminar el emisor"});
+            else res.json({status: 1, menssage: "Eliminacion realizada"});
+        });
+    });
+
+    app.post('/deleteCourier', (req, res, next) => {
+        let query = `Delete From courrier Where c_id = ${req.body.id}`;
+
+        conn.query(query, (error, form, cols) => {
+            if(error) res.status(500).json({status: 0, message: "No se pudo eliminar el courier"});
+            else res.json({status: 1, menssage: "Eliminacion realizada"});
+        });
+    });
+
+    app.post('/editExtencion', (req, res, next) => {
+        let query = `Update emisores set extencion = ${req.body.extencion} Where e_id = ${req.body.id}`;
+
+        conn.query(query, (error, form, cols) => {
+            if(error) res.status(500).json({status: 0, message: "No se pudo actualizar la extencion"});
+            else res.json({status: 1, menssage: "Actualizacion exitosa"});
+        });
     });
 }

@@ -54,8 +54,33 @@ export class AuthService {
     return this.http.post(url, data, httpHeader);
   }
 
+  editCourier(data): Observable<any>{
+    let url = dominio + "editCourrier";
+    return this.http.post(url, data, httpHeader);
+  }
+
+  eliminarCourier(data): Observable<any> {
+    let url = dominio + "deleteCourier";
+    return this.http.post(url, data, httpHeader);
+  }
+
   addEmisor(data): Observable<any> {
     let url = dominio + "newEmisor";
+    return this.http.post(url, data, httpHeader);
+  }
+
+  getEmisor(data): Observable<any> {
+    let url = dominio + "gerEmisor";
+    return this.http.post(url, data, httpHeader);
+  }
+
+  editEmisor(data): Observable<any>{
+    let url = dominio + "editEmisor";
+    return this.http.post(url, data, httpHeader);
+  }
+
+  eliminaEmisor(data): Observable<any> {
+    let url = dominio + "deleteEmisor";
     return this.http.post(url, data, httpHeader);
   }
 

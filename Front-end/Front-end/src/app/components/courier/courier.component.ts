@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { AdminComponent } from '../admin/admin.component';
 
 class courrier{
-  ip:String
-  nombre:String
+  ip:String;
+  nombre:String;
+  id:number;
 }
 
 @Component({
@@ -18,12 +19,29 @@ class courrier{
 export class CourierComponent implements OnInit {
 
   newCourrier:FormGroup
+  mod: boolean;
+  url: string;
 
-  constructor(private auth:AuthService, private fb:FormBuilder, public dialogRef:MatDialogRef<AdminComponent>) { }
+  constructor(private auth:AuthService, private fb:FormBuilder, public dialogRef:MatDialogRef<AdminComponent>,
+              @Inject(MAT_DIALOG_DATA) public datos:courrier) { }
   ngOnInit(): void {
     this.newCourrier = this.fb.group({
       ip: ['', Validators.required],
       nombre: ['', Validators.required]
+    })
+
+    this.url = this.datos.ip + "";
+    this.mod = this.datos.id == undefined;
+  }
+
+  editarCourier(){
+    let data:courrier = new courrier();
+    data.ip = this.newCourrier.value.ip;
+    data.nombre = this.datos.nombre;
+    data.id = this.datos.id;
+    this.auth.editCourier(data).subscribe((x) => {
+      if(x.status == 1) alert("Courier editado existosamente");
+      else alert("Ha ocurriodo un error");
     })
   }
 
