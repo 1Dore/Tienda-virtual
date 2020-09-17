@@ -21,20 +21,20 @@ class Emisor {
 export class PagoProductoComponent implements OnInit {
 
   emisores: Emisor[] = [];
-  
+
   pago: FormGroup;
   courier: String;
   orden: String;
   direccion: String;
   codigo: String;
-
+  estats: String;
   u_id: number;
 
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    
+
     this.u_id = Number(localStorage.getItem('UserID'));
     let temp_emisores = new Array<Emisor>();
 
@@ -58,7 +58,7 @@ export class PagoProductoComponent implements OnInit {
       console.log(JSON.parse(localStorage.getItem('datos_Courrier')));
     });
 
-    this.auth.newPedido({u_id: this.u_id});
+    this.auth.newPedido({ u_id: this.u_id });
   }
 
   irA(ruta: string) {
@@ -67,19 +67,19 @@ export class PagoProductoComponent implements OnInit {
 
   onSubmit(ruta: string) {
 
-    let pago:formulario = new formulario();
+    let pago: formulario = new formulario();
     pago.tarjeta = this.pago.value.tarjeta;
 
     //este ifelse es para cercioroarnos de mandar los meses tip YYYY0M cuando M < 10
-    if(this.pago.value.fecha_vencM < 10){
+    if (this.pago.value.fecha_vencM < 10) {
       pago.fecha_venc = "0" + this.pago.value.fecha_vencM;
       pago.fecha_venc = String(this.pago.value.fecha_vencY +""+ pago.fecha_venc);
     }
-    else{
+    else {
       //esto manda YYYYMM cuando M > 10
       pago.fecha_venc = this.pago.value.fecha_vencY+ "" + this.pago.value.fecha_vencM;
     }
-    
+
     pago.num_seguridad = this.pago.value.num_seguridad;
     pago.nombre = this.pago.value.nombre;
     pago.ip = " ";
@@ -99,41 +99,64 @@ export class PagoProductoComponent implements OnInit {
   }
 
 
-  despuesConsultaIP(pago:formulario){
-    let datos_tarjeta:formulario = pago;
+  despuesConsultaIP(pago: formulario) {
+    let datos_tarjeta: formulario = pago;
     console.log(datos_tarjeta);
     this.auth.solicitarAutorizacion(datos_tarjeta).subscribe(data => {
 
-      if(data.autorizacion.numero > 0){
+      if (data.autorizacion.numero > 0) {
         alert("Pago aceptado")
         this.terminarPedido()
       }
-      else{
+      else {
         alert("Pago rechazado, porfavor utilize otro metodo de pago");
       }
 
     });
-    
+
   }
 
-  terminarPedido(){
+  terminarPedido() {
 
-    let info_Pedido:formCourrier = new formCourrier();
+    let info_Pedido: formCourrier = new formCourrier();
     let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
     info_Pedido.nombre = this.pago.value.nombre;
     info_Pedido.codigo_postal = temp.postal;
     info_Pedido.direccion = temp.direccion;
-    this.auth.getPedidoIDNulls({u_id: this.u_id}).subscribe((res) => {
-      if(res.formularios.rows.length > 0){
+    this.auth.getPedidoIDNulls({ u_id: this.u_id }).subscribe((res) => {
+      if (res.formularios.rows.length > 0) {
         info_Pedido.p_id = res.formularios.rows[0].p_id;
+        this.statusPedido();
       }
     });
-
   }
 
-  enviarPedidoFinal(info_Pedido:formCourrier){
+  statusPedido() {
+    let info_Pedido: formCourrier = new formCourrier();
+    let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
+    info_Pedido.direccion = temp.direccion;
+    info_Pedido.codigo_postal = temp.postal;
+    info_Pedido.estatus = "PENDIENTE";
+    info_Pedido.courrier = temp.courrier;
+    info_Pedido.nombre = this.pago.value.nombre;
+    this.auth.terminarPedido(info_Pedido).subscribe((res) => {
+      if (res.status == 1) {
+        alert("Pedido terminado.")
+        console.log("IMPRIMIRE EL STATUS");
+        console.log(res.status);
+        return res.status;
+      }
+      else {
+        alert("Error");
+        console.log("IMPRIMIRE EL STATUS");
+        console.log(res.status);
+        return res.status;
+      }
+    });
+  }
+  enviarPedidoFinal(info_Pedido: formCourrier) {
     this.auth.askCourrierEnvio(info_Pedido).subscribe(x => alert("Se envio el pedido"));
-    
+
   }
 
 }
