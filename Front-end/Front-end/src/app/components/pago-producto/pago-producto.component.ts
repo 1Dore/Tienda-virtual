@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
 import { PagoCourierComponent } from '../pago-courier/pago-courier.component';
 import { formulario } from './formularioTarjeta';
+import { formCourrier } from './formularioCourrier';
 
 class Emisor {
   value: String;
@@ -108,7 +109,11 @@ export class PagoProductoComponent implements OnInit {
   }
 
   enviarPedido(){
-    
+    let info_Pedido:formCourrier = new formCourrier();
+    let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
+    info_Pedido.nombre = this.pago.value.nombre;
+    info_Pedido.codigo_postal = temp.postal;
+    info_Pedido.direccion = temp.direccion;
   }
 
 }
