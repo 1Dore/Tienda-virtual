@@ -1,5 +1,5 @@
+<h1 class="title">Consultar Courier</h1>
 <p class="separator"></p>
-<h1 class="title">Pago</h1>
 
 <div class="container">
     <form class="register-form" [formGroup]="pago">
@@ -27,11 +27,16 @@
             </mat-select>
         </mat-form-field>
         <p></p>
-        <button [disabled]="pago.invalid" mat-raised-button class="register-full-width button"
-            (click)="onSubmit('/pago-producto')" type="submit">
-            Ir a Caja
+        <button [disabled]="pago.invalid" mat-raised-button class="register-full-width button" (click)="onConsulta()"
+            type="submit">
+            Consultar
         </button>
         <p></p>
+        <button *ngIf="cobertura == true" type="submit" (click)="irA('/pago-producto')" mat-raised-button
+            class="register-full-width button">Ir a
+            Caja</button>
+        <p></p>
+        <h3 *ngIf="cobertura == true">Subtotal: Q.{{subtotal}}</h3>
         <button (click)="irA('/checkout')" type="submit" mat-raised-button class="register-full-width button">Regresar
             al Carrito</button>
     </form>
