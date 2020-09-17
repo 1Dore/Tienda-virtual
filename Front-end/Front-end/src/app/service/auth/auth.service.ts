@@ -341,7 +341,8 @@ export class AuthService {
   //Codigo para pedir tarjetas o Courrier estan en orden de uso
   //el inicio de pago de un carrito
 
-  
+
+
   getCourrierIP(data): Observable<any> {
     let url = dominio + "getCourrierIP";
     return this.http.post(url, data, httpHeader);
@@ -368,19 +369,15 @@ export class AuthService {
     return this.http.get(url);
   }
 
-  terminarPedido(data){
-    
+  terminarPedido(data):Observable<any>{
+    let url = dominio + `completarPedido`;
+    return this.http.post(url, data, httpHeader);
   }
 
   askCourrierEnvio(data): Observable<any> {
     let url = data.ip + `envio.php?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.direccion}&tienda=DIA`;
     console.log(url);
     return this.http.get(url, httpHeader);
-  }
-
-  createNewPedido(data): Observable<any> {
-    let url = dominio + "newPedido";
-    return this.http.post(url, data, httpHeader);
   }
 
   askCourrierStatus(ip, data): Observable<any> {

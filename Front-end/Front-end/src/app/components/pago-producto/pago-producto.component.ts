@@ -101,7 +101,7 @@ export class PagoProductoComponent implements OnInit {
 
       if(data.autorizacion.numero > 0){
         alert("Pago aceptado")
-        this.enviarPedido()
+        this.terminarPedido()
       }
       else{
         alert("Pago rechazado, porfavor utilize otro metodo de pago");
@@ -111,7 +111,7 @@ export class PagoProductoComponent implements OnInit {
     
   }
 
-  enviarPedido(){
+  terminarPedido(){
 
     let info_Pedido:formCourrier = new formCourrier();
     let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
