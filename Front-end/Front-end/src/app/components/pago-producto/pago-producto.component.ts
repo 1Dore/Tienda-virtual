@@ -91,6 +91,7 @@ export class PagoProductoComponent implements OnInit {
     this.auth.getEmisorIP(pago).subscribe(data => {
 
       pago.ip = data.formularios.rows[0].c_ip;
+      pago.extension = data.formulario.rows[0].extension
       console.log(pago);
       this.despuesConsultaIP(pago);
 
