@@ -33,6 +33,7 @@ export class CourierComponent implements OnInit {
 
     this.edit = this.fb.group({
       ip: ['', Validators.required],
+
     })
 
     this.url = this.datos.ip + "";
@@ -53,7 +54,7 @@ export class CourierComponent implements OnInit {
   agregarCourrier(){
     let formulario:courrier;
     formulario = new courrier();
-    formulario.ip = this.edit.value.ip;
+    formulario.ip = this.newCourrier.value.ip;
     formulario.nombre = this.newCourrier.value.nombre;
     this.auth.addCourrier(formulario).subscribe(x => {
 
@@ -62,7 +63,7 @@ export class CourierComponent implements OnInit {
       }
 
       else{
-        alert("Ocurrio un error" +formulario.ip);
+        alert("Ocurrio un error");
       }
 
     })
