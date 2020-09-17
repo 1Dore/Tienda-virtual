@@ -125,11 +125,11 @@ export class CheckoutComponent implements OnInit {
     this.carrito_IDs = this.servicio.getCarrito();
   }
 
-  guardarMontoTotal(ruta: string) {
+  guardarMontoTotal() {
     localStorage.setItem('total', this.total + '');
-    this.irA(ruta);
   }
   openDialog(): void {
+    this.guardarMontoTotal();
     const dialogRef = this.dialog.open(PagoCourierComponent, {
       width: '500px',
       data: { courier: this.courier, direccion: this.direccion, codigo: this.codigo }
