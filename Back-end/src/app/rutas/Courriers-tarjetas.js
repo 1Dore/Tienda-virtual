@@ -22,7 +22,7 @@ module.exports = (app) => {
         conn.query( querry, (error, formularios) => {
 
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status:1, message:`Courrier editado, la nueva ip es: ${req.boy.ip}` });
+            else res.json({status:1, message:`Courrier editado, la nueva ip es: ${req.body.ip}` });
 
         });
         
@@ -59,9 +59,9 @@ module.exports = (app) => {
     });
 
     //obtener ip de emisor
-    app.post('/getEmisor', (req, res, next) => {
+    app.post('/getEmisorIP', (req, res, next) => {
 
-        let querry = `Select ip from emisores where compañia = ${req.boyd.nombre}`;
+        let querry = `Select e_ip from emisores where compañia = '${req.body.nombre}'`;
 
         conn.query(querry, (err, formularios) => {
 
@@ -73,9 +73,9 @@ module.exports = (app) => {
     });
 
     //obtener ip de courrier
-    app.post('/getCourrier', (req, res, next) => {
+    app.post('/getCourrierIP', (req, res, next) => {
 
-        let querry = `Select ip from courrier where nombre = ${req.boyd.nombre}`;
+        let querry = `Select c_ip from courrier where c_nombre = '${req.body.courrier}'`;
 
         conn.query(querry, (err, formularios) => {
 

@@ -28,9 +28,9 @@ export class PagoCourierComponent implements OnInit {
   orden: String;
   direccion: String;
   codigo: String;
-  total:Number;
+  total:Number = 0;
   costoCourrier = 0;
-  cobertura: boolean;
+  cobertura: boolean = true;
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
@@ -98,7 +98,6 @@ export class PagoCourierComponent implements OnInit {
       }
       else{
         alert("No hay cobertura en tu zona, prueba con otro courrier");
-        this.cobertura = false;
       }
 
     });

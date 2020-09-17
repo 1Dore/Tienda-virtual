@@ -36,7 +36,9 @@
             class="register-full-width button">Ir a
             Caja</button>
         <p></p>
-        <h3 *ngIf="cobertura == true">Subtotal: Q.{{subtotal}}</h3>
+        <h3 *ngIf="cobertura == true">Costo Courrier: Q.{{costoCourrier}}</h3>
+        <p></p>
+        <h3 *ngIf="cobertura == true">Total: Q.{{total}}</h3>
         <button (click)="irA('/checkout')" type="submit" mat-raised-button class="register-full-width button">Regresar
             al Carrito</button>
     </form>
