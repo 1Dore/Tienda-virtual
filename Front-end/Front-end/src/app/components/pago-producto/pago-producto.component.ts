@@ -86,6 +86,9 @@ export class PagoProductoComponent implements OnInit {
     pago.num_seguridad = this.pago.value.num_seguridad;
     pago.nombre = this.pago.value.nombre;
 
+    if(pago.nombre.indexOf(' ') >= 0){
+     pago.nombre =  pago.nombre.replace(" ", "%20");
+    }
 
     //pedir ip
     pago.monto =Number (localStorage.getItem('total'));
@@ -103,10 +106,9 @@ export class PagoProductoComponent implements OnInit {
 
   despuesConsultaIP(pago: formulario) {
     let datos_tarjeta: formulario = pago;
-    console.log(datos_tarjeta);
     this.auth.solicitarAutorizacion(datos_tarjeta).subscribe(data => {
-
-      if (data.autorizacion.numero > 0) {
+      console.log(data);  
+      if (data.autorización.numero > 0) {
         alert("Pago aceptado")
         this.terminarPedido()
       }
