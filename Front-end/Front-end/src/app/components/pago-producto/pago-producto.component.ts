@@ -73,14 +73,16 @@ export class PagoProductoComponent implements OnInit {
     
     pago.num_seguridad = this.pago.value.num_seguridad;
     pago.nombre = this.pago.value.nombre;
-    
+    pago.ip = " "
 
     //autorizacion de pago
     pago.monto =Number (localStorage.getItem('total'));
     pago.emisor = this.pago.value.emisor
+    console.log(pago);
     this.auth.getEmisorIP(pago).subscribe(data => {
 
       pago.ip = data.formularios.rows[0].c_ip;
+      console.log(pago);
       this.despuesConsultaIP(pago);
 
     });
@@ -90,10 +92,16 @@ export class PagoProductoComponent implements OnInit {
 
   despuesConsultaIP(pago:formulario){
     let datos_tarjeta:formulario = pago;
-
+    console.log(datos_tarjeta);
     this.auth.solicitarAutorizacion(datos_tarjeta).subscribe(data => {
 
-
+      if(data.autorizacion.numero > 0){
+        alert("Pago aceptado")
+        this.enviarPedido()
+      }
+      else{
+        alert("Pago rechazado, porfavor utilize otro metodo de pago");
+      }
 
     });
     

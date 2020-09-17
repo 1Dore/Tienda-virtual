@@ -5,7 +5,7 @@ module.exports = (app) => {
     //crear pedido, viene vaco, en el checkout se crea el pedido como tal
     app.post('/newPedido', (req, res, next) => {
 
-        let query = `Insert into pedido (u_id, dir_entrega, codigo_postal, compañia, c_nombre, total) values (${req.body.u_id}, '${req.body.dir_entrega}', ${req.body.codigo_postal}, '${req.body.compañia}', '${req.body.c_nombre}', ${req.body.monto})`;
+        let query = `Insert into pedido (u_id) values (${req.body.u_id})`;
         
         conn.query(query, (error, form, cols) => {
 
@@ -15,6 +15,22 @@ module.exports = (app) => {
 
         });
     });
+
+    //editar pedido, aqui completamos el pedido
+    app.post('/completarPedido', (req, res, next) => {    
+
+        let querry = `Update pedido set dir_entrega='${req.body.direccion}', codigo_postal='${req.body.postal}', estatus='${req.body.estatus}', e_id=${req.body.e_id}, c_id=${req.body.c_id} where p_id = ${req.body.p_id}`;
+
+        conn.query( querry, (error, formularios) => {
+
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status:1});
+
+        });
+        
+    });
+
+
 
     //consultar estatus del pedido
     app.post('/getStatus', (req, res, next) => {    
@@ -43,19 +59,6 @@ module.exports = (app) => {
         
     });
 
-    //editar pedido, aqui completamos el pedido
-    app.post('/completarPedido', (req, res, next) => {    
-
-        let querry = `Update pedido set dir_entrega='${req.body.direccion}', codigo_postal='${req.body.postal}', estatus='${req.body.estatus}', e_id=${req.body.e_id}, c_id=${req.body.c_id} where p_id = ${req.body.p_id}`;
-
-        conn.query( querry, (error, formularios) => {
-
-            if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status:1});
-
-        });
-        
-    });
 
     app.post('/getPedidos', (req, res, next) => {
         let query = `Select * From pedido Where u_id = ${req.body.u_id}`;
