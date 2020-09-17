@@ -42,12 +42,12 @@ export class CourierComponent implements OnInit {
 
   editarCourier(){
     let data:courrier = new courrier();
-    data.ip = this.newCourrier.value.ip;
+    data.ip = this.edit.value.ip;
     data.nombre = this.datos.nombre;
     data.id = this.datos.id;
     this.auth.editCourier(data).subscribe((x) => {
       if(x.status == 1) alert("Courier editado existosamente");
-      else alert("Ha ocurriodo un error");
+      else alert("Ha ocurriodo un error  " + data.ip);
     })
   }
 
