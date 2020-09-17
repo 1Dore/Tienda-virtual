@@ -23,12 +23,15 @@ export class PagoCourierComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
     this.pago = this.fb.group({
+
       courier: ['', Validators.required],
       direccion: ['', Validators.required],
       codigo_postal: ['', Validators.required],
 
     });
+
     let temp_couriers = new Array<Courier>();
 
     this.auth.getAllCourriers().subscribe((res) => {
@@ -43,55 +46,18 @@ export class PagoCourierComponent implements OnInit {
 
     });
   }
+
+
   irA(ruta: string) {
+
     this.router.navigateByUrl(ruta);
     this.dialog.closeAll();
+    
   }
 
-  onSubmit(ruta: string) {
-    /*let form: formulario;
-    let cobertura: Boolean = true;
-    let pagado: Boolean = false;
-    form = new formulario();
-
-    //para pedir courrier
-    let direccion;
-    let direccionip = this.pago.value.courier; //busco el courrier por nombre
-    this.auth.getCourrier(direccionip).subscribe(data => {  //adquiero la ip del courrier buscado por nombre
-      direccionip = data.formularios.rows.ip;
-    });
-
-    this.auth.askCourrierCosto(direccionip, direccion).subscribe(x => {
-      if (x.consultaprecio.costo > 0) {
-        alert("El courrier tiene cobertura");
-        this.pago.value.monto = this.pago.value.monto + x.consultaprecio.costo;
-      }
-      else {
-        cobertura = false;    //si es false no hace cobro alguno
-      }
-
-    });
-
-
-    form.courrier = this.pago.value.courrier;*/
-
-    //todo lo que selecciona y agrega el usuario en frontend se agrega a un formato prehecho
-    //para pagar con tarjeta
-    /*if (cobertura) {  //si no hay cobertura no se hace ningun cobro
-
-      this.auth.getEmisor(emisor).subscribe(data => {
-        emisor = data.formularios.rows.e_ip;
-      });
-
-      this.auth.solicitarAutorizacion(emisor, form).subscribe(data => {
-        form.numero = data.autorizacion.numero
-        pagado = true;
-      });
-      this.pago.reset();
-    }
-
-    else {
-      alert("Este courrier no tiene cobertura, por favor seleccione otro");
-    }*/
+  onConsulta() {
+    
   }
+
+
 }
