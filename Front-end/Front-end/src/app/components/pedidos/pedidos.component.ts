@@ -56,11 +56,41 @@ export class PedidosComponent implements OnInit {
               temp.u_name =  'no Encontrado';
             }
           });
-
+          //1.Orden Nueva 2.Surtiendose 3. Empacandose 4. En ruta 5.Entregada
           this.servico.getCourrierIP({courrier: element.c_nombre}).subscribe((rows) => {
             let ip = rows.formularios.rows[0].c_ip;
             this.servico.askCourrierStatus(ip, {pedido_id: temp.p_id}).subscribe((x) => {
-              temp.estatus = x.orden.status;
+              let n = x.orden.status;
+              switch(n){
+                case "1": 
+                  temp.estatus = "Orden Nuevo";
+                  break;
+                case "2":
+                  temp.estatus = "Surtiendose";
+                  break;
+                case "3": 
+                  temp.estatus = "Empacandose";
+                  break;
+                case "4":
+                  temp.estatus = "Entregada";
+                  break;
+                case 1: 
+                  temp.estatus = "Orden Nuevo";
+                  break;
+                case 2:
+                  temp.estatus = "Surtiendose";
+                  break;
+                case 3: 
+                  temp.estatus = "Empacandose";
+                  break;
+                case 4:
+                  temp.estatus = "Entregada";
+                  break;
+                default:
+                  temp.estatus = "No hay estatus";
+                  break;
+              }
+
             });
           });
           
