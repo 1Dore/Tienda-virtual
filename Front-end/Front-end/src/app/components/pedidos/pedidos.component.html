@@ -15,35 +15,37 @@
             <h1>Pedidos</h1>
         </div>
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
+            <div class="card">
                 <mat-list role="list">
                     <mat-card *ngFor="let pedido of listaPedidos">
                         <mat-list-item class="container" role="listitem">
-                            <div class="row">
+                            <div class="col-4">
                                 Nombre del Comprador: {{pedido.u_name}}
                             </div>
-                            <div class="row">
+                            <div class="col-4">
                                 Curier: {{pedido.c_name}}
+                                <br>
                                 Emisor: {{pedido.e_name}}
                             </div>
-                            <div class="row">
+                            <div class="col-4">
                                 Direccion de Entrega: {{pedido.dir_entrega}}
+                                <br>
                                 Codigo Postal: {{pedido.codigo_postal}}
+                                <br>
                                 Status: {{pedido.estatus}}
+                                <br>
                                 Monto Total: {{pedido.total}}
                             </div>
                             <div>
                             </div>
                         </mat-list-item>
                         <mat-list-item role="listitem">Item</mat-list-item>
-                        <<<<<<< Updated upstream </div>
-                            =======
+                        <mat-divider></mat-divider>
+
                     </mat-card>
-                    >>>>>>> Stashed changes
+
                 </mat-list>
             </div>
-            <div class="col1"></div>
         </div>
     </div>
 
