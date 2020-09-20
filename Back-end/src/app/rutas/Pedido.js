@@ -19,7 +19,7 @@ module.exports = (app) => {
     //editar pedido, aqui completamos el pedido
     app.post('/completarPedido', (req, res, next) => {    
 
-        let querry = `Update pedido set dir_entrega='${req.body.direccion}', codigo_postal='${req.body.postal}', estatus='${req.body.estatus}', compañia='${req.body.emisor}', c_nombre='${req.body.courrier}' where p_id = ${req.body.p_id} and dir_entrega is null`;
+        let querry = `Update pedido set dir_entrega='${req.body.direccion}', codigo_postal='${req.body.postal}', estatus='${req.body.estatus}', compañia='${req.body.emisor}', c_nombre='${req.body.courrier}', total = ${req.body.total} where p_id = ${req.body.p_id} and dir_entrega is null`;
 
         conn.query( querry, (error, formularios) => {
 

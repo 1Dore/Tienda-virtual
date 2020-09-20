@@ -7,4 +7,6 @@ export class formCourrier {
         nombre: String
         estatus: String
         ip: string;
+        total: number;
+        emisor: String;
 }
