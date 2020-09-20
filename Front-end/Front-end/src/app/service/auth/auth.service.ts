@@ -400,8 +400,11 @@ export class AuthService {
 
   askCourrierStatus(ip, data): Observable<any> {
     let url = ip + `status.php?orden=${data.pedido_id}&tienda=DIA&formato=JSON`;
+    console.log(url);
     return this.http.get(url, httpHeader);
   }
+
+
 
 
 }

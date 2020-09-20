@@ -57,9 +57,13 @@ export class PedidosComponent implements OnInit {
             }
           });
 
-          this.servico.askCourrierStatus(this.getIpCurier(element.c_nombre), {pedido_id: temp.p_id}).subscribe((x) => {
-            temp.estatus = x.orden.status;
+          this.servico.getCourrierIP({courrier: element.c_nombre}).subscribe((rows) => {
+            let ip = rows.formularios.rows[0].c_ip;
+            this.servico.askCourrierStatus(ip, {pedido_id: temp.p_id}).subscribe((x) => {
+              temp.estatus = x.orden.status;
+            });
           });
+          
           //meto el temp a la lista
           this.listaPedidos.push(temp);
         });
@@ -75,7 +79,6 @@ export class PedidosComponent implements OnInit {
   getIpCurier(nombre: string){
     let ip: string;
     this.servico.getCourrierIP({courrier: nombre}).subscribe((rows) => {
-      console.log(nombre);
       ip = rows.formularios.rows[0].c_ip;
     });
     return ip;
