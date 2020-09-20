@@ -6,7 +6,7 @@ import { AuthService } from '../../service/auth/auth.service';
 import { PagoCourierComponent } from '../pago-courier/pago-courier.component';
 import { formulario } from './formularioTarjeta';
 import { formCourrier } from './formularioCourrier';
-import { info } from 'console';
+
 //import { info } from 'console';
 
 class Emisor {
