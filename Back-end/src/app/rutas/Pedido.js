@@ -19,7 +19,7 @@ module.exports = (app) => {
     //editar pedido, aqui completamos el pedido
     app.post('/completarPedido', (req, res, next) => {    
 
-        let querry = `Update pedido set dir_entrega='${req.body.direccion}', codigo_postal='${req.body.postal}', estatus='${req.body.estatus}', compañia=${req.body.emisor}, c_nombre=${req.body.courrier} where p_id = ${req.body.p_id} and dir_entrega is null`;
+        let querry = `Update pedido set dir_entrega='${req.body.direccion}', codigo_postal='${req.body.postal}', estatus='${req.body.estatus}', compañia='${req.body.emisor}', c_nombre='${req.body.courrier}' where p_id = ${req.body.p_id} and dir_entrega is null`;
 
         conn.query( querry, (error, formularios) => {
 
@@ -100,7 +100,7 @@ module.exports = (app) => {
     app.post('/getC_name', (req, res, next) => {
         let query = `Select c_nombre Form courrier Where c_id = ${req.body.c_id}`;
         conn.query(query, (error, formularios) => {
-            if (error) res.json({status: 0, message: `${error}`});
+            if (error) res.json({status: 0, message: `${error}`, formularios});
             else res.json({status: 1, formularios});
         });
     });
@@ -110,7 +110,7 @@ module.exports = (app) => {
     app.post('/getU_name', (req, res, next) => {
         let query = `Select nombre, apellido Form usuarios Where u_id = ${req.body.u_id}`;
         conn.query(query, (error, formularios) => {
-            if (error) res.json({status: 0, message: `${error}`});
+            if (error) res.json({status: 0, message: `${error}`, formularios});
             else res.json({status: 1, formularios});
         });
     });
@@ -119,7 +119,7 @@ module.exports = (app) => {
     app.post('/getE_name', (req, res, next) => {
         let query = `Select compañia Form emisores Where e_id = ${req.body.e_id}`;
         conn.query(query, (error, formularios) => {
-            if (error) res.json({status: 0, message: `${error}`});
+            if (error) res.json({status: 0, message: `${error}`, formularios});
             else res.json({status: 1, formularios});
         });
     });

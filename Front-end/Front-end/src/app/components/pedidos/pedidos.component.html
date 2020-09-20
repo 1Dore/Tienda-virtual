@@ -15,7 +15,7 @@
             <div class="col-1"></div>
             <div class="col-10">
                 <mat-list role="list">
-                    <div **ngFor="let pedido of listaPedidos">
+                    <div *ngFor="let pedido of listaPedidos">
                         <mat-list-item class="container" role="listitem" >
                             <div class="row">
                                 Nombre del Comprador: {{pedido.u_name}}
@@ -27,8 +27,10 @@
                             <div class="row">
                                 Direccion de Entrega: {{pedido.dir_entrega}}
                                 Codigo Postal: {{pedido.codigo_postal}}
-                                Estatus: {{pedido.estatus}}
+                                Status: {{pedido.estatus}}
                                 Monto Total: {{pedido.total}}
+                            </div>
+                            <div>
                             </div>
                         </mat-list-item>
                         <mat-list-item role="listitem">Item</mat-list-item>
