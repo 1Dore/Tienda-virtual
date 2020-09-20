@@ -6,4 +6,5 @@ export class formCourrier {
         codigo_postal: String
         nombre: String
         estatus: String
+        ip: string;
 }

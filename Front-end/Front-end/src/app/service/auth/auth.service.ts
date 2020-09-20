@@ -341,6 +341,7 @@ export class AuthService {
 
   newPedido(data): Observable<any> {
     let url = dominio + "newPedido";
+
     return this.http.post(url, data, httpHeader);
   }
 
@@ -367,7 +368,7 @@ export class AuthService {
   askCourrierCosto(data): Observable<any> {
     let ip = data.ip;
     console.log(data);
-    let url = ip + `/consulta.php?destino=${data.postal}&formato=JSON`;
+    let url = ip + `consulta.php?destino=${data.postal}&formato=JSON`;
     console.log(url);
     return this.http.get(url, httpHeader);
   }
@@ -392,7 +393,7 @@ export class AuthService {
   }
 
   askCourrierEnvio(data): Observable<any> {
-    let url = data.ip + `/envio.php?orden=${data.pedido_id}&destinatario=${data.nombre}&destino=${data.codigo_postal}&direccion=${data.direccion}&tienda=DIA`;
+    let url = data.ip + `envio.php?orden=${data.p_id}&destinatario=${data.nombre}&destino=${data.codigo_postal}&direccion=${data.direccion}&tienda=DIA`;
     console.log(url);
     return this.http.get(url, httpHeader);
   }

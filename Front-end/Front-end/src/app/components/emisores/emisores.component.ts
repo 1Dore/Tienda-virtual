@@ -48,12 +48,17 @@ export class EmisoresComponent implements OnInit {
     let data:emisor = new emisor();
     data.ip = this.edit.value.ip;
     data.extencion = this.edit.value.extencion;
+    if(data.extencion === " "){
+      data.extencion = "";
+    }
     data.nombre = this.datos.nombre;
     data.id = this.datos.id
     this.auth.editEmisor(data).subscribe((x) => {
       if(x.status == 1) alert("Emisor editado existosamente");
       else alert("Ha ocurriodo un error");
-    })
+    });
+    this.edit.reset();
+    this.dialogRef.close();
   }
   
   agregarEmisor(){

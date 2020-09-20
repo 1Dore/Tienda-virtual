@@ -9,9 +9,7 @@ class Pedido{
   estatus:string;
   u_id:number;
   u_name:string;
-  e_id:number;
-  e_name:string
-  c_id:number;
+  compañia:number;
   c_name:string;
   total:number;
 }
@@ -45,30 +43,9 @@ export class PedidosComponent implements OnInit {
           temp.codigo_postal = element.codigo_postal;
           temp.estatus = element.estatus;
           temp.u_id = this.u_id;
-          temp.e_id = element.e_id;
-          temp.c_id = element.c_id;
+          temp.compañia = element.compañia;
+          temp.c_name = element.c_nombre;
           temp.total = element.total;
-
-
-          // Nombre del Emisor
-          this.servico.getE_name({e_id: element.e_id}).subscribe((rows) => {
-            if (rows.formularios.rows.length > 0) {
-              temp.e_name =  rows.formularios.rows[0].compañia;
-            }
-            else {
-              temp.e_name =  'No Encontrado';
-            }
-          })
-
-          //Nombre del Courier
-          this.servico.getC_name({c_id: element.c_id}).subscribe((rows) => {
-            if (rows.formularios.rows.length > 0) {
-              temp.c_name =  rows.formularios.rows[0].c_nombre;
-            }
-            else {
-              temp.c_name =  'No Encontrado';
-            }
-          })
 
           //Nombre del Usuario
           this.servico.getU_name({u_id: element.u_id}).subscribe((rows) => {
@@ -78,7 +55,11 @@ export class PedidosComponent implements OnInit {
             else {
               temp.u_name =  'no Encontrado';
             }
-          })
+          });
+
+          this.servico.askCourrierStatus(this.getIpCurier(element.c_nombre), {pedido_id: temp.p_id}).subscribe((x) => {
+            temp.estatus = x.orden.status;
+          });
           //meto el temp a la lista
           this.listaPedidos.push(temp);
         });
@@ -88,6 +69,16 @@ export class PedidosComponent implements OnInit {
         console.log(rows.message);
       }
     });
+    console.log(this.listaPedidos);
+  }
+
+  getIpCurier(nombre: string){
+    let ip: string;
+    this.servico.getCourrierIP({courrier: nombre}).subscribe((rows) => {
+      console.log(nombre);
+      ip = rows.formularios.rows[0].c_ip;
+    });
+    return ip;
   }
 
 }

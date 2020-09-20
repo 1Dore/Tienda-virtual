@@ -30,6 +30,8 @@ export class PagoProductoComponent implements OnInit {
   estats: String;
   u_id: number;
 
+  info_Pedido: formCourrier = new formCourrier();
+
 
   constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, public dialog: MatDialog) { }
 
@@ -58,7 +60,7 @@ export class PagoProductoComponent implements OnInit {
       console.log(JSON.parse(localStorage.getItem('datos_Courrier')));
     });
 
-    this.auth.newPedido({ u_id: this.u_id });
+    this.auth.newPedido({ u_id: this.u_id }).subscribe();
   }
 
   irA(ruta: string) {
@@ -117,41 +119,43 @@ export class PagoProductoComponent implements OnInit {
       }
 
     });
-
+    //Codigo para evitar la tarjeta
+    //this.terminarPedido()
   }
 
   terminarPedido() {
-
-    let info_Pedido: formCourrier = new formCourrier();
     let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
-    info_Pedido.nombre = this.pago.value.nombre;
-    info_Pedido.codigo_postal = temp.postal;
-    info_Pedido.direccion = temp.direccion;
+    this.info_Pedido.nombre = this.pago.value.nombre;
+    this.info_Pedido.codigo_postal = temp.postal;
+    this.info_Pedido.direccion = temp.direccion;
+    this.info_Pedido.ip = temp.ip;
     this.auth.getPedidoIDNulls({ u_id: this.u_id }).subscribe((res) => {
+      
       if (res.formularios.rows.length > 0) {
-        info_Pedido.p_id = res.formularios.rows[0].p_id;
+        this.info_Pedido.p_id = res.formularios.rows[0].p_id;
         this.statusPedido();
       }
     });
   }
 
   statusPedido() {
-    let info_Pedido: formCourrier = new formCourrier();
     let temp = JSON.parse(localStorage.getItem('datos_Courrier'));
-    info_Pedido.direccion = temp.direccion;
-    info_Pedido.codigo_postal = temp.postal;
-    info_Pedido.estatus = "PENDIENTE";
-    info_Pedido.courrier = temp.courrier;
-    info_Pedido.nombre = this.pago.value.nombre;
-    this.auth.terminarPedido(info_Pedido).subscribe((res) => {
+    this.info_Pedido.direccion = temp.direccion;
+    console.log(temp);
+    this.info_Pedido.codigo_postal = temp.postal;
+    this.info_Pedido.estatus = "PENDIENTE";
+    this.info_Pedido.courrier = temp.courrier;
+    this.info_Pedido.nombre = this.pago.value.nombre;
+    this.auth.terminarPedido(this.info_Pedido).subscribe((res) => {
       if (res.status == 1) {
         alert("Pedido terminado.")
         console.log("IMPRIMIRE EL STATUS");
         console.log(res.status);
-        this.enviarPedidoFinal(info_Pedido);
+        this.enviarPedidoFinal(this.info_Pedido);
       }
       else {
         alert("Error");
+        console.log(this.info_Pedido);
         console.log("IMPRIMIRE EL STATUS");
         console.log(res.status);
       }

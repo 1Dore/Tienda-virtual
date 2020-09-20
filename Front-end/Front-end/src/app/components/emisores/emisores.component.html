@@ -36,7 +36,7 @@
                 <!------------- Nombre --------------------->
                 <mat-form-field class="register-full-width">
                     {{datos.nombre}}
-                    <input hidden matInput type="input" value="datos.nombre" formControlName="nombre">
+                    <input hidden matInput type="input" value="datos.nombre">
                 </mat-form-field>
 
                 <!------------- IP --------------------->
@@ -49,7 +49,7 @@
                 <!------------- Extencion --------------------->
                 <mat-form-field class="register-full-width">
                     <mat-label>Extencion Emisor</mat-label>
-                    <input matInput type="input" formControlName="extencion">
+                    <input matInput type="input" value="" formControlName="extencion">
                     <mat-icon matSuffix>location_on</mat-icon>
                 </mat-form-field>
                 <p></p>
