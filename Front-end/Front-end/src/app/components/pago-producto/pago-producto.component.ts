@@ -6,6 +6,7 @@ import { AuthService } from '../../service/auth/auth.service';
 import { PagoCourierComponent } from '../pago-courier/pago-courier.component';
 import { formulario } from './formularioTarjeta';
 import { formCourrier } from './formularioCourrier';
+import { info } from 'console';
 //import { info } from 'console';
 
 class Emisor {
@@ -29,6 +30,7 @@ export class PagoProductoComponent implements OnInit {
   codigo: String;
   estats: String;
   u_id: number;
+  total: number;
 
   info_Pedido: formCourrier = new formCourrier();
 
@@ -93,7 +95,8 @@ export class PagoProductoComponent implements OnInit {
     }
 
     //pedir ip
-    pago.monto =Number (localStorage.getItem('total'));
+    pago.monto = Number (localStorage.getItem('total'));
+    this.total = Number(localStorage.getItem('total'));
     console.log(pago);
     this.auth.getEmisorIP(pago).subscribe(data => {
       console.log(data.formularios.rows[0]);
@@ -112,6 +115,7 @@ export class PagoProductoComponent implements OnInit {
       console.log(data);  
       if (data.autorización.numero > 0) {
         alert("Pago aceptado")
+        this.info_Pedido.emisor = pago.emisor;
         this.terminarPedido()
       }
       else {
@@ -120,7 +124,8 @@ export class PagoProductoComponent implements OnInit {
 
     });
     //Codigo para evitar la tarjeta
-    //this.terminarPedido()
+    this.info_Pedido.emisor = pago.emisor;
+    this.terminarPedido()
   }
 
   terminarPedido() {
@@ -129,6 +134,7 @@ export class PagoProductoComponent implements OnInit {
     this.info_Pedido.codigo_postal = temp.postal;
     this.info_Pedido.direccion = temp.direccion;
     this.info_Pedido.ip = temp.ip;
+    this.info_Pedido.total = this.total;
     this.auth.getPedidoIDNulls({ u_id: this.u_id }).subscribe((res) => {
       
       if (res.formularios.rows.length > 0) {
